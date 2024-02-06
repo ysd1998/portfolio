@@ -22,7 +22,7 @@ public class LoginController {
 	
 	@GetMapping("/login")
 	public String view(Model model,LoginForm form) {
-		return "login";
+		return "/login";
 	}
 	
 	@PostMapping("/login")
@@ -34,7 +34,7 @@ public class LoginController {
 			return "redirect:/menu";
 		} else {
 			model.addAttribute("errorMsg", "ログインIDとパスワードが間違ってます。");
-			return "login";
+			return "/login";
 		}
 		
 	}

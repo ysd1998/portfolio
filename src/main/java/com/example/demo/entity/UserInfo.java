@@ -7,12 +7,12 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "user_info")
+@Table(name = "clients")
 @Data
 public class UserInfo {
 	
 	@Id
-	@Column(name = "login_id")
+	@Column(name = "client_id")
 	private String loginId;
 	
 	private String password;

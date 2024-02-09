@@ -4,8 +4,8 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.example.demo.entity.UserInfo;
-import com.example.demo.repository.UserInfoRepository;
+import com.example.demo.entity.primary.UserInfo;
+import com.example.demo.repository.primary.UserInfoRepository;
 
 import lombok.RequiredArgsConstructor;
 

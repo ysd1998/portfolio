@@ -1,40 +1,40 @@
-package com.example.demo.controller;
+package com.example.demo.controller.secondary;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.example.demo.form.LoginForm;
-import com.example.demo.service.LoginService;
+import com.example.demo.form.secondary.LoginForm;
+import com.example.demo.service.secondary.EmpLoginService;
 
 import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-public class LoginController {
+public class ManagerLoginController {
 	
 	//private static final String LOGIN_ID ="user";
 	
 	//private static final String PASSWORD ="pwd";
 	
-	private final LoginService service;
+	private final EmpLoginService service;
 	
-	@GetMapping("/login")
+	@GetMapping("/manager/login")
 	public String view(Model model,LoginForm form) {
-		return "/login";
+		return "manager/login";
 	}
 	
-	@PostMapping("/login")
+	@PostMapping("/manager/login")
 	public String login(Model model,LoginForm form) {
 		var userInfo = service.searchUserById(form.getLoginId());
 		var isCorrectUserAuth = userInfo.isPresent()
 				&& form.getPassword().equals(userInfo.get().getPassword());
 		if (isCorrectUserAuth) {
-			return "redirect:/menu";
+			return "redirect:/manager/menu";
 		} else {
 			model.addAttribute("errorMsg", "ログインIDとパスワードが間違ってます。");
-			return "/login";
+			return "/manager/login";
 		}
 		
 	}

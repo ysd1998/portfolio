@@ -1,10 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>とっプメニュー</title>
 </head>
 <body>
-トップメニューだよ
+<div th:insert="common/sourceList :: sourceList"></div>
+<div th:insert="common/menu :: menu"></div>
+<form th:action="@{/menu}" method="post"th:object="${serchForm}">
+	<div class="form-group">
+	<div class="d-flex align-items-center justify-content-center">
+	<div class="row g-1 col-10 align-items-center justify-content-center">
+	<div class="col-auto"><p><label>&emsp;&emsp;&emsp;ID</label></p></div>
+	<div class="col-7"><input class="form-control" type="text"  th:field="*{serchData}"></div>
+	<div class="col-auto"><input class="btn btn-primary" type="submit" value="ログイン"></div>
+	</div>
+	</div>
+	</div>
+</form>
 </body>
 </html>

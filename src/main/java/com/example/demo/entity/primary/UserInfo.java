@@ -13,7 +13,10 @@ public class UserInfo {
 	
 	@Id
 	@Column(name = "client_id")
-	private String loginId;
+	private String loginid;
+	
+	@Column(name = "name")
+	private String name;
 	
 	private String password;
 

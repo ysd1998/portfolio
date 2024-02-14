@@ -34,7 +34,7 @@ public class LoginController {
 			return "redirect:/menu";
 		} else {
 			model.addAttribute("errorMsg", "ログインIDとパスワードが間違ってます。");
-			return "/login";
+			return "login";
 		}
 		
 	}

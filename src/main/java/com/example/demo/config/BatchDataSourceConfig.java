@@ -21,7 +21,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
     transactionManagerRef = "primaryTransactionManager"
 )
 public class BatchDataSourceConfig {
-	 @Bean
+	  @Bean
 	  @Primary
 	  @ConfigurationProperties(prefix = "spring.datasource.primary")
 	  public DataSourceProperties primaryProperties() {

@@ -9,7 +9,7 @@ public class ManegerMenuController {
 	@GetMapping("manager/menu")
 	public String view() {
 		
-		return "/manager/menu";
+		return "manager/menu";
 	}
 
 }

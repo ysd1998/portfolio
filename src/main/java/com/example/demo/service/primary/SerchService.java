@@ -1,6 +1,6 @@
 package com.example.demo.service.primary;
 
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -11,11 +11,12 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class LoginService {
+public class SerchService {
 	
 	private final UserInfoRepository repository;
-	public Optional<UserInfo> searchUserById(String loginId){
-		return repository.findById(loginId);
+	
+	public List<UserInfo> searchData(String loginId){
+		return repository.findByLoginidOrNameLike("%"+loginId+"%","%"+loginId+"%");
 	}
 
 }

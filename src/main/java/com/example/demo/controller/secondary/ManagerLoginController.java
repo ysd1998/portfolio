@@ -34,7 +34,7 @@ public class ManagerLoginController {
 			return "redirect:/manager/menu";
 		} else {
 			model.addAttribute("errorMsg", "ログインIDとパスワードが間違ってます。");
-			return "/manager/login";
+			return "manager/login";
 		}
 		
 	}

@@ -35,7 +35,7 @@ public class MenuController {
 	@PostMapping("/menu")
 	public String serch(Model model,SerchForm form) {
 		var userInfo = service.searchData(form.getSerchData());
-		System.out.println(userInfo);
+		model.addAttribute("result", userInfo.get());
 		return "/menu";
 		
 	}

@@ -1,6 +1,6 @@
 package com.example.demo.service.primary;
 
-import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -15,8 +15,8 @@ public class SerchService {
 	
 	private final UserInfoRepository repository;
 	
-	public List<UserInfo> searchData(String loginId){
-		return repository.findByLoginidOrNameLike("%"+loginId+"%","%"+loginId+"%");
+	public Optional<UserInfo> searchData(String loginId){
+		return repository.findByLoginidLikeOrNameLikeOrPasswordLike("%"+loginId+"%","%"+loginId+"%","%"+loginId+"%");
 	}
 
 }

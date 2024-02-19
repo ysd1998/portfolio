@@ -7,17 +7,34 @@
 <body>
 <div th:insert="common/sourceList :: sourceList"></div>
 <div th:insert="common/menu :: menu"></div>
-<form th:action="@{/menu}" method="post"th:object="${serchForm}">
+<!--<form th:action="@{/menu}" method="post"th:object="${serchForm}">-->
+<form method="post" name="form1">
 	<div class="form-group">
 	<div class="d-flex align-items-center justify-content-center">
 	<div class="row g-1 col-10 align-items-center justify-content-center">
 	<div class="col-auto"><p><label>&emsp;&emsp;&emsp;ID</label></p></div>
-	<div class="col-7"><input class="form-control" type="text"  th:field="*{serchData}"></div>
+	<div class="col-7"><input class="form-control" name="serchData" id="serchData" type="text"  th:value="${serchData}"></div>
 	<div class="col-auto"><input class="btn btn-primary" type="submit" value="ログイン"></div>
 	</div>
 	</div>
 	</div>
-	<span th:text="${result}"></span>
-</form>
+	</form>
+	<div class="d-flex align-items-center justify-content-center">
+	<table class="table" th:if="${resultSize > 0}">
+      <tr>
+        <td>商品名</td>
+        <td>作者</td>
+        <td>価格</td>
+      </tr>
+      <tr th:each="data : ${result}">
+		<form th:action="@{/data}" method="post"th:object="${index}">
+        <td th:text="${data.loginid}"/>
+        <td th:text="${data.name}"/>
+        <td th:text="${data.password}"/>
+<!--        <input class="btn btn-primary" type="submit" value="ログイン">-->
+		</form>
+      </tr>
+    </table>
+	</div>
 </body>
 </html>

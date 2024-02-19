@@ -5,11 +5,12 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.entity.primary.UserInfo;
+import com.example.demo.entity.primary.Clients;
 
 @Repository
-public interface UserInfoRepository extends JpaRepository<UserInfo,String>{
+public interface UserInfoRepository extends JpaRepository<Clients,String>{
 	
-	Optional<UserInfo> findByLoginidLikeOrNameLikeOrPasswordLike(String loginid,String name,String password);
+	Optional<Clients> findByLoginidLikeOrNameLikeOrPasswordLike(String loginid,String name,String password);
+
 
 }

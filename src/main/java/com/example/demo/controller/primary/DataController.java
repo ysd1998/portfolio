@@ -11,12 +11,12 @@ import com.example.demo.service.primary.SerchService;
 @ComponentScan
 @Controller
 //@RequiredArgsConstructor
-@RequestMapping("/data")
+@RequestMapping("/bookdata")
 public class DataController {
-	private static final String VIEW = "/data";
+	private static final String VIEW = "/bookdata";
 	@Autowired
 	public SerchService service;
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.GET)
 	public String index() {
 		return VIEW;
 	}

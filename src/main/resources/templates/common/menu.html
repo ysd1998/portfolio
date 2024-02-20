@@ -4,13 +4,11 @@
 <meta charset="UTF-8">
 </head>
 <body>
-<header class="d-flex flex-wrap align-items-center mb-3 border-bottom" style="background-color: #ff914b;color:#fff;" th:fragment="menu">
-      <div class="m-p-0 py-3 row" style="background-color: #ffbd59;color:#fff;">
-        <h2>○○書店</h2>
+<header class="d-flex flex-wrap py-0 px-0 align-items-center mb-3 border-bottom" style="background-color: #ff914b;color:#fff;" th:fragment="menu">
+      <div class="row">
+        <h2 class="col m-0 py-3" style="background-color: #ffbd59;color:#fff;width:100%;">○○書店</h2>
       </div>
-      <div class="m-p-0 py-3 row" style="background-color: #ffbd59;color:#fff;">
-        <img th:src="@{/getImg?imgname=ユーザーアイコン}"/>
-      </div>
+      <div class="row" style="width:90%;text-align: right;"><i class="bi bi-person-circle"></i></div>
 </header>
 </body>
 </html>

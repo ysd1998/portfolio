@@ -60,7 +60,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jdbc</artifactId>
-			<version>3.2.2</version>
 		</dependency>
 		<!--JDBC-->
 		<dependency>

@@ -1,27 +1,19 @@
 package com.example.demo.controller.primary;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 //
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.entity.primary.Clients;
-import com.example.demo.form.primary.LoginForm;
 import com.example.demo.service.primary.SerchService;
 
 
@@ -37,12 +29,15 @@ public class MenuController {
 	@Autowired
 	public SerchService service;
 	@RequestMapping(method = RequestMethod.GET)
-	public String index() {
+	public String index(Model model,Pageable pageable) {
+		List<Clients> result = service.search("", "", "");
+		model.addAttribute("result",result);
+		model.addAttribute("resultSize", result.size());
 		return VIEW;
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView serch(ModelAndView mav, @RequestParam("serchData") String serchData) {
+	public ModelAndView serch(ModelAndView mav,Pageable pageable, @RequestParam("serchData") String serchData) {
 		mav.setViewName(VIEW);
 		mav.addObject("client_id", serchData);
 		mav.addObject("name", serchData);
@@ -50,13 +45,18 @@ public class MenuController {
 		List<Clients> result = service.search(serchData, serchData, serchData);
 		mav.addObject("result", result);
 		mav.addObject("resultSize", result.size());
+		if (result== null || result.size() == 0) {
+			mav.addObject("errorMsg","検索結果がありませんでした。");	
+		} else {
+			mav.addObject("errorMsg","");
+		}
 		return mav;
 	}
-	@PostMapping("/menu")
-	public String serchs(Model model,LoginForm form) {
-		return "redirect:/data";
-		
-	}
+//	@PostMapping("/menu")
+//	public String serchs(Model model,LoginForm form) {
+//		return "redirect:/data";
+//		
+//	}
 	
 //	
 ////	@RequestMapping("/menu")
@@ -68,25 +68,5 @@ public class MenuController {
 ////		
 ////	}
 //	
-	@RequestMapping("/getImg")
-	@ResponseBody
-	public HttpEntity<byte[]> getImg(@RequestParam("imgname") String fileName){
-		File fileImg = new File("picture"+fileName +".png");
-		
-		byte[] byteImg = null;
-		HttpHeaders headers = null;
-		try {
-			//バイト列に変換
-			byteImg = Files.readAllBytes(fileImg.toPath());
-			headers = new HttpHeaders();
-			
-			//Responseのヘッダーを作成
-			headers.setContentType(MediaType.IMAGE_PNG);
-			headers.setContentLength(byteImg.length);
-		}catch(IOException e) {
-			return null;
-		}
-		return new HttpEntity<byte[]>(byteImg,headers);
-	}
 
 }

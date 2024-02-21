@@ -22,6 +22,7 @@ public class LoginController {
 	
 	@GetMapping("/login")
 	public String view(Model model,LoginForm form) {
+		model.addAttribute("errorMsg", "");
 		return "/login";
 	}
 	

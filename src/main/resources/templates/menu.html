@@ -13,6 +13,18 @@
 <!--      };-->
 <!--  });-->
 <!--</script>-->
+	<script>
+		$(function() {
+		    $(".menu__item").hover(
+		       function() {
+		            $(".menuSub:not(:animated)", this).slideDown();
+		        },
+		        function() {
+		            $(".menuSub", this).slideUp();
+		        }
+		    );
+		});
+	</script>
 </head>
 <body>
 <!--<div th:insert="common/sourceList :: sourceList"></div>-->

@@ -3,7 +3,6 @@ package com.example.demo.controller.primary;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-//
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -15,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.entity.primary.Clients;
 import com.example.demo.service.primary.SerchService;
-
 
 @ComponentScan
 @Controller

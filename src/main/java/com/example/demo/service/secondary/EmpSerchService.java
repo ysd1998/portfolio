@@ -25,7 +25,7 @@ public class EmpSerchService {
 		if ("".equals(loginId) && "".equals(Name) && "".equals(Password)) {
 			result = repository.findAll();
 		} else {
-			result = repositoryCustom.search(loginId, Name, Password);
+			result = repositoryCustom.searchEmp(loginId, Name, Password);
 		}
 		return result;
 	}

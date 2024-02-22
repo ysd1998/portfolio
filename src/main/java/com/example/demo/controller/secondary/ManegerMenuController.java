@@ -15,9 +15,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.demo.entity.secondary.Employees;
 import com.example.demo.service.secondary.EmpSerchService;
 
+import lombok.RequiredArgsConstructor;
+
 @ComponentScan
 @Controller
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
 @RequestMapping("/manager/menu")
 public class ManegerMenuController {
 	
@@ -35,7 +37,7 @@ public class ManegerMenuController {
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView serch(ModelAndView mav,Pageable pageable, @RequestParam("serchData") String serchData) {
 		mav.setViewName(VIEW);
-		mav.addObject("client_id", serchData);
+		mav.addObject("employee_id", serchData);
 		mav.addObject("name", serchData);
 		mav.addObject("password",serchData);
 		List<Employees> result = service.search(serchData, serchData, serchData);

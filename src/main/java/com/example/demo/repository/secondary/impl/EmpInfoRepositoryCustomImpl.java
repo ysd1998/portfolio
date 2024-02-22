@@ -19,33 +19,33 @@ public class EmpInfoRepositoryCustomImpl implements EmpInfoRepositoryCustom  {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Employees> search(String loginId,String Name,String Password) {
+	public List<Employees> searchEmp(String loginid,String Name,String Password) {
 		StringBuilder sql = new StringBuilder();
-		sql.append("SELECT c From Employees c WHERE ");
+		sql.append("SELECT e From Employees e WHERE ");
 		boolean andFlg = false;
 		boolean goodsIdFlg = false;
-		if (!"".equals(loginId) && loginId != null) {
-			sql.append(" c.loginid LIKE :loginId ");
+		if (!"".equals(loginid) && loginid != null) {
+			sql.append(" e.loginid LIKE :loginid ");
 			goodsIdFlg = true;
 			andFlg = true;
 		}
 		boolean goodsNameFlg = false;
 		if (!"".equals(Name) && Name != null) {
 			if (andFlg) sql.append(" or ");
-			sql.append("c.name LIKE :Name ");
+			sql.append("e.name LIKE :Name ");
 			goodsNameFlg = true;
 			andFlg = true;
 		}
 		boolean priceFromFlg = false;
 		if (!"".equals(Password) && Password != null) {
 			if (andFlg) sql.append(" or ");
-			sql.append("c.password LIKE :Password ");
+			sql.append("e.password LIKE :Password ");
 			priceFromFlg = true;
 			andFlg = true;
 		}
 		
 		Query query = manager.createQuery(sql.toString());
-		if (goodsIdFlg) query.setParameter("loginId", "%" + loginId + "%");
+		if (goodsIdFlg) query.setParameter("loginId", "%" + loginid + "%");
 		if (goodsNameFlg) query.setParameter("Name", "%" + Name + "%");
 		if (priceFromFlg) query.setParameter("Password", "%" + Password + "%");
 		return query.getResultList();

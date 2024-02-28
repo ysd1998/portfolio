@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    primary:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      password: mysql
+      url: jdbc:mysql://localhost/client_db
+      username: devuser01
+    secondary:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      password: mysql
+      url: jdbc:mysql://localhost/employee_db
+      username: devuser01
+    book:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      password: mysql
+      url: jdbc:mysql://localhost/book_db
+      username: devuser01
+      
+  jpa:
+    hibernate:
+      ddl-auto: none;
+    

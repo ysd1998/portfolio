@@ -19,24 +19,25 @@ public class Employees {
 	@Setter
 	private String loginid;
 	
+	
 	@Column(name = "name")
 	@Getter
 	@Setter
 	private String name;
 	
-	@Column(name = "password")
+	@Column(name = "department_id")
 	@Getter
 	@Setter
-	private String password;
+	private String did;
 	
 	@Column(name = "authority")
 	@Getter
 	@Setter
 	private String authority;
 	
-	@Column(name = "department_id")
+	@Column(name = "password")
 	@Getter
 	@Setter
-	private String did;
+	private String password;
 
 }

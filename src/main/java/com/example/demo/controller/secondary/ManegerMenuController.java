@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.demo.entity.secondary.Employees;
-import com.example.demo.service.secondary.EmpSerchService;
+import com.example.demo.entity.book.Books;
+import com.example.demo.service.book.BookSerchService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -25,10 +25,10 @@ public class ManegerMenuController {
 	
 	private static final String VIEW = "/manager/menu";
 	@Autowired
-	public EmpSerchService service;
+	public BookSerchService service;
 	@RequestMapping(method = RequestMethod.GET)
 	public String index(Model model,Pageable pageable) {
-		List<Employees> result = service.search("", "", "");
+		List<Books> result = service.search("", "", "");
 		model.addAttribute("result",result);
 		model.addAttribute("resultSize", result.size());
 		return VIEW;
@@ -37,10 +37,10 @@ public class ManegerMenuController {
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView serch(ModelAndView mav,Pageable pageable, @RequestParam("serchData") String serchData) {
 		mav.setViewName(VIEW);
-		mav.addObject("employee_id", serchData);
-		mav.addObject("name", serchData);
-		mav.addObject("password",serchData);
-		List<Employees> result = service.search(serchData, serchData, serchData);
+		mav.addObject("title", serchData);
+		mav.addObject("auther", serchData);
+		mav.addObject("price",serchData);
+		List<Books> result = service.search(serchData, serchData, serchData);
 		mav.addObject("result", result);
 		mav.addObject("resultSize", result.size());
 		if (result== null || result.size() == 0) {

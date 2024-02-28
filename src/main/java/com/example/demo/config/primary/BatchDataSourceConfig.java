@@ -1,4 +1,4 @@
-package com.example.demo.config;
+package com.example.demo.config.primary;
 
 import javax.sql.DataSource;
 
@@ -55,4 +55,19 @@ public class BatchDataSourceConfig {
 	    transactionManager.setEntityManagerFactory(primaryEntityManager.getObject());
 	    return transactionManager;
 	  }
+	  
+//	  @Bean
+//	  @Primary
+//	  @Autowired
+//	  public LocalContainerEntityManagerFactoryBean myEntityManager(EntityManagerFactoryBuilder builder, @Qualifier("myDataSource") DataSource dataSource){
+//		  return builder.dataSource(dataSource)
+//		    .packages("\"com.example.demo.entity.primary")
+//		    .properties(new HashMap<>(){
+//		      {
+//		        put("hibernate.physical_naming_strategy", PhysicalNamingStrategy.class.getName());
+//		        put("hibernate.implicit_naming_strategy", SpringImplicitNamingStrategy.class.getName());
+//		      }
+//		    })
+//		    .build();
+//		}
 }

@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.demo.entity.primary.Clients;
-import com.example.demo.service.primary.SerchService;
+import com.example.demo.entity.book.Books;
+import com.example.demo.service.book.BookSerchService;
 
 @ComponentScan
 @Controller
@@ -25,10 +25,10 @@ public class MenuController {
 //	
 	private static final String VIEW = "/menu";
 	@Autowired
-	public SerchService service;
+	public BookSerchService service;
 	@RequestMapping(method = RequestMethod.GET)
 	public String index(Model model,Pageable pageable) {
-		List<Clients> result = service.search("", "", "");
+		List<Books> result = service.search("", "", "");
 		model.addAttribute("result",result);
 		model.addAttribute("resultSize", result.size());
 		return VIEW;
@@ -37,10 +37,10 @@ public class MenuController {
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView serch(ModelAndView mav,Pageable pageable, @RequestParam("serchData") String serchData) {
 		mav.setViewName(VIEW);
-		mav.addObject("client_id", serchData);
-		mav.addObject("name", serchData);
-		mav.addObject("password",serchData);
-		List<Clients> result = service.search(serchData, serchData, serchData);
+		mav.addObject("title", serchData);
+		mav.addObject("auther", serchData);
+		mav.addObject("price",serchData);
+		List<Books> result = service.search(serchData, serchData, serchData);
 		mav.addObject("result", result);
 		mav.addObject("resultSize", result.size());
 		if (result== null || result.size() == 0) {

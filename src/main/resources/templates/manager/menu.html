@@ -18,18 +18,19 @@
 <!--<div th:insert="common/sourceList :: sourceList"></div>-->
 <div th:insert="manager/common/menu :: menu"></div>
 <!--<form th:action="@{/menu}" method="post"th:object="${serchForm}">-->
-<form method="post" name="form1">
+	<form method="post" name="form1">
 	<div class="form-group">
 	<div class="d-flex align-items-center justify-content-center">
 	<div class="row g-1 col-10 align-items-center justify-content-center">
 	<div class="col-auto"><p><label>&emsp;&emsp;&emsp;ID</label></p></div>
 	<div class="col-7"><input class="form-control" name="serchData" id="serchData" type="text"  th:value="${serchData}"></div>
-	<div class="col-auto"><input class="btn btn-primary" type="submit" value="ログイン"></div>
-<!--	<div class="col-auto"><input class="btn btn-primary" type="submit" value="ログイン"></div>-->
+	<div class="col-auto"><input class="btn btn-primary" type="submit" value="検索"></div>
+	<div class="col-auto"><button class="btn" type="button"><a  th:href="@{/bookdata}">追加</a></button></div>
 	</div>
 	</div>
 	</div>
 	</form>
+	
 	<div class="d-flex align-items-center justify-content-center">
 	<span th:text="${errorMsg}"></span>
 	<table class="table" th:if="${resultSize > 0}">
@@ -39,9 +40,9 @@
         <td>価格</td>
       </tr>
       <tr th:each="data : ${result}">
-        <td><a th:href="@{/bookdata}"  th:text="${data.loginid}"/></td>
-        <td><a th:href="@{/bookdata}"  th:text="${data.name}"/></td>
-        <td><a th:href="@{/bookdata}"  th:text="${data.password}"/></td>
+        <td><a th:href="@{/bookdata}"  th:text="${data.title}"/></td>
+        <td><a th:href="@{/bookdata}"  th:text="${data.auther}"/></td>
+        <td><a th:href="@{/bookdata}"  th:text="${data.price}"/></td>
 <!--        <input class="btn btn-primary" type="submit" value="ログイン">-->
       </tr>
       </a>

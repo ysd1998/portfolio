@@ -3,8 +3,56 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}">
+<script rel="text/javascript" th:src="@{/webjars/jquery/3.7.1/jquery.min.js}"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+<!--<script>-->
+<!--  $('tr[data-href]').click(function (e) {-->
+<!--      if (!$(e.target).is('a')) {-->
+<!--        window.location = $(e.target).data('href');-->
+<!--      };-->
+<!--  });-->
+<!--</script>-->
+	<script>
+		$(function() {
+		    $(".menu__item").hover(
+		       function() {
+		            $(".menuSub:not(:animated)", this).slideDown();
+		        },
+		        function() {
+		            $(".menuSub", this).slideUp();
+		        }
+		    );
+		});
+	</script>
 </head>
 <body>
-詳細画面だよ
+<div th:insert="common/menu :: menu"></div>
+	f<div class="d-flex align-items-center justify-content-center">
+	<span th:text="${errorMsg}"></span>
+	<table class="table" th:if="${resultSize > 0}">
+      <tr>
+        <td>商品名</td>
+        <td>作者</td>
+        <td>価格</td>
+        <td>商品名</td>
+        <td>作者</td>
+        <td>価格</td>
+        <td>商品名</td>
+      </tr>
+      <tr th:each="data : ${result}">
+        <td><a th:text="${data.title}"/></td>
+        <td><a th:text="${data.auther}"/></td>
+        <td><a th:text="${data.price}"/></td>
+        <td><a th:text="${data.publisher}"/></td>
+        <td><a th:text="${data.type_id}"/></td>
+        <td><a th:text="${data.book_id}"/></td>
+        <td><a th:text="${data.ex}"/></td>
+<!--        <input class="btn btn-primary" type="submit" value="ログイン">-->
+      </tr>
+      </a>
+    </table>
+
+	</div>
 </body>
 </html>

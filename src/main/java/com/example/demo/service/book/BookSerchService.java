@@ -30,6 +30,10 @@ public class BookSerchService {
 		return result;
 	}
 	
+	public Books findById(String id) {
+		return repository.findById(id).get();
+	}
+	
 //	public List<UserInfo> searchData(String loginId,SerchForm form){
 //		StringBuilder sqlBuilder = new StringBuilder();
 //	    sqlBuilder.append("SELECT c.client_id, c.name,c.password "

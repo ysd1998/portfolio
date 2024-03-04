@@ -8,15 +8,23 @@
       <div class="row">
         <h2 class="col m-0 py-3" style="background-color: #ffbd59;color:#fff;width:10%;">○○書店</h2>
       </div>
-      <div class="d-flex justify-content-start row" style="width:90%;text-align: right;">
-	  <ul menu="row menu">
-      <li class="row menu__item justify-content-end" style="width:10%;">
-            <a href="" class="menu__drop"><i class="bi bi-person-circle" style="font-size: 40px;"></i></a>
-            <ul class="menuSub" style="display:none;">
-                <li class="menuSub__item"><a href="">ログアウト</a></li>
-            </ul>
-        </li>
-       </ul>
+      <div class="d-flex row justify-content-end" style="width:90%;text-align: right;">
+<!--	  <ul menu="menu d-flex row justify-content-end">-->
+<!--      <li class="menu__item" style="width:10%;">-->
+<!--            <a href="" class="menu__drop"><i class="bi bi-person-circle" style="font-size: 40px;"></i></a>-->
+<!--            <ul class="menuSub" style="display:none;">-->
+<!--                <li class="menuSub__item"><a href="">ログアウト</a></li>-->
+<!--            </ul>-->
+<!--        </li>-->
+<!--       </ul>-->
+       <div class="dropdown">
+ 		<button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+ 		   <a href="" class="menu__drop"><i class="bi bi-person-circle" style="font-size: 40px;"></i></a>
+ 		 </button>
+ 	 <ul class="dropdown-menu">
+ 	    <li><a class="dropdown-item" href="#">ログアウト</a></li>
+ 	  </ul>
+ 	</div>
       </div>
 </header>
 </body>

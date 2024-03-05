@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,7 +29,9 @@ public class MenuController {
 	public BookSerchService service;
 	@RequestMapping(method = RequestMethod.GET)
 	public String index(Model model,Pageable pageable) {
-		List<Books> result = service.search("", "", "");
+		Page<Books> results = service.search("", "", "",pageable);
+		List<Books> result = results.getContent();
+		model.addAttribute("pages", results);
 		model.addAttribute("result",result);
 		model.addAttribute("resultSize", result.size());
 		return VIEW;
@@ -40,7 +43,9 @@ public class MenuController {
 		mav.addObject("title", serchData);
 		mav.addObject("auther", serchData);
 		mav.addObject("price",serchData);
-		List<Books> result = service.search(serchData, serchData, serchData);
+		Page<Books> results = service.search(serchData, serchData, serchData,pageable);
+		List<Books> result = results.getContent();
+		mav.addObject("pages", results);
 		mav.addObject("result", result);
 		mav.addObject("resultSize", result.size());
 		if (result== null || result.size() == 0) {

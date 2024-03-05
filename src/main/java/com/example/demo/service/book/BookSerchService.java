@@ -1,8 +1,8 @@
 package com.example.demo.service.book;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.book.Books;
@@ -20,12 +20,12 @@ public class BookSerchService {
 	@Autowired
 	private final BookInfoRepositoryCustom repositoryCustom;
 	
-	public List<Books> search(String loginId,String Name,String Password) {
-		List<Books> result;
+	public Page<Books> search(String loginId,String Name,String Password,Pageable pageable) {
+		Page<Books> result;
 		if ("".equals(loginId) && "".equals(Name) && "".equals(Password)) {
-			result = repository.findAll();
+			result = repository.findAll(pageable);
 		} else {
-			result = repositoryCustom.searchBooks(loginId, Name, Password);
+			result = repository.findByTitleOrAuther(loginId, Name,pageable);
 		}
 		return result;
 	}

@@ -40,10 +40,10 @@ public class MenuController {
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView serch(ModelAndView mav,Pageable pageable, @RequestParam("serchData") String serchData) {
 		mav.setViewName(VIEW);
-		mav.addObject("title", serchData);
-		mav.addObject("auther", serchData);
-		mav.addObject("price",serchData);
-		Page<Books> results = service.search(serchData, serchData, serchData,pageable);
+		mav.addObject("title", serchData );
+		mav.addObject("auther", serchData );
+		mav.addObject("price",serchData );
+		Page<Books> results = service.search(serchData , serchData , serchData ,pageable);
 		List<Books> result = results.getContent();
 		mav.addObject("pages", results);
 		mav.addObject("result", result);

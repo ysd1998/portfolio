@@ -30,7 +30,7 @@ public class BookSerchService {
 		return result;
 	}
 	
-	public Books findById(String id) {
+	public Books serchId(String id) {
 		return repository.findById(id).get();
 	}
 	

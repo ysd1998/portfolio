@@ -26,11 +26,16 @@
 	<div class="col-auto"><p><label>&emsp;&emsp;&emsp;ID</label></p></div>
 	<div class="col-7"><input class="form-control" name="serchData" id="serchData" type="text"  th:value="${serchData}"></div>
 	<div class="col-auto"><input class="btn btn-primary" type="submit" value="検索"></div>
-	<div class="col-auto"><button class="btn" type="button"><a  th:href="@{/bookdata}">追加</a></button></div>
+	<div class="col-auto">
+	<button class="btn btn-primary" type="button"><a th:href="@{/manager/bookinit}" style="color:#fff;text-decoration: none;">追加</a></button>
+<!--	<form th:action="@{/manager/bookinit}" method="get">-->
+<!--	<input class=" btn btn-primary" type="submit" th:href="@{/manager/bookinit}" value="追加"/>-->
+<!--	</form>-->
 	</div>
 	</div>
 	</div>
-	</form>
+	</div>
+	
 	
 	<div class="d-flex align-items-center justify-content-center">
 	<span th:text="${errorMsg}"></span>

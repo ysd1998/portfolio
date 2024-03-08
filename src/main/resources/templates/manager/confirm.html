@@ -28,78 +28,70 @@
 	</script>
 </head>
 <body>
-<div th:insert="manager/common/menu :: menu"></div>
-	<form th:action="@{/manager/confirm}" th:object="${bookData}" method="GET">
+<div th:insert="common/manager/menu :: menu"></div>
 	<div class="d-flex align-items-center justify-content-center">
-	<div style="width:50%;">
+	<form th:action="@{/manager/confirm}"th:object="${bookData}" method="post">
       <div class="row">
         <div class="col-2 border bg-light">タイトル</div>
         <div class="col border">
-          <input class="form-control" type="text"  th:field="*{title}"/>
+          <p th:text="*{title}"></p>
         </div>
       </div>
       <div class="row">
         <div class="col-2 border bg-light">作者</div>
         <div class="col border">
-          <input class="form-control" type="text"  th:field="*{auther}"/>
+          <p th:text="*{auther}"></p>
         </div>
       </div>
       <div class="row">
         <div class="col-2 border bg-light">価格</div>
         <div class="col border">
-          <input class="form-control" type="text"  th:field="*{price}"/>
+          <p th:text="*{price}"></p>
         </div>
       </div>
       <div class="row">
         <div class="col-2 border bg-light">出版社</div>
         <div class="col border">
-          <input class="form-control" type="text"  th:field="*{publisher}"/>
+          <p th:text="*{publisher}"></p>
         </div>
       </div>
       <div class="row">
         <div class="col-2 border bg-light">発行日</div>
         <div class="col border">
-          <input class="form-control" type="text"  th:field="*{year}"/>
+          <p th:text="*{year}"></p>
         </div>
       </div>
       <div class="row">
         <div class="col-2 border bg-light">カテゴリ</div>
         <div class="col border">
-			<select class="form-select" aria-label="Default select example" th:value="*{type_id}">
-			<option selected></option>
-				<option value="105">その他</option>
-				<option value="102">Two</option>
-				<option value="103">Three</option>
-			</select>
-<!--          <input class="form-control" type="text"  th:field="${type_id}"/>-->
+          <p th:text="${typeData.name}" th:value="*{type_id}"></p>
         </div>
       </div>
       <div class="row">
         <div class="col-2 border bg-light">商品番号</div>
         <div class="col border">
-          <input class="form-control" type="text"  th:field="*{book_id}"/>
+          <p th:text="*{book_id}"></p>
         </div>
       </div>
-      <div class="row" style="height: 40%;" >
+      <div class="row" style="height: 40%;">
         <div class="col-2 border bg-light">説明</div>
         <div class="col border">
-		  <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"  th:field="*{ex}"></textarea>
+          <p th:text="*{ex}"></p>
         </div>
       </div>
-      <div class="row" style="height: 40%;" >
-        <div class="col-2 border bg-light">その他</div>
+      <div class="row" style="height: 40%;">
+        <div class="col-2 border bg-light">そのた</div>
         <div class="col border">
-		  <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"  th:field="*{other}"></textarea>
+          <p th:text="*{other}"></p>
         </div>
       </div>
     </div>
 <!-- mx-md-n5-->
-	</div>
-	<div class="d-flex justify-content-evenly">
-	<input class=" btn btn-primary" type="submit" th:href="@{/manager/confirm}" value="追加"/>
-	<form th:action="@{/manager/menu}" method="get">
-	<input class=" btn btn-primary" type="submit" th:href="@{/manager/menu}" value="戻る"/>
+	<div class="d-flex justify-content-center">
+	<input class=" btn btn-primary" type="submit" th:href="@{/manager/menu}" value="追加"/>
 	</form>
+	<form th:action="@{/manager/menu}" method="get">
+	<input class=" btn btn-primary" type="submit" th:href="@{/manage/menu}" value="戻る"/>
 	</form>
 	</div>
 </body>

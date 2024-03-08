@@ -25,7 +25,7 @@ public class BookSerchService {
 		if ("".equals(loginId) && "".equals(Name) && "".equals(Password)) {
 			result = repository.findAll(pageable);
 		} else {
-			result = repository.findByTitleOrAuther(loginId, Name,pageable);
+			result = repository.findByTitleLikeOrAutherLikeOrPublisherLike("%"+loginId+"%","%" +Name+"%","%" +Password+"%",pageable);
 		}
 		return result;
 	}

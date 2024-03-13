@@ -29,7 +29,7 @@
 </head>
 <body>
 <div th:insert="manager/common/menu :: menu"></div>
-	<form th:action="@{/manager/confirm}" th:object="${bookData}" method="GET">
+	<form th:action="@{/manager/bookinit}" th:object="${bookData}" method="POST">
 	<div class="d-flex align-items-center justify-content-center">
 	<div style="width:50%;">
       <div class="row">
@@ -65,19 +65,17 @@
       <div class="row">
         <div class="col-2 border bg-light">カテゴリ</div>
         <div class="col border">
-			<select class="form-select" aria-label="Default select example" th:value="*{type_id}">
-			<option selected></option>
-				<option value="105">その他</option>
-				<option value="102">Two</option>
-				<option value="103">Three</option>
+			<select class="form-select" aria-label="Default select example" th:field="*{typeid}" value="*{typeid}">
+				<option value="0">--- 選択してください ---</option>
+				<option  th:each="list : ${Types}" th:value="${list.typeid}" th:selected="${list.typeid == typeid}" th:inline="text">[[${list.name}]]</option>
 			</select>
-<!--          <input class="form-control" type="text"  th:field="${type_id}"/>-->
+<!--          <input class="form-control" type="text"  th:field="*{type_id}"/>-->
         </div>
       </div>
       <div class="row">
         <div class="col-2 border bg-light">商品番号</div>
         <div class="col border">
-          <input class="form-control" type="text"  th:field="*{book_id}"/>
+          <input class="form-control" type="text" th:field="*{bookid}"/>
         </div>
       </div>
       <div class="row" style="height: 40%;" >
@@ -97,9 +95,9 @@
 	</div>
 	<div class="d-flex justify-content-evenly">
 	<input class=" btn btn-primary" type="submit" th:href="@{/manager/confirm}" value="追加"/>
+	</form>
 	<form th:action="@{/manager/menu}" method="get">
 	<input class=" btn btn-primary" type="submit" th:href="@{/manager/menu}" value="戻る"/>
-	</form>
 	</form>
 	</div>
 </body>

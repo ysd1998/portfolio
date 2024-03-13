@@ -52,9 +52,9 @@ function loadPage(currentPage) {
         <td>価格</td>
       </tr>
       <tr th:each="data : ${result}">
-        <td><a th:href="@{/{id}(id=*{data.book_id})}"  th:text="${data.title}"/></td>
-        <td><a th:href="@{/{id}(id=*{data.book_id})}"  th:text="${data.auther}"/></td>
-        <td><a th:href="@{/{id}(id=*{data.book_id})}"  th:text="${data.price}"/></td>
+        <td><a th:href="@{/{id}(id=*{data.bookid})}"  th:text="${data.title}"/></td>
+        <td><a th:href="@{/{id}(id=*{data.bookid})}"  th:text="${data.auther}"/></td>
+        <td><a th:href="@{/{id}(id=*{data.bookid})}"  th:text="${data.price}"/></td>
 <!--        <input class="btn btn-primary" type="submit" value="ログイン">-->
       </tr>
       </a>

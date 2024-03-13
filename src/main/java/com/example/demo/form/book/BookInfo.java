@@ -1,8 +1,14 @@
 package com.example.demo.form.book;
 
+
+
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Data
+@Getter
+@Setter
 public class BookInfo {
 	
 	private String book_id;
@@ -25,7 +31,6 @@ public class BookInfo {
 	
 	private String year;
 	
-	
 	private String ex;
 	
 	
@@ -45,7 +50,6 @@ public class BookInfo {
 	
 	
 	private String update_day;
-	
 	
 	private String delete_id;
 	

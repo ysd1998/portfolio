@@ -50,5 +50,5 @@ public class BookDataSourceConfiguration {
     transactionManager.setEntityManagerFactory(bookEntityManager.getObject());
     return transactionManager;
   }
-
+  
 }

@@ -28,7 +28,7 @@ public class DataController {
 	@GetMapping("{id}")
 	public String index(Model model,@PathVariable String id) {
 		Books book = service.serchId(id);
-		Types type = typeservice.serchId(book.getType_id());
+		Types type = typeservice.serchId(book.getTypeid());
 		model.addAttribute("bookData", book);
 		model.addAttribute("typeData", type);
 		return "/bookdata";

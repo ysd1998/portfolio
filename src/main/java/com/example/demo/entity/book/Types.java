@@ -17,7 +17,7 @@ public class Types {
 	@Column(name = "type_id")
 	@Getter
 	@Setter
-	private String type_id;
+	private String typeid;
 	
 	@Column(name = "name")
 	@Getter

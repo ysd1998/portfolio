@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.book.Books;
 import com.example.demo.repository.book.BookInfoRepository;
-import com.example.demo.repository.book.BookInfoRepositoryCustom;
 
 import lombok.RequiredArgsConstructor;
 
@@ -17,21 +16,22 @@ public class BookSerchService {
 	
 	@Autowired
 	private final BookInfoRepository repository;
-	@Autowired
-	private final BookInfoRepositoryCustom repositoryCustom;
+//	@Autowired
+//	private final BookInfoRepositoryCustom repositoryCustom;
 	
-	public Page<Books> search(String loginId,String Name,String Password,Pageable pageable) {
+	public Page<Books> search(String loginId,String Name,String Password,String Typeid,Pageable pageable) {
 		Page<Books> result;
-		if ("".equals(loginId) && "".equals(Name) && "".equals(Password)) {
+		if ("".equals(loginId) && "".equals(Name) && "".equals(Password) && "".equals(Typeid)) {
 			result = repository.findAll(pageable);
 		} else {
-			result = repository.findByTitleLikeOrAutherLikeOrPublisherLike("%"+loginId+"%","%" +Name+"%","%" +Password+"%",pageable);
+			result = repository.findByTitleLikeOrAutherLikeOrPublisherLikeOrTypeidLike("%"+loginId+"%","%" +Name+"%","%" +Password+"%","%" +Typeid+"%",pageable);
 		}
 		return result;
 	}
 	
 	public Books serchId(String id) {
-		return repository.findById(id).get();
+		Books book =repository.findById(id).get();
+		return book;
 	}
 	
 //	public List<UserInfo> searchData(String loginId,SerchForm form){

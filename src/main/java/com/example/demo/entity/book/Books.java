@@ -1,5 +1,8 @@
 package com.example.demo.entity.book;
 
+
+import org.springframework.data.annotation.CreatedDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -14,10 +17,13 @@ import lombok.Setter;
 public class Books {
 	
 	@Id
+//	@EmbeddedId
 	@Column(name = "book_id")
+//	(generator = "idGenerator")
+//	@UuidGenerator
 	@Getter
 	@Setter
-	private String book_id;
+	private String bookid;
 	
 	
 	@Column(name = "title")
@@ -41,7 +47,7 @@ public class Books {
 	@Column(name = "type_id")
 	@Getter
 	@Setter
-	private String type_id;
+	private String typeid;
 	
 	
 	@Column(name = "publisher")
@@ -80,6 +86,7 @@ public class Books {
 	@Column(name = "insert_day")
 	@Getter
 	@Setter
+	@CreatedDate
 	private String insert_day;
 	
 	@Column(name = "update_id")
@@ -100,8 +107,19 @@ public class Books {
 	
 	@Column(name = "delete_day")
 	@Getter
-	@Setter
 	private String delete_day;
+	
+//	@Override
+//	  @Deprecated
+//	  public int getId() {
+//	    return null;
+//	  }
+//
+//	  @Override
+//	  public boolean isNew() {
+//	    // save時のSELECT防止のため、新規エンティティとして認識させるためにtrueを返す。
+//	    return true;
+//	  }
 
 
 }

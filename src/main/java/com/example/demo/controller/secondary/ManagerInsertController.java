@@ -1,5 +1,9 @@
 package com.example.demo.controller.secondary;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,11 +12,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.example.demo.entity.book.Types;
 import com.example.demo.form.book.BookInfo;
 import com.example.demo.service.book.BookAdminService;
+import com.example.demo.service.book.TypeSerchService;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -22,22 +27,34 @@ public class ManagerInsertController {
 	@Autowired
 	public BookAdminService service;
 	
+	@Autowired
+	public TypeSerchService typeservice;
+	
 	@GetMapping("/manager/bookinit")
-	public String view(@ModelAttribute("bookData") BookInfo bookData,HttpServletRequest request,Model model) {
+	public String view(@ModelAttribute("bookData")BookInfo bookData,HttpServletRequest request,Model model) {
 		model.addAttribute("bookData", bookData);
+		List<Types> result = typeservice.serchData("%");
+		model.addAttribute("Types", result);
 		return "/manager/bookinit";
 	}
 	
 	@PostMapping("/manager/bookinit")
-	public String insert(@Valid @ModelAttribute("bookData") BookInfo bookData,
+	public String insertId(@Valid @ModelAttribute("bookData")BookInfo bookData,
 						BindingResult bindingResult,
 						HttpServletRequest request,
 						 Model model) {
+		model.addAttribute("bookData", bookData);
 		String isCorrectUserAuth = bookData.getBook_id();
+		bookData.setWork("追加");
+//		HttpSession session = request.getSession();@Valid
+		Date date = new Date();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String strDate = dateFormat.format(date);
+		bookData.setInsert_day(strDate);
+		bookData.setInsert_id("24020801");
+		bookData.setDelete_flag("0");
+		service.insert(bookData);
 		if (isCorrectUserAuth.equals("")) {
-			bookData.setWork("追加");
-			HttpSession session = request.getSession();
-			session.setAttribute("bookData", bookData);
 			return "redirect:/confirm";
 		} else {
 //			model.addAttribute("errorMsg", "ログインIDとパスワードが間違ってます。");

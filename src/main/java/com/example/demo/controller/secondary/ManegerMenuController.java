@@ -34,7 +34,7 @@ public class ManegerMenuController {
 	public BookSerchService service;
 	@RequestMapping(method = RequestMethod.GET)
 	public String index(Model model,Pageable pageable) {
-		Page<Books> results = service.search("", "", "",pageable);
+		Page<Books> results = service.search("", "", "", "",pageable);
 		List<Books> result = results.getContent();
 		model.addAttribute("result",result);
 		model.addAttribute("resultSize", result.size());
@@ -47,7 +47,7 @@ public class ManegerMenuController {
 		mav.addObject("title", serchData);
 		mav.addObject("auther", serchData);
 		mav.addObject("price",serchData);
-		Page<Books> results = service.search(serchData, serchData, serchData,pageable);
+		Page<Books> results = service.search(serchData, serchData, serchData, serchData,pageable);
 		List<Books> result = results.getContent();
 		mav.addObject("result", result);
 		mav.addObject("resultSize", result.size());

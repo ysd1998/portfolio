@@ -21,38 +21,38 @@ public class BookAdminService {
 	
 	public String insert(BookInfo book) {
 		Books books = new Books();
-		books.setBookid(book.getBook_id());
+		books.setBookid(book.getBookid());
 		books.setTitle(book.getTitle());
 		books.setAuther(book.getAuther());
 		books.setPrice(book.getPrice());
-		books.setTypeid(book.getType_id());
+		books.setTypeid(book.getTypeid());
 		books.setPublisher(book.getPublisher());
 		books.setYear(book.getYear());
 		books.setEx(book.getEx());
 		books.setOther(book.getOther());
-		books.setInsert_id(book.getInsert_id());
-		books.setInsert_day(book.getInsert_day());
-		books.setUpdate_id(book.getUpdate_id());
-		books.setUpdate_day(book.getUpdate_day());
-		books.setDelete_id(book.getDelete_id());
-		books.setDelete_day(book.getDelete_day());
-		books.setDelete_flag(book.getDelete_flag());
+		books.setInsertid(book.getInsertid());
+		books.setInsertday(book.getInsertday());
+		books.setUpdateid(book.getUpdateid());
+		books.setUpdateday(book.getUpdateday());
+		books.setDeleteid(book.getDeleteid());
+		books.setDeleteday(book.getDeleteday());
+		books.setDeleteflag(book.getDeleteflag());
 		repository.save(books);
-//		jdbc.update("INSERT INTO `book_db`.`books`"
-//				+ " (`book_id`, `title`, `auther`, `price`, `type_id`, `publisher`, `year`, `ex` ,`other`, `delete_flag`, `insert_id`, `insert_day`)"
+//		jdbc.update("INSERT INTO `bookdb`.`books`"
+//				+ " (`bookid`, `title`, `auther`, `price`, `typeid`, `publisher`, `year`, `ex` ,`other`, `deleteflag`, `insertid`, `insertday`)"
 //				+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
-//				book.getBook_id(),
+//				book.getBookid(),
 //				book.getTitle(),
 //				book.getAuther(),
 //				book.getPrice(),
-//				book.getType_id(),
+//				book.getTypeid(),
 //				book.getPublisher(),
 //				book.getYear(),
 //				book.getEx(),
 //				book.getOther(),
-//				book.getDelete_flag(),
-//				book.getInsert_id(),
-//				book.getInsert_day());
+//				book.getDeleteflag(),
+//				book.getInsertid(),
+//				book.getInsertday());
 		return "sucsess";
 	}
 

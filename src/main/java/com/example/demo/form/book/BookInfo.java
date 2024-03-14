@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 public class BookInfo {
 	
-	private String book_id;
+	private String bookid;
 	
 	
 	private String title;
@@ -23,7 +23,7 @@ public class BookInfo {
 	private String price;
 	
 	
-	private String type_id;
+	private String typeid;
 	
 	
 	private String publisher;
@@ -37,24 +37,24 @@ public class BookInfo {
 	private String other;
 	
 	
-	private String delete_flag;
+	private String deleteflag;
 	
 	
-	private String insert_id;
+	private String insertid;
 	
 	
-	private String insert_day;
+	private String insertday;
 	
 	
-	private String update_id;
+	private String updateid;
 	
 	
-	private String update_day;
+	private String updateday;
 	
-	private String delete_id;
+	private String deleteid;
 	
 	
-	private String delete_day;
+	private String deleteday;
 	
 	private String work;
 

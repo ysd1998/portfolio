@@ -18,6 +18,7 @@ import com.example.demo.service.book.BookAdminService;
 import com.example.demo.service.book.TypeSerchService;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -44,21 +45,23 @@ public class ManagerInsertController {
 						HttpServletRequest request,
 						 Model model) {
 		model.addAttribute("bookData", bookData);
-		String isCorrectUserAuth = bookData.getBook_id();
+		String isCorrectUserAuth = bookData.getBookid();
 		bookData.setWork("追加");
-//		HttpSession session = request.getSession();@Valid
+		HttpSession session = request.getSession();
 		Date date = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		String strDate = dateFormat.format(date);
-		bookData.setInsert_day(strDate);
-		bookData.setInsert_id("24020801");
-		bookData.setDelete_flag("0");
-		service.insert(bookData);
+		bookData.setInsertday(strDate);
+		bookData.setInsertid("24020801");
+		bookData.setDeleteflag("0");
+		session.setAttribute("bookData", bookData);
+//		service.insert(bookData);
 		if (isCorrectUserAuth.equals("")) {
-			return "redirect:/confirm";
+			return "/manager/bookinit";
 		} else {
 //			model.addAttribute("errorMsg", "ログインIDとパスワードが間違ってます。");
-			return "/manager/bookinit";
+			return "redirect:/manager/confirm";
+			
 		}
 		
 	}

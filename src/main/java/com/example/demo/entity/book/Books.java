@@ -1,13 +1,12 @@
 package com.example.demo.entity.book;
 
 
+import org.hibernate.annotations.SQLRestriction;
 import org.springframework.data.annotation.CreatedDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.Getter;
@@ -15,6 +14,7 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "books")
+@SQLRestriction("delete_flag <> 1")
 @Data
 public class Books {
 	
@@ -45,13 +45,13 @@ public class Books {
 	@Setter
 	private String price;
 	
-	
 	@Column(name = "type_id")
 	@Getter
 	@Setter
-	@OneToOne
-	@JoinColumn(name = "type_id")
 	private String typeid;
+//	@OneToOne
+//	@JoinColumn(name = "type_id")
+//	private Types typeid;
 	
 	
 	@Column(name = "publisher")
@@ -80,38 +80,39 @@ public class Books {
 	@Column(name = "delete_flag")
 	@Getter
 	@Setter
-	private String delete_flag;
+	private String deleteflag;
 	
 	@Column(name = "insert_id")
 	@Getter
 	@Setter
-	private String insert_id;
+	private String insertid;
 	
 	@Column(name = "insert_day")
 	@Getter
 	@Setter
 	@CreatedDate
-	private String insert_day;
+	private String insertday;
 	
 	@Column(name = "update_id")
 	@Getter
 	@Setter
-	private String update_id;
+	private String updateid;
 	
 	@Column(name = "update_day")
 	@Getter
 	@Setter
-	private String update_day;
+	private String updateday;
 	
 	@Column(name = "delete_id")
 	@Getter
 	@Setter
-	private String delete_id;
+	private String deleteid;
 	
 	
 	@Column(name = "delete_day")
 	@Getter
-	private String delete_day;
+	@Setter
+	private String deleteday;
 	
 //	@Override
 //	  @Deprecated

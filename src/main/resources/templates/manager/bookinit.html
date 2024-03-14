@@ -67,7 +67,7 @@
         <div class="col border">
 			<select class="form-select" aria-label="Default select example" th:field="*{typeid}" value="*{typeid}">
 				<option value="0">--- 選択してください ---</option>
-				<option  th:each="list : ${Types}" th:value="${list.typeid}" th:selected="${list.typeid == typeid}" th:inline="text">[[${list.name}]]</option>
+				<option th:each="list : ${Types}" th:value="${list.typeid}" th:selected="${list.typeid == typeid}" th:inline="text">[[${list.name}]]</option>
 			</select>
 <!--          <input class="form-control" type="text"  th:field="*{type_id}"/>-->
         </div>

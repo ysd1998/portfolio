@@ -28,9 +28,10 @@
 	</script>
 </head>
 <body>
-<div th:insert="common/manager/menu :: menu"></div>
-	<div class="d-flex align-items-center justify-content-center">
+<div th:insert="manager/common/menu :: menu"></div>
 	<form th:action="@{/manager/confirm}" th:object="${bookData}" method="post">
+	<div class="d-flex align-items-center justify-content-center">
+	<div style="width:50%;">
       <div class="row">
         <div class="col-2 border bg-light">タイトル</div>
         <div class="col border">
@@ -65,7 +66,8 @@
         <div class="col-2 border bg-light">カテゴリ</div>
         <div class="col border">
 <!--          <p th:text="${typeData.name}" th:value="*{type_id}"></p>-->
-          <p th:text="*{typeid}"></p>
+          <input type="hidden" th:value="*{typeid}"/>
+          <p th:text="${typeData.name}"></p>
         </div>
       </div>
       <div class="row">
@@ -88,12 +90,14 @@
       </div>
     </div>
 <!-- mx-md-n5-->
-	<div class="d-flex justify-content-center">
-	<input class=" btn btn-primary" type="submit" th:href="@{/manager/menu}" value="追加"/>
+</div>
+	<div class="d-flex justify-content-evenly">
+	<input type="hidden" th:value="*{work}"/>
+	<input class=" btn btn-primary" type="submit" th:href="@{/manager/insert/{id}}" value="追加"/>
 	</form>
 	<form th:action="@{/manager/menu}" method="get">
 	<input class=" btn btn-primary" type="submit" th:href="@{/manage/menu}" value="戻る"/>
-	</form>
 	</div>
+	</form>
 </body>
 </html>

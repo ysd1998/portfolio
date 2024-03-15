@@ -8,6 +8,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,6 +21,7 @@ public class Books {
 	
 	@Id
 //	@EmbeddedId
+	@Size(min = 0, max = 10)
 	@Column(name = "book_id")
 //	(generator = "idGenerator")
 //	@UuidGenerator
@@ -29,6 +31,7 @@ public class Books {
 	
 	
 	@Column(name = "title")
+	@Size(min = 0, max = 10)
 	@Getter
 	@Setter
 	private String title;

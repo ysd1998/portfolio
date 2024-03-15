@@ -1,5 +1,7 @@
 package com.example.demo.service.book;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -29,10 +31,26 @@ public class BookSerchService {
 		return result;
 	}
 	
-	public Books serchId(String id) {
+	public Books serchId(String id){
 		Books book =repository.findById(id).get();
 		return book;
 	}
+	
+	public Optional<Books> check(String id){
+		Optional<Books> book =repository.findById(id);
+		return book;
+	}
+	
+//	public Books serchIdthrows(String id) throws NoSuchElementException{
+//		Books book;
+//		try {
+//			book =repository.findById(id).get();
+//		} catch (NoSuchElementException e) {
+//			book.setBookid("値無し");
+//		}
+//		return book;
+//		
+//	}
 	
 //	public List<UserInfo> searchData(String loginId,SerchForm form){
 //		StringBuilder sqlBuilder = new StringBuilder();

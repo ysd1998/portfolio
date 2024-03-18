@@ -36,8 +36,7 @@ function loadPage(currentPage) {
 	<div class="form-group">
 	<div class="d-flex align-items-center justify-content-center">
 	<div class="row g-1 col-10 align-items-center justify-content-center">
-	<div class="col-auto"><p><label>&emsp;&emsp;&emsp;ID</label></p></div>
-	<div class="col-7"><input class="form-control" name="serchData" id="serchData" type="text"  th:value="${serchData}"></div>
+	<div class="col-7"><input class="form-control" name="serchData" id="serchData" placeholder="書籍名、キーワード" type="text"  th:value="${serchData}"></div>
 	<div class="col-auto"><input class="btn btn-primary" type="submit" value="検索"></div>
 	</div>
 	</div>
@@ -45,40 +44,56 @@ function loadPage(currentPage) {
 	</form>
 	<div class="d-flex align-items-center justify-content-center">
 	<span th:text="${errorMsg}"></span>
-	<table class="table" th:if="${resultSize > 0}">
-      <tr>
-        <td>商品名</td>
-        <td>作者</td>
-        <td>価格</td>
-      </tr>
-      <tr th:each="data : ${result}">
-        <td><a th:href="@{/{id}(id=*{data.bookid})}"  th:text="${data.title}"/></td>
-        <td><a th:href="@{/{id}(id=*{data.bookid})}"  th:text="${data.auther}"/></td>
-        <td><a th:href="@{/{id}(id=*{data.bookid})}"  th:text="${data.price}"/></td>
+	<div style="width: 100%; font-size: 18px;" th:if="${resultSize > 0}">
+	<div class="row border-top border-bottom">
+        <div class="col-4  mt-sm-2 mt-auto mb-sm-2 mb-auto">商品名</div>
+        <div class="col mt-sm-2 mt-auto mb-sm-2 mb-auto">作者</div>
+        <div class="col mt-sm-2 mt-auto mb-sm-2 mb-auto">価格</div>
+    </div>
+    <a class="link-offset-2 link-underline link-underline-opacity-0" th:each="data : ${result}" th:href="@{/{id}(id=*{data.bookid})}" >
+	<div class="row border-bottom">
+        <div class="col-4 mb-sm-2 mb-auto"><span th:text="${data.title}"></span></div>
+        <div class="col mb-sm-2 mb-auto"><span th:text="${data.auther}"></span></div>
+        <div class="col mb-sm-2 mb-auto"><span th:text="${data.price}"></span></div>
+    </div>
+    </a>
+    </div>
+<!--	<table class="table" th:if="${resultSize > 0}">-->
+<!--      <tr>-->
+<!--        <td>商品名</td>-->
+<!--        <td>作者</td>-->
+<!--        <td>価格</td>-->
+<!--      </tr>-->
+<!--      <tr th:each="data : ${result}">-->
+<!--        <td><a th:href="@{/{id}(id=*{data.bookid})}"  th:text="${data.title}"/></td>-->
+<!--        <td><a th:href="@{/{id}(id=*{data.bookid})}"  th:text="${data.auther}"/></td>-->
+<!--        <td><a th:href="@{/{id}(id=*{data.bookid})}"  th:text="${data.price}"/></td>-->
 <!--        <input class="btn btn-primary" type="submit" value="ログイン">-->
-      </tr>
-      </a>
-    </table>
+<!--      </tr>-->
+<!--      </a>-->
+<!--    </table>-->
     <!-- ページリンク -->
     </div>
 	<div class="d-flex align-items-center justify-content-center">
 	
-        <ul class="paging">
-            <li>
+        <ul class="list-group list-group-horizontal">
+            <li class="list-group-item">
                 <span th:if="${pages.first}">&lt;&lt;</span>
                 <a th:if="${not pages.first}" th:href="@{${url}(page=0)}">&lt;&lt;</a>
             </li>
 
             <!-- 中間のページリンク -->
-            <li th:each="i:${#numbers.sequence(0, pages.totalPages-1)}">
+            <li class="list-group-item" th:each="i:${#numbers.sequence(0, pages.totalPages-1)}" th:if="${i}!=-1">
                 <span th:if="${i}==${pages.number}" th:text="${i+1}"></span>
+                <a th:if="${i}!=-1">
                 <a th:if="${i}!=${pages.number}" th:href="@{${url}(page=${i})}">
                     <span th:text="${i+1}"></span>
+                </a>
                 </a>
             </li>
 
             <!-- 末尾のページリンク -->
-            <li>
+            <li class="list-group-item">
                 <span th:if="${pages.last}">&gt;&gt;</span>
                 <a th:if="${not pages.last}" th:href="@{${url}(page=(${pages.totalPages-1}))}">
                     &gt;&gt;

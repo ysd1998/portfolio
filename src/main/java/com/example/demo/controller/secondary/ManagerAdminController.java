@@ -21,6 +21,7 @@ import com.example.demo.service.book.BookSerchService;
 import com.example.demo.service.book.TypeSerchService;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -37,9 +38,11 @@ public class ManagerAdminController {
 	public TypeSerchService typeservice;
 	
 	@GetMapping("/manager/{id}")
-	public String view(@PathVariable String id,@ModelAttribute("bookData")BookInfo bookData,HttpServletRequest request,Model model) {
+	public String view(@PathVariable String id,@ModelAttribute("bookData")BookInfo bookData,
+			@ModelAttribute("deleteData")BookInfo DeleteData,HttpServletRequest request,Model model) {
 		Books book = serch.serchId(id);
 		model.addAttribute("bookData", book);
+		model.addAttribute("deleteData", book);
 		List<Types> result = typeservice.serchData("%");
 		model.addAttribute("Types", result);
 		return "/manager/bookadmin";
@@ -52,45 +55,55 @@ public class ManagerAdminController {
 						 Model model) {
 		model.addAttribute("bookData", bookData);
 		String isCorrectUserAuth = bookData.getBookid();
-		bookData.setWork("追加");
+		String isTitle = bookData.getTitle();
+		bookData.setWork("更新");
 //		HttpSession session = request.getSession();@Valid
 		Date date = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		String strDate = dateFormat.format(date);
-		bookData.setInsertday(strDate);
-		bookData.setInsertid("24020801");
+		bookData.setUpdateday(strDate);
+		bookData.setUpdateid("24020801");
 		bookData.setDeleteflag("0");
-		admin.insert(bookData);
-		if (isCorrectUserAuth.equals("")) {
-			return "/manager/bookadmin";
+		HttpSession session = request.getSession();
+		session.setAttribute("bookData", bookData);
+		if (isCorrectUserAuth.equals("") || isTitle.equals("") ) {
+			List<Types> result = typeservice.serchData("%");
+			model.addAttribute("Types", result);
+			return "/manager/{id}";
 		} else {
 //			model.addAttribute("errorMsg", "ログインIDとパスワードが間違ってます。");
-			return "redirect:/manager/menu";
+			return "redirect:/manager/confirm";
+			
 		}
 		
 	}
 	
 	@GetMapping("/manager/delete/{id}")
-	public String deleteId(@Valid @ModelAttribute("bookData")BookInfo bookData,
+	public String deleteId(@Valid @ModelAttribute("deleteData")BookInfo DeleteData,
 						BindingResult bindingResult,
 						HttpServletRequest request,
 						 Model model) {
-		model.addAttribute("bookData", bookData);
-		String isCorrectUserAuth = bookData.getBookid();
-		bookData.setWork("追加");
+		model.addAttribute("bookData", DeleteData);
+		String isCorrectUserAuth = DeleteData.getBookid();
+		String isTitle = DeleteData.getTitle();
+		DeleteData.setWork("削除");
 //		HttpSession session = request.getSession();@Valid
 		Date date = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		String strDate = dateFormat.format(date);
-		bookData.setInsertday(strDate);
-		bookData.setInsertid("24020801");
-		bookData.setDeleteflag("1");
-		admin.insert(bookData);
-		if (isCorrectUserAuth.equals("")) {
-			return "/manager/bookadmin";
+		DeleteData.setDeleteday(strDate);
+		DeleteData.setDeleteid("24020801");
+		DeleteData.setDeleteflag("1");
+		HttpSession session = request.getSession();
+		session.setAttribute("bookData", DeleteData);
+		if (isCorrectUserAuth.equals("") || isTitle.equals("") ) {
+			List<Types> result = typeservice.serchData("%");
+			model.addAttribute("Types", result);
+			return "/manager/{id}";
 		} else {
 //			model.addAttribute("errorMsg", "ログインIDとパスワードが間違ってます。");
-			return "redirect:/manager/menu";
+			return "redirect:/manager/confirm";
+			
 		}
 		
 	}

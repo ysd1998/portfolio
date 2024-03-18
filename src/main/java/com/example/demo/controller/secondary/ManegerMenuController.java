@@ -37,6 +37,7 @@ public class ManegerMenuController {
 	public String index(Model model,Pageable pageable) {
 		Page<Books> results = service.search("", "", "", "",pageable);
 		List<Books> result = results.getContent();
+		model.addAttribute("pages", results);
 		model.addAttribute("result",result);
 		model.addAttribute("resultSize", result.size());
 		return VIEW;
@@ -50,6 +51,7 @@ public class ManegerMenuController {
 		mav.addObject("price",serchData);
 		Page<Books> results = service.search(serchData, serchData, serchData, serchData,pageable);
 		List<Books> result = results.getContent();
+		mav.addObject("pages", results);
 		mav.addObject("result", result);
 		mav.addObject("resultSize", result.size());
 		if (result== null || result.size() == 0) {

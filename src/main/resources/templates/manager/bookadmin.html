@@ -97,7 +97,7 @@
 	<div class="d-flex justify-content-evenly">
 	<input class=" btn btn-primary" type="submit" th:href="@{/manager/confirm}" value="更新"/>
 	</form>
-	<form th:action="@{/manager/delete/{id}}" th:object="${bookData}" method="GET">
+	<form th:action="@{/manager/delete/{id}}" th:object="${deleteData}" method="GET">
 	<input type="hidden" th:field="*{bookid}"/>
 	<input type="hidden" th:field="*{auther}"/>
 	<input type="hidden" th:field="*{title}"/>
@@ -107,7 +107,7 @@
 	<input type="hidden" th:field="*{ex}"/>
 	<input type="hidden" th:field="*{other}"/>
 	<input type="hidden" th:field="*{publisher}"/>
-	<input class=" btn btn-primary" type="submit" th:href="@{/manager/menu}" value="削除"/>
+	<input class=" btn btn-primary" type="submit" th:href="@{/manager/confirm}" value="削除"/>
 	</form>
 	<form th:action="@{/manager/menu}" method="get">
 	<input class=" btn btn-primary" type="submit" th:href="@{/manager/menu}" value="戻る"/>

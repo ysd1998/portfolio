@@ -103,7 +103,7 @@
 	<input type="hidden" th:field="*{other}"/>
 	<input type="hidden" th:field="*{publisher}"/>
 	<input type="hidden" th:field="*{work}"/>
-	<input class=" btn btn-primary" type="submit" th:href="@{/manager/m}" value="追加"/>
+	<input class=" btn btn-primary" type="submit" th:href="@{/manager/menu}" th:value="*{work}"/>
 	</form>
 	<form th:action="@{/manager/menu}" method="get">
 	<input class=" btn btn-primary" type="submit" th:href="@{/manage/menu}" value="戻る"/>

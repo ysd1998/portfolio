@@ -1,5 +1,7 @@
 package com.example.demo.controller.secondary;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +21,8 @@ public class ManagerLoginController {
 	//private static final String PASSWORD ="pwd";
 	
 	private final EmpLoginService service;
+	
+	private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	
 	@GetMapping("/manager/login")
 	public String view(Model model,LoginForm form) {

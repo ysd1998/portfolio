@@ -42,9 +42,9 @@ function loadPage(currentPage) {
 	</div>
 	</div>
 	</form>
-	<div class="d-flex align-items-center justify-content-center">
+	<div class="d-flex align-items-center justify-content-center  mt-sm-2 mt-auto mb-sm-2 mb-auto">
 	<span th:text="${errorMsg}"></span>
-	<div style="width: 100%; font-size: 18px;" th:if="${resultSize > 0}">
+	<div class="w-75" style="font-size: 18px;" th:if="${resultSize > 0}">
 	<div class="row border-top border-bottom">
         <div class="col-4  mt-sm-2 mt-auto mb-sm-2 mb-auto">商品名</div>
         <div class="col mt-sm-2 mt-auto mb-sm-2 mb-auto">作者</div>
@@ -52,9 +52,9 @@ function loadPage(currentPage) {
     </div>
     <a class="link-offset-2 link-underline link-underline-opacity-0" th:each="data : ${result}" th:href="@{/{id}(id=*{data.bookid})}" >
 	<div class="row border-bottom">
-        <div class="col-4 mb-sm-2 mb-auto"><span th:text="${data.title}"></span></div>
-        <div class="col mb-sm-2 mb-auto"><span th:text="${data.auther}"></span></div>
-        <div class="col mb-sm-2 mb-auto"><span th:text="${data.price}"></span></div>
+        <div class="col-4 mt-sm-2 mt-auto  mb-sm-2 mb-auto"><span th:text="${data.title}"></span></div>
+        <div class="col mt-sm-2 mt-auto  mb-sm-2 mb-auto"><span th:text="${data.auther}"></span></div>
+        <div class="col mt-sm-2 mt-auto  mb-sm-2 mb-auto"><span th:text="${data.price}"></span></div>
     </div>
     </a>
     </div>

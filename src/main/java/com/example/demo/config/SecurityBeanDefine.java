@@ -10,23 +10,29 @@ package com.example.demo.config;
 public class SecurityBeanDefine {
 	
 //	private final String USERNAME_PARAMETER = "loginId";
-//	/**
-//	 * 
-//	 * @param http
-//	 * @return
-//	 * @throws Exception
-//	 */
+	/**
+	 * 
+	 * @param http
+	 * @return
+	 * @throws Exception
+	 */
+//	
+//	@Autowired
+//	private EmpLoginService empLoginService;
+//	
+//	@Autowired
+//	private LoginService loginService;
 //	
 //	@Bean
-//	SecurityFilterChain securityfilterChain(HttpSecurity http) throws Exception {
-//		http.authorizeHttpRequests(
-//				authorize -> authorize.requestMatchers(UrlConfig.NO_AUTHENTICATION).permitAll()
-//				.anyRequest().authenticated()).formLogin(
+//	SecurityFilterChain secondfilterChain(HttpSecurity http) throws Exception {
+//		http.formLogin(
 //					login -> login.loginPage(UrlConfig.login)
 //					.usernameParameter(USERNAME_PARAMETER)
 //					.defaultSuccessUrl(UrlConfig.menu));
 //		return http.build();
 //	}
+	
+	
 
 //	.authorizeHttpRequests(
 //			authorize -> authorize.requestMatchers("").permitAll()

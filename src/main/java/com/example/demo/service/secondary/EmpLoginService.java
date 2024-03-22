@@ -18,5 +18,9 @@ public class EmpLoginService {
 	public Optional<Employees> searchUserById(String loginId){
 		return repository.findById(loginId);
 	}
+	
+	public boolean login(String loginId,String password) {
+		return repository.findByLoginidLikeOrPasswordLike(loginId,password).size() == 1;
+	}
 
 }

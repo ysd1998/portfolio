@@ -33,7 +33,7 @@ public class ManagerLoginController {
 	public String login(Model model,LoginForm form) {
 		var userInfo = service.searchUserById(form.getLoginId());
 		var isCorrectUserAuth = userInfo.isPresent()
-				&& form.getPassword().equals(userInfo.get().getPassword());
+				&& passwordEncoder.matches(form.getPassword(),userInfo.get().getPassword());
 		if (isCorrectUserAuth) {
 			return "redirect:/manager/menu";
 		} else {

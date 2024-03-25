@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -64,6 +66,7 @@ public class ManagerInsertController {
 	
 	@PostMapping("/manager/bookinit")
 	public String insertId(@Valid @ModelAttribute("bookData")BookInfo bookData,
+						@AuthenticationPrincipal User user,
 						BindingResult bindingResult,
 						HttpServletRequest request,
 						 Model model) {
@@ -79,7 +82,7 @@ public class ManagerInsertController {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		String strDate = dateFormat.format(date);
 		bookData.setInsertday(strDate);
-		bookData.setInsertid("24020801");
+		bookData.setInsertid(user.getUsername());
 		bookData.setDeleteflag("0");
 		session.setAttribute("bookData", bookData);
 //		service.insert(bookData);

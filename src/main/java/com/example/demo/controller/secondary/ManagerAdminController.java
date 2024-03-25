@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -50,6 +52,7 @@ public class ManagerAdminController {
 	
 	@PostMapping("/manager/{id}")
 	public String updateId(@Valid @ModelAttribute("bookData")BookInfo bookData,
+						@AuthenticationPrincipal User user,
 						BindingResult bindingResult,
 						HttpServletRequest request,
 						 Model model) {
@@ -62,7 +65,7 @@ public class ManagerAdminController {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		String strDate = dateFormat.format(date);
 		bookData.setUpdateday(strDate);
-		bookData.setUpdateid("24020801");
+		bookData.setUpdateid(user.getUsername());
 		bookData.setDeleteflag("0");
 		HttpSession session = request.getSession();
 		session.setAttribute("bookData", bookData);
@@ -80,6 +83,7 @@ public class ManagerAdminController {
 	
 	@GetMapping("/manager/delete/{id}")
 	public String deleteId(@Valid @ModelAttribute("deleteData")BookInfo DeleteData,
+						@AuthenticationPrincipal User user,
 						BindingResult bindingResult,
 						HttpServletRequest request,
 						 Model model) {
@@ -92,7 +96,7 @@ public class ManagerAdminController {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		String strDate = dateFormat.format(date);
 		DeleteData.setDeleteday(strDate);
-		DeleteData.setDeleteid("24020801");
+		DeleteData.setDeleteid(user.getUsername());
 		DeleteData.setDeleteflag("1");
 		HttpSession session = request.getSession();
 		session.setAttribute("bookData", DeleteData);

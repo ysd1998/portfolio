@@ -35,9 +35,9 @@ public class LoginController {
 		
 		var userInfo = service.searchUserById(form.getLoginId());
 		var isCorrectUserAuth = userInfo.isPresent()
-				&& form.getPassword().equals(userInfo.get().getPassword());
-		String digest = passwordEncoder.encode(userInfo.get().getPassword());
-        System.out.println("ハッシュ値 = " + digest);
+				&& passwordEncoder.matches(form.getPassword(),userInfo.get().getPassword());
+//		String digest = passwordEncoder.encode(userInfo.get().getPassword());
+//        System.out.println("ハッシュ値 = " + digest);
 		if (isCorrectUserAuth) {
 			return "redirect:/menu";
 		} else {

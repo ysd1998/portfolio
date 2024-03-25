@@ -9,6 +9,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -22,12 +23,14 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 public class SecondaryDataSourceConfiguration {
 
   @Bean
+  @Primary
   @ConfigurationProperties(prefix = "spring.datasource.secondary")
   public DataSourceProperties secondaryProperties() {
     return new DataSourceProperties();
   }
 
   @Bean
+  @Primary
   @Autowired
   public DataSource secondaryDataSource(@Qualifier("secondaryProperties")
       DataSourceProperties properties) {
@@ -35,6 +38,7 @@ public class SecondaryDataSourceConfiguration {
   }
 
   @Bean
+  @Primary
   @Autowired
   public LocalContainerEntityManagerFactoryBean secondaryEntityManager(EntityManagerFactoryBuilder builder,@Qualifier("secondaryDataSource") DataSource dataSource){
     return builder.dataSource(dataSource)
@@ -44,6 +48,7 @@ public class SecondaryDataSourceConfiguration {
   }
 
   @Bean
+  @Primary
   @Autowired
   public JpaTransactionManager secondaryTransactionManager(@Qualifier("secondaryEntityManager") LocalContainerEntityManagerFactoryBean secondaryEntityManager) {
     JpaTransactionManager transactionManager = new JpaTransactionManager();

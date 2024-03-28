@@ -28,10 +28,6 @@ public class ManegerMenuController {
 	
 	private static final String VIEW = "/manager/menu";
 	
-//	private final String limit = "3";
-//	
-//	private int showPageSize = 3;
-	
 	@Autowired
 	public BookSerchService service;
 	

@@ -16,22 +16,20 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ManagerLoginController {
 	
-	//private static final String LOGIN_ID ="user";
-	
-	//private static final String PASSWORD ="pwd";
-	
 	private final EmpLoginService service;
 	
 	private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	
+	//ログイン画面（社員側）
 	@GetMapping("/manager/login")
 	public String view(Model model,LoginForm form) {
 		return "manager/login";
 	}
 	
+	//ログイン後の処理
 	@PostMapping("/manager/login")
 	public String login(Model model,LoginForm form) {
-		var userInfo = service.searchUserById(form.getLoginId());
+		var userInfo = service.searchUserById(form.getLoginid());
 		var isCorrectUserAuth = userInfo.isPresent()
 				&& passwordEncoder.matches(form.getPassword(),userInfo.get().getPassword());
 		if (isCorrectUserAuth) {

@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,6 +37,7 @@ public class ManagerConfirmController {
 	@Autowired
 	public TypeSerchService typeservice;
 	
+	//確認画面
 	@GetMapping("/manager/confirm")
 	public String confirm(
 	        Model model, HttpServletRequest request) {
@@ -51,12 +54,13 @@ public class ManagerConfirmController {
 	    }
 	    model.addAttribute("bookData", bookData);
 	    model.addAttribute("typeData", type);
-//	    service.insert(bookData);
 	    return "/manager/confirm";
 	}
 	
+	//作業処理
 	@PostMapping("/manager/confirm")
 	public String confirmOK(@Valid @ModelAttribute("bookData")BookInfo bookData,
+			@AuthenticationPrincipal User user,
 			Model model, HttpServletRequest request) {
 		Date date = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -64,14 +68,14 @@ public class ManagerConfirmController {
 		Books list;
 		if ("追加".equals(bookData.getWork())) {
 			bookData.setInsertday(strDate);
-			bookData.setInsertid("24020801");
+			bookData.setInsertid(user.getUsername());
 			bookData.setDeleteflag("0");
 	    } else if ("更新".equals(bookData.getWork())) {
 	    	list = serch.serchId(bookData.getBookid());
 	    	bookData.setInsertday(list.getInsertday());
 			bookData.setInsertid(list.getInsertid());
 	    	bookData.setUpdateday(strDate);
-			bookData.setUpdateid("24020801");
+			bookData.setUpdateid(user.getUsername());
 			bookData.setDeleteflag("0");
 	    } else if ("削除".equals(bookData.getWork())) {
 	    	list = serch.serchId(bookData.getBookid());
@@ -80,7 +84,7 @@ public class ManagerConfirmController {
 			bookData.setUpdateday(list.getUpdateday());
 			bookData.setUpdateid(list.getUpdateid());
 	    	bookData.setDeleteday(strDate);
-			bookData.setDeleteid("24020801");
+			bookData.setDeleteid(user.getUsername());
 	    	bookData.setDeleteflag("1");
 	    }
 	    service.insert(bookData);

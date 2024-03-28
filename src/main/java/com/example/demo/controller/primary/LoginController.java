@@ -16,28 +16,23 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class LoginController {
 	
-	//private static final String LOGIN_ID ="user";
-	
-	//private static final String PASSWORD ="pwd";
-	
 	private final LoginService service;
 	
 	private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	
+	//ログイン画面（ユーザー側）
 	@GetMapping("/login")
 	public String view(Model model,LoginForm form) {
 		model.addAttribute("errorMsg", "");
 		return "/login";
 	}
 	
+	//ログイン後の処理
 	@PostMapping("/login")
 	public String login(Model model,LoginForm form) {
-		
-		var userInfo = service.searchUserById(form.getLoginId());
+		var userInfo = service.searchUserById(form.getLoginid());
 		var isCorrectUserAuth = userInfo.isPresent()
 				&& passwordEncoder.matches(form.getPassword(),userInfo.get().getPassword());
-//		String digest = passwordEncoder.encode(userInfo.get().getPassword());
-//        System.out.println("ハッシュ値 = " + digest);
 		if (isCorrectUserAuth) {
 			return "redirect:/menu";
 		} else {

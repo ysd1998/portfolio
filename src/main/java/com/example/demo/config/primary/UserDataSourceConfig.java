@@ -19,7 +19,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
     entityManagerFactoryRef = "primaryEntityManager",
     transactionManagerRef = "primaryTransactionManager"
 )
-public class BatchDataSourceConfig {
+public class UserDataSourceConfig {
 	  @Bean
 	  @ConfigurationProperties(prefix = "spring.datasource.primary")
 	  public DataSourceProperties primaryProperties() {
@@ -42,7 +42,6 @@ public class BatchDataSourceConfig {
 	        .build();
 	  }
 
-
 	  @Bean
 	  @Autowired
 	  public JpaTransactionManager primaryTransactionManager(@Qualifier("primaryEntityManager") LocalContainerEntityManagerFactoryBean primaryEntityManager) {
@@ -51,18 +50,4 @@ public class BatchDataSourceConfig {
 	    return transactionManager;
 	  }
 	  
-//	  @Bean
-//	  
-//	  @Autowired
-//	  public LocalContainerEntityManagerFactoryBean myEntityManager(EntityManagerFactoryBuilder builder, @Qualifier("myDataSource") DataSource dataSource){
-//		  return builder.dataSource(dataSource)
-//		    .packages("\"com.example.demo.entity.primary")
-//		    .properties(new HashMap<>(){
-//		      {
-//		        put("hibernate.physical_naming_strategy", PhysicalNamingStrategy.class.getName());
-//		        put("hibernate.implicit_naming_strategy", SpringImplicitNamingStrategy.class.getName());
-//		      }
-//		    })
-//		    .build();
-//		}
 }

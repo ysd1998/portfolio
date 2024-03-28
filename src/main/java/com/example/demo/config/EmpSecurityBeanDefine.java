@@ -17,22 +17,7 @@ import lombok.RequiredArgsConstructor;
 @EnableMethodSecurity 
 @RequiredArgsConstructor
 @Order(1)
-public class SecondSecurityBeanDefine {
-	
-//	@Bean
-//	public PasswordEncoder emppasswordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
-//
-//    @Bean
-//    public InMemoryUserDetailsManager empDetailsService() {
-//        UserDetails admin = User
-//                .withUsername("admin")
-//                .password("123456")
-//                .roles("USER")
-//                .build();
-//        return new InMemoryUserDetailsManager(admin);
-//    }
+public class EmpSecurityBeanDefine {
     
 	@Bean
 	SecurityFilterChain securityfilterChain(HttpSecurity http) throws Exception {
@@ -42,7 +27,7 @@ public class SecondSecurityBeanDefine {
 				.requestMatchers(UrlConfig.MN_NO_AUTHENTICATION).permitAll()
 				.requestMatchers("/manager/admin").hasAuthority("管理者")
 				.anyRequest().authenticated())
-		.formLogin(login -> login.loginPage("/manager/login").usernameParameter("loginId").defaultSuccessUrl("/manager/menu"));
+		.formLogin(login -> login.loginPage("/manager/login").usernameParameter("loginid").defaultSuccessUrl("/manager/menu"));
 		return http.build();
 	}
 	

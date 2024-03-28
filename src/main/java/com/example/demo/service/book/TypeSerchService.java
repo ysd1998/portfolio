@@ -24,25 +24,12 @@ public class TypeSerchService {
 		return type;
 	}
 	
-//	public List<Types> serchName(String id) {
-//		List<Types> type;
-//		if ("".equals(id) ) {
-//			type = null;
-//		} else {
-//			type = typerepo.findByNameLike("%"+id+"%");
-//		}
-//		
-//		return type;
-//	}
-	
 	public Types serchNames(String id) {
 		Types type = new Types();
 		Optional<Types> types = typerepo.findByNameLike(id);
 		if (types.isPresent()) {
 			type = types.get();
-		} else {
-			type = null;
-		}
+		} 
 		return type;
 	}
 	

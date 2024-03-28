@@ -73,9 +73,7 @@ public class ManagerInsertController {
 		model.addAttribute("bookData", bookData);
 		
 		String isCorrectUserAuth = bookData.getBookid();
-//		Books book = serch.serchId(isCorrectUserAuth);
 		String isTitle = bookData.getTitle();
-//		String is = bookData.getTitle();
 		bookData.setWork("追加");
 		HttpSession session = request.getSession();
 		Date date = new Date();
@@ -85,13 +83,11 @@ public class ManagerInsertController {
 		bookData.setInsertid(user.getUsername());
 		bookData.setDeleteflag("0");
 		session.setAttribute("bookData", bookData);
-//		service.insert(bookData);
 		if (isCorrectUserAuth.equals("") || isTitle.equals("") ) {
 			List<Types> result = typeservice.serchData("%");
 			model.addAttribute("Types", result);
 			return "/manager/bookinit";
 		} else {
-//			model.addAttribute("errorMsg", "ログインIDとパスワードが間違ってます。");
 			return "redirect:/manager/confirm";
 			
 		}

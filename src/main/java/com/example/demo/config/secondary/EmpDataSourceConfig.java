@@ -20,7 +20,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
     entityManagerFactoryRef = "secondaryEntityManager",
     transactionManagerRef = "secondaryTransactionManager"
 )
-public class SecondaryDataSourceConfiguration {
+public class EmpDataSourceConfig {
 
   @Bean
   @Primary

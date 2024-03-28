@@ -15,20 +15,17 @@ import com.example.demo.service.book.TypeSerchService;
 
 @ComponentScan
 @Controller
-//@RequiredArgsConstructor
-//@RequestMapping("/bookdata")
 public class DataController {
-//	private static final String VIEW = "/bookdata/{id}";
 	@Autowired
 	public BookSerchService service;
 	
 	@Autowired
 	public TypeSerchService typeservice;
 	
+	//詳細画面に本の情報を出力
 	@GetMapping("{id}")
 	public String index(Model model,@PathVariable String id) {
 		Books book = service.serchId(id);
-//		Types btype = book.getTypeid();
 		Types type = typeservice.serchId(book.getTypeid());
 		model.addAttribute("bookData", book);
 		model.addAttribute("typeData", type);

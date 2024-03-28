@@ -50,13 +50,6 @@ public class MenuController {
 		mav.addObject("auther", serchData );
 		mav.addObject("price",serchData );
 		mav.addObject("type",serchData );
-//		List<Types> type = typeservice.serchName("%"+serchData+"%");
-////		if (type.getTypeid()!=null) {
-////			serchData=type.getTypeid();
-////		} else {
-////			type.setTypeid("");
-////			type.setName("");
-////		}
 		Page<Books> results = service.search(serchData , serchData , serchData, serchData ,pageable);
 		List<Books> result = results.getContent();
 		mav.addObject("pages", results);
@@ -69,21 +62,4 @@ public class MenuController {
 		}
 		return mav;
 	}
-//	@PostMapping("/menu")
-//	public String serchs(Model model,LoginForm form) {
-//		return "redirect:/data";
-//		
-//	}
-	
-//	
-////	@RequestMapping("/menu")
-////	public String serch(Model model,SerchForm form) {
-////		var userInfo = service.login(form.getSerchData(),form);
-////		//UserInfo user = userInfo.get();user.getLoginid()
-////		model.addAttribute("result", userInfo);
-////		return "/menu";
-////		
-////	}
-//	
-
 }

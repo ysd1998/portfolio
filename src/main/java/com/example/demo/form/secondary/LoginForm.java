@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 public class LoginForm {
 	
-	private String loginId;
+	private String loginid;
 	
 	private String name;
 	

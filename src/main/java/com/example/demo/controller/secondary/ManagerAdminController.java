@@ -60,7 +60,6 @@ public class ManagerAdminController {
 		String isCorrectUserAuth = bookData.getBookid();
 		String isTitle = bookData.getTitle();
 		bookData.setWork("更新");
-//		HttpSession session = request.getSession();@Valid
 		Date date = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		String strDate = dateFormat.format(date);
@@ -74,7 +73,6 @@ public class ManagerAdminController {
 			model.addAttribute("Types", result);
 			return "/manager/{id}";
 		} else {
-//			model.addAttribute("errorMsg", "ログインIDとパスワードが間違ってます。");
 			return "redirect:/manager/confirm";
 			
 		}
@@ -91,7 +89,6 @@ public class ManagerAdminController {
 		String isCorrectUserAuth = DeleteData.getBookid();
 		String isTitle = DeleteData.getTitle();
 		DeleteData.setWork("削除");
-//		HttpSession session = request.getSession();@Valid
 		Date date = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		String strDate = dateFormat.format(date);
@@ -105,7 +102,6 @@ public class ManagerAdminController {
 			model.addAttribute("Types", result);
 			return "/manager/{id}";
 		} else {
-//			model.addAttribute("errorMsg", "ログインIDとパスワードが間違ってます。");
 			return "redirect:/manager/confirm";
 			
 		}

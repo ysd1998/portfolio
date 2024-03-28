@@ -19,7 +19,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
     entityManagerFactoryRef = "bookEntityManager",
     transactionManagerRef = "bookTransactionManager"
 )
-public class BookDataSourceConfiguration {
+public class BookDataSourceConfig {
 
   @Bean
   @ConfigurationProperties(prefix = "spring.datasource.book")

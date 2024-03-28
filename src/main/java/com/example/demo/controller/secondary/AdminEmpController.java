@@ -35,7 +35,7 @@ public class AdminEmpController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String index(Model model,Pageable pageable) {
-		Page<Employees> results = service.searchEmp("", "", "", pageable);
+		Page<Employees> results = service.searchEmp("", "", "web販売担当", pageable);
 		List<Employees> result = results.getContent();
 		model.addAttribute("pages", results);
 		model.addAttribute("result",result);

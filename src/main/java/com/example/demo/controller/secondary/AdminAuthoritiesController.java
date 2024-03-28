@@ -15,7 +15,6 @@ import com.example.demo.service.secondary.DepSerchService;
 import com.example.demo.service.secondary.EmpSerchService;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -44,10 +43,10 @@ public class AdminAuthoritiesController {
 		return "/manager/authority";
 	}
 	
-	@PostMapping("/manager/authority/{loginid}")
-	public String confirmOK(@Valid @ModelAttribute("authData")LoginForm authData,
+	@PostMapping("/manager/authority")
+	public String confirmOK(@ModelAttribute("authData")LoginForm authData,
 			Model model, HttpServletRequest request) {
-		Employees emp = service.searchId(authData.getLoginId());
+		Employees emp = service.searchId(authData.getLoginid());
 		if ("web販売担当".equals(authData.getAuthority())) {
 	    	authData.setAuthority("");
 	    } else if ("".equals(authData.getAuthority())) {
@@ -55,7 +54,7 @@ public class AdminAuthoritiesController {
 	    }
 		authData.setPassword(emp.getPassword());
 	    service.insert(authData);
-	    return "redirect:/manager/menu";
+	    return "redirect:/manager/admin";
 	}
 
 }

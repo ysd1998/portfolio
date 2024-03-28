@@ -19,9 +19,9 @@ import com.example.demo.form.primary.UrlConfig;
 @EnableWebSecurity
 @EnableMethodSecurity 
 @Order(2)
-public class SecurityBeanDefine {
+public class UserSecurityBeanDefine {
 	
-	private final String USERNAME_PARAMETER = "loginId";
+	private final String USERNAME_PARAMETER = "loginid";
 	
 
 	/**
@@ -30,29 +30,6 @@ public class SecurityBeanDefine {
 	 * @return
 	 * @throws Exception
 	 */
-//	
-//	@Autowired
-//	private EmpLoginService empLoginService;
-//	
-//	@Autowired
-//	private LoginService loginService;
-//	
-	
-//	@Bean
-//	public PasswordEncoder userpasswordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
-//
-//    @Bean
-//    public InMemoryUserDetailsManager userDetailsService() {
-//        UserDetails user = User
-//                .withUsername("user")
-//                .password("123456")
-//                .roles("USER")
-//                .build();
-//        return new InMemoryUserDetailsManager(user);
-//    }
-//	
 	@Bean
 	SecurityFilterChain secondfilterChain(HttpSecurity http) throws Exception {
 		http
@@ -68,18 +45,6 @@ public class SecurityBeanDefine {
 	
 	
 	
-	
-
-//	.authorizeHttpRequests(
-//			authorize -> authorize.requestMatchers("").permitAll()
-//			.anyRequest().authenticated())
-	
-//	@Bean
-//	@Order(2)
-//	SecurityFilterChain secondfilterChain(HttpSecurity http) throws Exception {
-//		http.formLogin(login -> login.loginPage("/manager/login").usernameParameter("loginId").defaultSuccessUrl("/manager/menu"));
-//		return http.build();
-//	}
 
 
 }

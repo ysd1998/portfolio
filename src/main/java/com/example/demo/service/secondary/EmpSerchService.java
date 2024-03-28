@@ -1,13 +1,16 @@
 package com.example.demo.service.secondary;
 
-import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.secondary.Employees;
+import com.example.demo.form.book.BookInfo;
+import com.example.demo.form.secondary.LoginForm;
 import com.example.demo.repository.secondary.EmpInfoRepository;
-import com.example.demo.repository.secondary.EmpInfoRepositoryCustom;
 
 import lombok.RequiredArgsConstructor;
 
@@ -17,19 +20,42 @@ public class EmpSerchService {
 	
 	@Autowired
 	private final EmpInfoRepository repository;
-	@Autowired
-	private final EmpInfoRepositoryCustom repositoryCustom;
+//	@Autowired
+//	private final EmpInfoRepositoryCustom repositoryCustom;
 	
-	public List<Employees> search(String loginId,String Name,String Password) {
-		List<Employees> result;
+	public Page<Employees> searchEmp(String loginId,String Name,String Password,Pageable page) {
+		Page<Employees> result;
 		if ("".equals(loginId) && "".equals(Name) && "".equals(Password)) {
-			result = repository.findAll();
+			result = repository.findAll(page);
 		} else {
-			result = repositoryCustom.searchEmp(loginId, Name, Password);
+			result = repository.findByLoginidLikeOrNameLikeOrAuthorityLike("%"+loginId +"%", "%"+Name+"%","%"+ Password +"%",page);
 		}
 		return result;
 	}
 	
+	public Employees searchId(String loginId) {
+		Employees emp = new Employees();
+		Optional<Employees> emps = repository.findById(loginId);
+		if (emps.isPresent()) {
+			emp = emps.get();
+		} else {
+			emp = null;
+		}
+		return emp;
+	}
+	
+	public String insert(LoginForm emp) {
+		Employees employees = new Employees();
+		Optional<Employees> emps = repository.findById(emp.getLoginId());
+		if (emps.isPresent()) {
+			employees = emps.get();
+		} else {
+			emps = null;
+		}
+		employees.setAuthority(emp.getAuthority());
+		repository.save(employees);
+		return "auth change sucsess";
+	}
 //	public List<UserInfo> searchData(String loginId,SerchForm form){
 //		StringBuilder sqlBuilder = new StringBuilder();
 //	    sqlBuilder.append("SELECT c.client_id, c.name,c.password "

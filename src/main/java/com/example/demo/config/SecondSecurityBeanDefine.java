@@ -6,7 +6,6 @@ import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.SecurityFilterChain;
 
 import com.example.demo.form.primary.UrlConfig;
@@ -19,8 +18,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Order(1)
 public class SecondSecurityBeanDefine {
-	
-	 private final UserDetailsService userDetailsService;
 	
 //	@Bean
 //	public PasswordEncoder emppasswordEncoder() {
@@ -42,6 +39,8 @@ public class SecondSecurityBeanDefine {
 		http.securityMatcher("/manager/**") 
 		.authorizeHttpRequests(
 				authorize -> authorize.requestMatchers(UrlConfig.MN_NO_AUTHENTICATION).permitAll()
+				.requestMatchers(UrlConfig.MN_NO_AUTHENTICATION).permitAll()
+				.requestMatchers("/manager/admin").hasAuthority("管理者")
 				.anyRequest().authenticated())
 		.formLogin(login -> login.loginPage("/manager/login").usernameParameter("loginId").defaultSuccessUrl("/manager/menu"));
 		return http.build();

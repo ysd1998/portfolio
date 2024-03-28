@@ -1,5 +1,6 @@
 package com.example.demo.service.book;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +32,14 @@ public class BookSerchService {
 		return result;
 	}
 	
-	public Books serchId(String id){
-		Books book =repository.findById(id).get();
+	public Books serchId(String id) throws NoSuchElementException {
+		Books book;
+		Optional<Books> books =repository.findById(id);
+		if (books.isPresent()) {
+			book = books.get();
+		} else {
+			book = null;
+		}
 		return book;
 	}
 	

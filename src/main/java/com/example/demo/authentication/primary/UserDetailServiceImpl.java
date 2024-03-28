@@ -2,9 +2,9 @@ package com.example.demo.authentication.primary;
 
 //@Component
 //@RequiredArgsConstructor
-public class UserDetailServiceImpl{// implements UserDetailsService  {
+public class UserDetailServiceImpl {//implements UserDetailsService  {
 //	private final UserInfoRepository repository;
-	
+//	
 //	@Override
 //	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 //		var userInfo = repository.findById(username)

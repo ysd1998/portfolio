@@ -26,7 +26,7 @@ public class EmpDetailServiceImpl implements UserDetailsService {
 		
 		return User.withUsername(userInfo.getLoginid())
 				.password(userInfo.getPassword())
-				.roles("USER")
+				.authorities(userInfo.getAuthority())
 				.build();
 	}
 

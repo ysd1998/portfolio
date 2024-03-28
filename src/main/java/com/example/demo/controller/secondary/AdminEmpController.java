@@ -13,35 +13,30 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.demo.entity.book.Books;
-import com.example.demo.entity.book.Types;
-import com.example.demo.service.book.BookSerchService;
-import com.example.demo.service.book.TypeSerchService;
+import com.example.demo.entity.secondary.Employees;
+import com.example.demo.service.secondary.EmpSerchService;
 
 import lombok.RequiredArgsConstructor;
 
 @ComponentScan
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/manager/menu")
-public class ManegerMenuController {
+@RequestMapping("/manager/admin")
+public class AdminEmpController {
 	
-	private static final String VIEW = "/manager/menu";
+	private static final String VIEW = "/manager/admin";
 	
 //	private final String limit = "3";
 //	
 //	private int showPageSize = 3;
 	
 	@Autowired
-	public BookSerchService service;
-	
-	@Autowired
-	public TypeSerchService typeserch;
+	public EmpSerchService service;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String index(Model model,Pageable pageable) {
-		Page<Books> results = service.search("", "", "", "",pageable);
-		List<Books> result = results.getContent();
+		Page<Employees> results = service.searchEmp("", "", "", pageable);
+		List<Employees> result = results.getContent();
 		model.addAttribute("pages", results);
 		model.addAttribute("result",result);
 		model.addAttribute("resultSize", result.size());
@@ -49,20 +44,13 @@ public class ManegerMenuController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView serch(ModelAndView mav,Pageable pageable, @RequestParam("serchData") String serchData) {
+	public ModelAndView serch(ModelAndView mav,Pageable pageable, @RequestParam("serchData")String serchData) {
 		mav.setViewName(VIEW);
-		mav.addObject("title", serchData);
-		mav.addObject("auther", serchData);
-		mav.addObject("price",serchData);
-		Types type = typeserch.serchNames(serchData);
-		String typeid;
-		if (type == null || "".equals(type)) {
-			typeid = serchData;
-		} else {
-			typeid = type.getTypeid();
-		}
-		Page<Books> results = service.search(serchData, serchData, serchData, typeid ,pageable);
-		List<Books> result = results.getContent();
+		mav.addObject("loginid", serchData);
+		mav.addObject("name", serchData);
+		mav.addObject("authority",serchData);
+		Page<Employees> results = service.searchEmp(serchData, serchData, serchData,pageable);
+		List<Employees> result = results.getContent();
 		mav.addObject("pages", results);
 		mav.addObject("result", result);
 		mav.addObject("resultSize", result.size());
@@ -73,5 +61,6 @@ public class ManegerMenuController {
 		}
 		return mav;
 	}
+	
 
 }

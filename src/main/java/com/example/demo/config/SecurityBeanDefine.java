@@ -22,6 +22,8 @@ import com.example.demo.form.primary.UrlConfig;
 public class SecurityBeanDefine {
 	
 	private final String USERNAME_PARAMETER = "loginId";
+	
+
 	/**
 	 * 
 	 * @param http

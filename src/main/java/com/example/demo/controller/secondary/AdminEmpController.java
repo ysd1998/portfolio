@@ -26,10 +26,6 @@ public class AdminEmpController {
 	
 	private static final String VIEW = "/manager/admin";
 	
-//	private final String limit = "3";
-//	
-//	private int showPageSize = 3;
-	
 	@Autowired
 	public EmpSerchService service;
 	

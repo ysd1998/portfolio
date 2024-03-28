@@ -24,8 +24,6 @@ import com.example.demo.service.book.TypeSerchService;
 @RequestMapping("/menu")
 public class MenuController {
 	
-//	private final SerchService service;
-//	
 	private static final String VIEW = "/menu";
 	@Autowired
 	public BookSerchService service;

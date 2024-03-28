@@ -19,6 +19,8 @@ import lombok.RequiredArgsConstructor;
 @Order(1)
 public class EmpSecurityBeanDefine {
     
+	
+	
 	@Bean
 	SecurityFilterChain securityfilterChain(HttpSecurity http) throws Exception {
 		http.securityMatcher("/manager/**") 

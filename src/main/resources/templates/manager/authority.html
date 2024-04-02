@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html  xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
 <meta charset="UTF-8">
 <title>商品詳細</title>
 <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}">
 <script rel="text/javascript" th:src="@{/webjars/jquery/3.7.1/jquery.min.js}"></script>
+<!-- ※必ず先にJQueryを読み込む -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>　
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <!--<script>-->
@@ -28,7 +30,7 @@
 	</script>
 </head>
 <body>
-<div th:insert="manager/common/menu :: menu"></div>
+<div th:insert="~{manager/common/menu :: menu}"></div>
 	<div class="d-flex align-items-center justify-content-center">
 	<div th:object="${empData}" style="width:50%;">
       <div class="row">
@@ -69,7 +71,7 @@
 	<input type="hidden" th:field="*{authority}"/>
 	<input class=" btn btn-primary" type="submit" th:href="@{/manager/menu}" th:value="権限変更"/>
 	</form>
-	<form th:action="@{/manager/menu}" method="get">
+	<form th:action="@{/manager/admin}" method="get">
 	<input class=" btn btn-primary" type="submit" th:href="@{/manage/menu}" value="戻る"/>
 	</div>
 	</form>

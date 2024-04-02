@@ -20,12 +20,12 @@ public class BookSerchService {
 	@Autowired
 	private final BookInfoRepository repository;
 	
-	public Page<Books> search(String id,String Name,String publisher,String Typeid,Pageable pageable) {
+	public Page<Books> search(String id,String Name,String publisher,Pageable pageable) {
 		Page<Books> result;
-		if ("".equals(id) && "".equals(Name) && "".equals(publisher) && "".equals(Typeid)) {
+		if ("".equals(id) && "".equals(Name) && "".equals(publisher) ) {
 			result = repository.findAll(pageable);
 		} else {
-			result = repository.findByTitleLikeOrAutherLikeOrPublisherLikeOrTypeidLike("%"+id+"%","%" +Name+"%","%" +publisher+"%","%" +Typeid+"%",pageable);
+			result = repository.findByTitleLikeOrAutherLikeOrPublisherLike("%"+id+"%","%" +Name+"%","%" +publisher+"%",pageable);
 		}
 		return result;
 	}

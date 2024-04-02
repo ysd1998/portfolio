@@ -30,6 +30,9 @@ public class AdminAuthoritiesController {
 	@GetMapping("/manager/authority/{loginid}")
 	public String view(@PathVariable String loginid,@ModelAttribute("empData")LoginForm empData,
 			@ModelAttribute("authData")LoginForm authData,HttpServletRequest request,Model model) {
+		if (loginid != null) {
+			System.out.println("error");
+		}
 		Employees emp = service.searchId(loginid);
 		model.addAttribute("empData", emp);
 		model.addAttribute("authData", emp);

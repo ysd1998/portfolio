@@ -43,6 +43,7 @@ public class ManagerAdminController {
 	public String view(@PathVariable String id,@ModelAttribute("bookData")BookInfo bookData,
 			@ModelAttribute("deleteData")BookInfo DeleteData,HttpServletRequest request,Model model) {
 		Books book = serch.serchId(id);
+
 		model.addAttribute("bookData", book);
 		model.addAttribute("deleteData", book);
 		List<Types> result = typeservice.serchData("%");

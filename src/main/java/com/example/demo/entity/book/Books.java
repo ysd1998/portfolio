@@ -1,6 +1,8 @@
 package com.example.demo.entity.book;
 
 
+import java.sql.Blob;
+
 import org.hibernate.annotations.SQLRestriction;
 import org.springframework.data.annotation.CreatedDate;
 
@@ -116,6 +118,11 @@ public class Books {
 	@Getter
 	@Setter
 	private String deleteday;
+	
+	@Column(name = "photo")
+	@Getter
+	@Setter
+	private Blob photo;
 	
 //	@Override
 //	  @Deprecated

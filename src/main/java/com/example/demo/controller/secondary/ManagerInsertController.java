@@ -83,9 +83,17 @@ public class ManagerInsertController {
 		bookData.setInsertid(user.getUsername());
 		bookData.setDeleteflag("0");
 		session.setAttribute("bookData", bookData);
-		if (isCorrectUserAuth.equals("") || isTitle.equals("") ) {
+		if (isCorrectUserAuth.equals("") || isTitle.equals("") || "".equals(bookData.getPublisher()) ||
+				"".equals(bookData.getYear()) || "0".equals(bookData.getTypeid()) || "".equals(bookData.getPrice())) {
 			List<Types> result = typeservice.serchData("%");
 			model.addAttribute("Types", result);
+			model.addAttribute("errorMsg","必須項目が空欄です。");
+			return "/manager/bookinit";
+		} else if (isCorrectUserAuth.length() >= 8 || isTitle.length() >= 10 || bookData.getPublisher().length() >= 10 ||
+				bookData.getAuther().length() >= 10) {
+			List<Types> result = typeservice.serchData("%");
+			model.addAttribute("Types", result);
+			model.addAttribute("errorMsg","必須項目が入力されていません。");
 			return "/manager/bookinit";
 		} else {
 			return "redirect:/manager/confirm";

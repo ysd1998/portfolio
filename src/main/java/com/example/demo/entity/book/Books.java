@@ -4,6 +4,7 @@ package com.example.demo.entity.book;
 import java.sql.Blob;
 
 import org.hibernate.annotations.SQLRestriction;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.CreatedDate;
 
 import jakarta.persistence.Column;
@@ -22,30 +23,29 @@ import lombok.Setter;
 public class Books {
 	
 	@Id
-//	@EmbeddedId
 	@Size(min = 0, max = 10)
 	@Column(name = "book_id")
-//	(generator = "idGenerator")
-//	@UuidGenerator
 	@Getter
 	@Setter
 	private String bookid;
 	
 	
 	@Column(name = "title")
-	@Size(min = 1, max = 10)
+	@Length(min=0, max=10)
 	@Getter
 	@Setter
 	private String title;
 	
 	
 	@Column(name = "auther")
+	@Length(min=0, max=10)
 	@Getter
 	@Setter
 	private String auther;
 	
 	
 	@Column(name = "price")
+	@Length(min=0, max=10)
 	@Getter
 	@Setter
 	private String price;
@@ -60,6 +60,7 @@ public class Books {
 	
 	
 	@Column(name = "publisher")
+	@Length(min=0, max=8)
 	@Getter
 	@Setter
 	private String publisher;
@@ -72,12 +73,14 @@ public class Books {
 	
 	
 	@Column(name = "ex")
+	@Length(min=0, max=1000)
 	@Getter
 	@Setter
 	private String ex;
 	
 	
 	@Column(name = "other")
+	@Length(min=0, max=1000)
 	@Getter
 	@Setter
 	private String other;

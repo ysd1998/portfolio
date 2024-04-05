@@ -69,9 +69,11 @@ public class ManagerAdminController {
 		bookData.setDeleteflag("0");
 		HttpSession session = request.getSession();
 		session.setAttribute("bookData", bookData);
-		if (isCorrectUserAuth.equals("") || isTitle.equals("") ) {
+		if (isCorrectUserAuth.equals("") || isTitle.equals("") || "".equals(bookData.getPublisher()) ||
+				"".equals(bookData.getYear()) || "0".equals(bookData.getTypeid()) || "".equals(bookData.getPrice())) {
 			List<Types> result = typeservice.serchData("%");
 			model.addAttribute("Types", result);
+			model.addAttribute("errorMsg","必須項目が空欄です。");
 			return "/manager/{id}";
 		} else {
 			return "redirect:/manager/confirm";

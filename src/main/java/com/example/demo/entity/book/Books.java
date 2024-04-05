@@ -33,7 +33,7 @@ public class Books {
 	
 	
 	@Column(name = "title")
-	@Size(min = 0, max = 10)
+	@Size(min = 1, max = 10)
 	@Getter
 	@Setter
 	private String title;

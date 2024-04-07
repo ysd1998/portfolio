@@ -30,6 +30,7 @@
 </head>
 <div>
 <div th:insert="~{manager/common/menu :: menu}"></div>
+	<img th:src="${base64AccountIcon}" alt="アイコン画像"  th:width="50px" th:height="50px">
 	<form th:action="@{/manager/{id}}" th:object="${bookData}" method="POST">
 	<div class="d-flex align-items-center justify-content-center mt-sm-2 mt-auto mb-sm-2 mb-auto">
 	<div  style="width:50%;">

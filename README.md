@@ -1,5 +1,29 @@
 # 書店商品管理システム
 
+## 使用技術
+
+- 開発言語
+  - Java
+
+- プロジェクト管理ツール
+  - Maven
+  
+- 使用フレームワーク
+  - Java/SpringBoot
+  - css/BootStrap
+  - Javascript/jquery
+  - MySQL/Hibernate(Spring Data JPA)
+  
+- DB
+  - MySQL
+  
+- view
+  - Thymeleaf,HTML
+  - css/Bootstrap
+
+- サーバー
+  - Apache Tomcat
+
 ## 概要
 　○○書店では更なる事業拡大のために、Web上で本を検索するシステムを作成しようと構想している。  
 　システムの開発に伴い、Web販売担当という新しい部署を作る予定している。  
@@ -28,10 +52,4 @@
 　尚、管理者側でWeb担当社員を設定することができる。  
 　管理者が担当権限を付与・削除することができる。  
  
-## 使用技術
-　言語:java SE17  
-　フレームワーク:SpringBoot 3.2.1  
-　DB:MySQL 8.0.35  
-　サーバー：Tomcat 11  
-　総合開発環境:Eclipse 2022  
-　OS:Windows 11  
+

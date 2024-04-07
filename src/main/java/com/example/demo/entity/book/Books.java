@@ -1,16 +1,17 @@
 package com.example.demo.entity.book;
 
 
-import java.sql.Blob;
-
 import org.hibernate.annotations.SQLRestriction;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.Getter;
@@ -125,7 +126,11 @@ public class Books {
 	@Column(name = "photo")
 	@Getter
 	@Setter
-	private Blob photo;
+	@Lob
+	private byte[] photo;
+	
+	@Transient
+	private MultipartFile photoFile;
 	
 //	@Override
 //	  @Deprecated

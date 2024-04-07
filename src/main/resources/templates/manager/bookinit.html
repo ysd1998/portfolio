@@ -31,6 +31,11 @@
 <body>
 <div th:insert="~{manager/common/menu :: menu}"></div>
 	<form th:action="@{/manager/bookinit}" th:object="${bookData}" method="POST">
+<!--	<span th:if="${base64AccountIcon}">-->
+<!--    <div class="video">-->
+<!--        <video controls th:src="${'data:video/mp4;base64,' + base64video}"></video>-->
+<!--    </div>-->
+<!--	</span>-->
 	<div class="d-flex align-items-center justify-content-center mt-sm-2 mt-auto mb-sm-2 mb-auto">
 	<div style="width:50%;">
       <div class="row">

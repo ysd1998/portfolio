@@ -15,7 +15,9 @@ spring:
       password: mysql
       url: jdbc:mysql://localhost/book_db
       username: devuser01
-      
+  servlet:
+       multipart:
+        max-file-size: 10MB
   jpa:
     hibernate:
       ddl-auto: none;

@@ -26,9 +26,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class ManagerAdminController {
 	@Autowired
 	public BookAdminService admin;
@@ -41,8 +43,20 @@ public class ManagerAdminController {
 	
 	@GetMapping("/manager/{id}")
 	public String view(@PathVariable String id,@ModelAttribute("bookData")BookInfo bookData,
-			@ModelAttribute("deleteData")BookInfo DeleteData,HttpServletRequest request,Model model) {
+			@ModelAttribute("deleteData")BookInfo DeleteData,HttpServletRequest request,Model model)  throws Exception {
 		Books book = serch.serchId(id);
+		
+//		log.info(book.toString());
+//		
+//		StringBuffer data  = new StringBuffer();
+//		
+//		String base64 = new String(Base64.encodeBase64(book.getPhoto(),true),"ASCII");
+//		
+//		data.append("data:image/png;base64,");
+//		data.append(base64);
+//		
+//		model.addAttribute("base64AccountIcon",data.toString());
+
 
 		model.addAttribute("bookData", book);
 		model.addAttribute("deleteData", book);

@@ -32,43 +32,43 @@
 <div th:insert="~{manager/common/menu :: menu}"></div>
 
 	<form th:action="@{/manager/{id}}" th:object="${bookData}" method="POST">
-<!--	<img th:src="${base64AccountIcon}" alt="アイコン画像"  th:width="500px" th:height="6000px">-->
+<!--	<img th:src="${base64AccountIcon}" alt="アイコン画像"  th:width="500px" th:height="600spx">-->
 	<div class="d-flex align-items-center justify-content-center mt-sm-2 mt-auto mb-sm-2 mb-auto">
 	<div  style="width:50%;">
       <div class="row">
         <div class="col-2 border bg-light">タイトル</div>
         <div class="col border">
-          <input class="form-control" type="text" th:field="*{title}"/>
+          <input class="form-control mt-sm-2 mt-auto mb-sm-2 mb-auto" type="text" th:field="*{title}"/>
         </div>
       </div>
       <div class="row">
         <div class="col-2 border bg-light">作者</div>
         <div class="col border">
-          <input class="form-control" type="text" th:field="*{auther}"/>
+          <input class="form-control mt-sm-2 mt-auto mb-sm-2 mb-auto" type="text" th:field="*{auther}"/>
         </div>
       </div>
       <div class="row">
         <div class="col-2 border bg-light">価格</div>
         <div class="col border">
-          <input class="form-control" type="text" th:field="*{price}"/>
+          <input class="form-control mt-sm-2 mt-auto mb-sm-2 mb-auto" type="text" th:field="*{price}"/>
         </div>
       </div>
       <div class="row">
         <div class="col-2 border bg-light">出版社</div>
         <div class="col border">
-          <input class="form-control" type="text"  th:field="*{publisher}"/>
+          <input class="form-control mt-sm-2 mt-auto mb-sm-2 mb-auto" type="text"  th:field="*{publisher}"/>
         </div>
       </div>
       <div class="row">
         <div class="col-2 border bg-light">発行日</div>
         <div class="col border">
-          <input class="form-control" type="text" th:field="*{year}"/>
+          <input class="form-control mt-sm-2 mt-auto mb-sm-2 mb-auto" type="text" th:field="*{year}"/>
         </div>
       </div>
       <div class="row">
         <div class="col-2 border bg-light">カテゴリ</div>
         <div class="col border">
-			<select class="form-select" aria-label="Default select example" th:field="*{typeid}" value="*{typeid}">
+			<select class="form-select  mt-sm-2 mt-auto mb-sm-2 mb-auto" aria-label="Default select example" th:field="*{typeid}" value="*{typeid}">
 				<option value="0">--- 選択してください ---</option>
 				<option  th:each="list : ${Types}" th:value="${list.typeid}" th:selected="${list.typeid == typeid}" th:inline="text">[[${list.name}]]</option>
 			</select>
@@ -76,21 +76,21 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-2 border bg-light">商品番号</div>
+        <div class="col-2 border bg-light ">商品番号</div>
         <div class="col border">
-          <input class="form-control" type="text" th:field="*{bookid}" readonly/>
+          <input class="form-control mt-sm-2 mt-auto mb-sm-2 mb-auto" type="text" th:field="*{bookid}" readonly/>
         </div>
       </div>
       <div class="row" style="height: 40%;" >
         <div class="col-2 border bg-light">説明</div>
         <div class="col border">
-		  <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"  th:field="*{ex}"></textarea>
+		  <textarea class="form-control  mt-sm-2 mt-auto mb-sm-2 mb-auto" id="exampleFormControlTextarea1" rows="4"  th:field="*{ex}"></textarea>
         </div>
       </div>
       <div class="row" style="height: 40%;" >
         <div class="col-2 border bg-light">その他</div>
         <div class="col border">
-		  <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"  th:field="*{other}"></textarea>
+		  <textarea class="form-control mt-sm-2 mt-auto mb-sm-2 mb-auto" id="exampleFormControlTextarea1" rows="4"  th:field="*{other}"></textarea>
         </div>
       </div>
     </div>

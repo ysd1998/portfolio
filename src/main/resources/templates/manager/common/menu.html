@@ -27,7 +27,13 @@
  		   <i class="bi bi-person-circle" style="font-size: 40px;color: #fff;"></i>
  		 </button>
  	 <ul class="dropdown-menu">
- 	    <li><a class="dropdown-item" th:href="@{/manager/login}">ログアウト</a></li>
+		
+ 	    <li>
+<!--				 <a class="dropdown-item" th:href="@{/manager/login}">ログアウト</a>-->
+			 <form th:action="@{/manager/logout}" method="POST">
+			 	<input type="submit" class="btn btn-light" value="ログアウト"/>
+			 </form>
+		</li>
  	  </ul>
  	</div>
  	</div>

@@ -29,7 +29,12 @@ public class EmpSecurityBeanDefine {
 				.requestMatchers(UrlConfig.MN_NO_AUTHENTICATION).permitAll()
 				.requestMatchers("/manager/admin").hasAuthority("管理者")
 				.anyRequest().authenticated())
+		.logout((logout) -> logout
+		        .logoutSuccessUrl("/manager/logout")
+		        .permitAll()
+		    )
 		.formLogin(login -> login.loginPage("/manager/login").usernameParameter("loginid").defaultSuccessUrl("/manager/menu"));
+//		.logout((logout) -> logout.logoutSuccessUrl("/manager/login"))
 		return http.build();
 	}
 	

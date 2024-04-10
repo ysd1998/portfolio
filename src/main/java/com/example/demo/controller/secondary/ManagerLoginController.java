@@ -50,11 +50,5 @@ public class ManagerLoginController {
 		}
 		
 	}
-	
-	@PostMapping("/manager/logout")
-	public String performLogout() {
-	    // .. perform logout
-	    return "redirect:/manager/login";
-	}
 
 }

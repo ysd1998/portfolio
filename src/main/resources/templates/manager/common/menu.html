@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
 <meta charset="UTF-8">
 </head>
@@ -8,10 +8,9 @@
       <div class="row">
         <h2 class="col mx-3 my-0 py-3" style="background-color: #a6a6a6;color:#fff;width:100%;">○○書店</h2>
       </div>
-      <input type="hidden" sec:authentication="name"/>
-      <div role="presentation" sec:authorize="hasAuthority('管理者')" class="col my-0 w-auto" style="text-align: left;">
-			<a class="mx-3 py-3" th:href="@{/manager/menu}">商品管理</a>
-			<a sec:authorize="hasAuthority('管理者')" class="mx-3 py-3" th:href="@{/manager/admin}">社員管理</a>
+      <div class="col my-0 w-auto" style="text-align: left;">
+			<a role="presentation" sec:authorize="hasAuthority('管理者')" class="mx-3 py-3" th:href="@{/manager/menu}">商品管理</a>
+			<a role="presentation" sec:authorize="hasAuthority('管理者')" class="mx-3 py-3" th:href="@{/manager/admin}">社員管理</a>
       </div>
         <div class="d-flex row justify-content-end w-auto" style="text-align: right;">
 <!--	  <ul menu="menu d-flex row justify-content-end">-->
@@ -31,7 +30,7 @@
  	    <li>
 <!--				 <a class="dropdown-item" th:href="@{/manager/login}">ログアウト</a>-->
 			 <form th:action="@{/manager/logout}" method="POST">
-			 	<input type="submit" class="btn btn-light" value="ログアウト"/>
+			 	<input type="submit" class="btn btn-light w-100" value="ログアウト"/>
 			 </form>
 		</li>
  	  </ul>

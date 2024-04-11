@@ -45,18 +45,26 @@ public class ManagerAdminController {
 	public String view(@PathVariable String id,@ModelAttribute("bookData")BookInfo bookData,
 			@ModelAttribute("deleteData")BookInfo DeleteData,HttpServletRequest request,Model model)  throws Exception {
 		Books book = serch.serchId(id);
-		
 //		log.info(book.toString());
-//		
-//		StringBuffer data  = new StringBuffer();
-//		
-//		String base64 = new String(Base64.encodeBase64(book.getPhoto(),true),"ASCII");
-//		
-//		data.append("data:image/png;base64,");
-//		data.append(base64);
-//		
-//		model.addAttribute("base64AccountIcon",data.toString());
-
+//		if (book.getPhoto()==null) {
+//			File fileImg = new File("C:/Users/guestuser/Desktop/pleiades-2022-12-ultimate-win-64bit-jre_20230212/workspace/portfolio/src/main/resources/templates/picture/20200501_noimage.png");
+//			byte[] byteImg = Files.readAllBytes(fileImg.toPath());
+//			StringBuffer data  = new StringBuffer();
+//			String base64 = new String(Base64.encodeBase64(byteImg,true),"ASCII");
+//			data.append("data:image/png;base64,");
+//			data.append(base64);
+//			model.addAttribute("base64AccountIcon",data.toString());
+//		} else {
+//			
+//			StringBuffer data  = new StringBuffer();
+//			
+//			String base64 = new String(Base64.encodeBase64(book.getPhoto(),true),"ASCII");
+//			
+//			data.append("data:image/png;base64,");
+//			data.append(base64);
+//			
+//			model.addAttribute("base64AccountIcon",data.toString());
+//		}
 
 		model.addAttribute("bookData", book);
 		model.addAttribute("deleteData", book);

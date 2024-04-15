@@ -20,7 +20,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
     transactionManagerRef = "primaryTransactionManager"
 )
 public class UserDataSourceConfig {
-	
+	//データソース
 	  @Bean
 	  @ConfigurationProperties(prefix = "spring.datasource.primary")
 	  public DataSourceProperties primaryProperties() {

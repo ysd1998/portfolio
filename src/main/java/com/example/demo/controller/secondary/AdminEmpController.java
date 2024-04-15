@@ -31,7 +31,7 @@ public class AdminEmpController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String index(Model model,Pageable pageable) {
-		Page<Employees> results = service.searchEmp("", "", "web販売担当", pageable);
+		Page<Employees> results = service.searchEmp("web販売担当", "web販売担当", "web販売担当", pageable);
 		List<Employees> result = results.getContent();
 		model.addAttribute("pages", results);
 		model.addAttribute("result",result);
@@ -45,7 +45,13 @@ public class AdminEmpController {
 		mav.addObject("loginid", serchData);
 		mav.addObject("name", serchData);
 		mav.addObject("authority",serchData);
-		Page<Employees> results = service.searchEmp(serchData, serchData, serchData,pageable);
+		Page<Employees> results;
+		if ("".equals(serchData)) {
+			results = service.searchEmp("web販売担当", "web販売担当", "web販売担当" ,pageable);
+		} else {
+			results = service.searchEmp(serchData, serchData, serchData,pageable);
+		}
+		
 		List<Employees> result = results.getContent();
 		mav.addObject("pages", results);
 		mav.addObject("result", result);

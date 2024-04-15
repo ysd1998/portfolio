@@ -27,7 +27,7 @@ public class EmpSerchService {
 		if ("".equals(loginId) && "".equals(Name) && "".equals(authority)) {
 			result = repository.findAll(page);
 		} else {
-			result = repository.findByLoginidLikeOrNameLikeOrAuthorityLike("%"+loginId +"%", "%"+Name+"%","%"+ authority +"%",page);
+			result = repository.findByLoginidLikeOrNameLikeOrAuthorityLike("%"+loginId +"%", "%"+Name+"%","%"+ authority +"%" , page);
 		}
 		return result;
 	}

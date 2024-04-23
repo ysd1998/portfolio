@@ -83,7 +83,7 @@ public class ManagerConfirmController {
 	@PostMapping("/manager/confirm")
 	public String confirmOK(@Valid @ModelAttribute("bookData")BookInfo bookData,
 			@AuthenticationPrincipal User user,
-			Model model, HttpServletRequest request) {
+			Model model, HttpServletRequest request) throws Exception {
 		Date date = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		String strDate = dateFormat.format(date);
@@ -94,6 +94,7 @@ public class ManagerConfirmController {
 			bookData.setDeleteflag("0");
 	    } else if ("更新".equals(bookData.getWork())) {
 	    	list = serch.serchId(bookData.getBookid());
+	    	String base64 = new String(Base64.encodeBase64(bookData.getPhoto(),true),"ASCII");
 	    	if (bookData.getPhoto() == null && list.getPhoto() !=null) {
 	    		bookData.setPhoto(list.getPhoto());
 	    	} if (bookData.getPhoto() == null && list.getPhoto() ==null) {

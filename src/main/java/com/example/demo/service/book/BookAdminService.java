@@ -37,6 +37,7 @@ public class BookAdminService {
 		books.setDeleteid(book.getDeleteid());
 		books.setDeleteday(book.getDeleteday());
 		books.setDeleteflag(book.getDeleteflag());
+		books.setPhoto(book.getPhoto());
 		repository.save(books);
 //		jdbc.update("INSERT INTO `bookdb`.`books`"
 //				+ " (`bookid`, `title`, `auther`, `price`, `typeid`, `publisher`, `year`, `ex` ,`other`, `deleteflag`, `insertid`, `insertday`)"

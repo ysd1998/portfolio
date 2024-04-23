@@ -48,6 +48,8 @@ public class BookInfo {
 	
 	private String updateid;
 	
+	private byte[] photo;
+	
 	
 	private String updateday;
 	

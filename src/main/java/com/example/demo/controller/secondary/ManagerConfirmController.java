@@ -1,8 +1,11 @@
 package com.example.demo.controller.secondary;
 
+import java.io.File;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
@@ -40,10 +43,29 @@ public class ManagerConfirmController {
 	//確認画面
 	@GetMapping("/manager/confirm")
 	public String confirm(
-	        Model model, HttpServletRequest request) {
+	        Model model, HttpServletRequest request)  throws Exception {
 
 	    HttpSession session = request.getSession();
 	    BookInfo bookData = (BookInfo) session.getAttribute("bookData");
+	    if (bookData.getPhoto()==null) {
+			File fileImg = new File("C:/Users/guestuser/Desktop/pleiades-2022-12-ultimate-win-64bit-jre_20230212/workspace/portfolio/src/main/resources/templates/picture/20200501_noimage.png");
+			byte[] byteImg = Files.readAllBytes(fileImg.toPath());
+			StringBuffer data  = new StringBuffer();
+			String base64 = new String(Base64.encodeBase64(byteImg,true),"ASCII");
+			data.append("data:image/png;base64,");
+			data.append(base64);
+			model.addAttribute("base64AccountIcon",data.toString());
+		} else {
+			
+			StringBuffer data  = new StringBuffer();
+			
+			String base64 = new String(Base64.encodeBase64(bookData.getPhoto(),true),"ASCII");
+			
+			data.append("data:image/png;base64,");
+			data.append(base64);
+			
+			model.addAttribute("base64AccountIcon",data.toString());
+		}
 	    Types type = typeservice.serchId(bookData.getTypeid());
 	    if ("追加".equals(bookData.getWork())) {
 	    	model.addAttribute("mesage","こちらの内容を追加しますか？");
@@ -72,6 +94,11 @@ public class ManagerConfirmController {
 			bookData.setDeleteflag("0");
 	    } else if ("更新".equals(bookData.getWork())) {
 	    	list = serch.serchId(bookData.getBookid());
+	    	if (bookData.getPhoto() == null && list.getPhoto() !=null) {
+	    		bookData.setPhoto(list.getPhoto());
+	    	} if (bookData.getPhoto() == null && list.getPhoto() ==null) {
+	    		bookData.setPhoto(null);
+	    	}
 	    	bookData.setInsertday(list.getInsertday());
 			bookData.setInsertid(list.getInsertid());
 	    	bookData.setUpdateday(strDate);

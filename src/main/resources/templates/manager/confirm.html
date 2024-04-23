@@ -32,6 +32,7 @@
 <div th:insert="~{manager/common/menu :: menu}"></div>
 	<div class="d-flex align-items-center justify-content-center mt-sm-2 mt-auto mb-sm-2 mb-auto">
 	<div th:object="${bookData}" style="width:50%;">
+	  <img th:src="${base64AccountIcon}" alt="アイコン画像"  th:width="500px" th:height="600spx">
       <div class="row">
         <div class="col-2 border bg-light">タイトル</div>
         <div class="col border">
@@ -104,6 +105,7 @@
 	<input type="hidden" th:field="*{other}"/>
 	<input type="hidden" th:field="*{publisher}"/>
 	<input type="hidden" th:field="*{work}"/>
+	<input type="hidden" th:field="*{photo}"/>
 	<input class=" btn btn-primary" type="submit" th:href="@{/manager/menu}" th:value="*{work}"/>
 	</form>
 	<form th:action="@{/manager/menu}" method="get">

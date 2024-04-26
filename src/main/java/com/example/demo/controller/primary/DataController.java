@@ -1,6 +1,10 @@
 package com.example.demo.controller.primary;
 
 
+import java.io.File;
+import java.nio.file.Files;
+
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
@@ -24,8 +28,27 @@ public class DataController {
 	
 	//詳細画面に本の情報を出力
 	@GetMapping("{id}")
-	public String index(Model model,@PathVariable String id) {
+	public String index(Model model,@PathVariable String id)  throws Exception  {
 		Books book = service.serchId(id);
+		if (book.getPhoto()==null) {
+			File fileImg = new File("C:/Users/guestuser/Desktop/pleiades-2022-12-ultimate-win-64bit-jre_20230212/workspace/portfolio/src/main/resources/templates/picture/20200501_noimage.png");
+			byte[] byteImg = Files.readAllBytes(fileImg.toPath());
+			StringBuffer data  = new StringBuffer();
+			String base64 = new String(Base64.encodeBase64(byteImg,true),"ASCII");
+			data.append("data:image/png;base64,");
+			data.append(base64);
+			model.addAttribute("base64AccountIcon",data.toString());
+		} else {
+			
+			StringBuffer data  = new StringBuffer();
+			
+			String base64 = new String(Base64.encodeBase64(book.getPhoto(),true),"ASCII");
+			
+			data.append("data:image/png;base64,");
+			data.append(base64);
+			
+			model.addAttribute("base64AccountIcon",data.toString());
+		}
 		Types type = typeservice.serchId(book.getTypeid());
 		model.addAttribute("bookData", book);
 		model.addAttribute("typeData", type);

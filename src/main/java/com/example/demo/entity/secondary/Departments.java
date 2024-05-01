@@ -12,13 +12,13 @@ import lombok.Setter;
 @Table(name = "departments")
 @Data
 public class Departments {
-	
+
 	@Id
 	@Column(name = "department_id")
 	@Getter
 	@Setter
 	private String did;
-	
+
 	@Column(name = "name")
 	@Getter
 	@Setter

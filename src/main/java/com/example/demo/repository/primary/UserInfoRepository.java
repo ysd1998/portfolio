@@ -13,9 +13,8 @@ import com.example.demo.entity.primary.Clients;
 //		  transactionManagerRef = "primaryTransactionManager"
 //		)
 @Repository
-public interface UserInfoRepository extends JpaRepository<Clients,String>{
-	
-	Optional<Clients> findByLoginidLikeOrNameLikeOrPasswordLike(String loginid,String name,String password);
+public interface UserInfoRepository extends JpaRepository<Clients, String> {
 
+	Optional<Clients> findByLoginidLikeOrNameLikeOrPasswordLike(String loginid, String name, String password);
 
 }

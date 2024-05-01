@@ -14,29 +14,25 @@ import lombok.RequiredArgsConstructor;
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity 
+@EnableMethodSecurity
 @RequiredArgsConstructor
 @Order(1)
 public class EmpSecurityBeanDefine {
-    
-	
-	
+
 	@Bean
 	SecurityFilterChain securityfilterChain(HttpSecurity http) throws Exception {
-		http.securityMatcher("/manager/**") 
-		.authorizeHttpRequests(
-				authorize -> authorize.requestMatchers(UrlConfig.MN_NO_AUTHENTICATION).permitAll()
-				.requestMatchers(UrlConfig.MN_NO_AUTHENTICATION).permitAll()
-				.requestMatchers("/manager/admin").hasAuthority("管理者")
-				.anyRequest().authenticated())
-		.logout((logout) -> logout
-		        .logoutUrl("/manager/logout")
-		    )
-		.formLogin(login -> login.loginPage("/manager/login").usernameParameter("loginid").defaultSuccessUrl("/manager/menu"));
-//		.logout((logout) -> logout.logoutSuccessUrl("/manager/login"))
+		http.securityMatcher("/manager/**")
+				.authorizeHttpRequests(
+						authorize -> authorize.requestMatchers(UrlConfig.MN_NO_AUTHENTICATION).permitAll()
+								.requestMatchers(UrlConfig.MN_NO_AUTHENTICATION).permitAll()
+								.requestMatchers("/manager/admin").hasAuthority("管理者")
+								.anyRequest().authenticated())
+				.logout((logout) -> logout
+						.logoutUrl("/manager/logout"))
+				.formLogin(login -> login.loginPage("/manager/login").usernameParameter("loginid")
+						.defaultSuccessUrl("/manager/menu"));
+		//		.logout((logout) -> logout.logoutSuccessUrl("/manager/login"))
 		return http.build();
 	}
-	
-	
 
 }

@@ -16,22 +16,23 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class EmpSerchService {
-	
+
 	@Autowired
 	private final EmpInfoRepository repository;
-//	@Autowired
-//	private final EmpInfoRepositoryCustom repositoryCustom;
-	
-	public Page<Employees> searchEmp(String loginId,String Name,String authority,Pageable page) {
+	//	@Autowired
+	//	private final EmpInfoRepositoryCustom repositoryCustom;
+
+	public Page<Employees> searchEmp(String loginId, String Name, String authority, Pageable page) {
 		Page<Employees> result;
 		if ("".equals(loginId) && "".equals(Name) && "".equals(authority)) {
 			result = repository.findAll(page);
 		} else {
-			result = repository.findByLoginidLikeOrNameLikeOrAuthorityLike("%"+loginId +"%", "%"+Name+"%","%"+ authority +"%" , page);
+			result = repository.findByLoginidLikeOrNameLikeOrAuthorityLike("%" + loginId + "%", "%" + Name + "%",
+					"%" + authority + "%", page);
 		}
 		return result;
 	}
-	
+
 	public Employees searchId(String loginId) {
 		Employees emp = new Employees();
 		Optional<Employees> emps = repository.findById(loginId);
@@ -40,7 +41,7 @@ public class EmpSerchService {
 		}
 		return emp;
 	}
-	
+
 	public String insert(LoginForm emp) {
 		Employees employees = new Employees();
 		Optional<Employees> emps = repository.findById(emp.getLoginid());

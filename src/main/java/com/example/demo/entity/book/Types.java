@@ -12,13 +12,13 @@ import lombok.Setter;
 @Table(name = "types")
 @Data
 public class Types {
-	
+
 	@Id
 	@Column(name = "type_id")
 	@Getter
 	@Setter
 	private String typeid;
-	
+
 	@Column(name = "name")
 	@Getter
 	@Setter

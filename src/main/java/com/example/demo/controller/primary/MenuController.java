@@ -23,40 +23,41 @@ import com.example.demo.service.book.TypeSerchService;
 //@RequiredArgsConstructor
 @RequestMapping("menu")
 public class MenuController {
-	
+
 	private static final String VIEW = "menu";
 	@Autowired
 	public BookSerchService service;
-	
+
 	@Autowired
 	public TypeSerchService typeservice;
-	
+
 	@RequestMapping(method = RequestMethod.GET)
-	public String index(Model model,Pageable pageable) {
-		Page<Books> results = service.search("", "", "",pageable);
+	public String index(Model model, Pageable pageable) {
+		Page<Books> results = service.search("", "", "", pageable);
 		List<Books> result = results.getContent();
 		model.addAttribute("pages", results);
-		model.addAttribute("result",result);
+		model.addAttribute("result", result);
 		model.addAttribute("resultSize", result.size());
 		return VIEW;
 	}
-	
+
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView serch(ModelAndView mav,Pageable pageable, @RequestParam("serchData") String serchData) throws NoSuchElementException {
+	public ModelAndView serch(ModelAndView mav, Pageable pageable, @RequestParam("serchData") String serchData)
+			throws NoSuchElementException {
 		mav.setViewName(VIEW);
-		mav.addObject("title", serchData );
-		mav.addObject("auther", serchData );
-		mav.addObject("price",serchData );
-		mav.addObject("type",serchData );
-		Page<Books> results = service.search(serchData , serchData , serchData,pageable);
+		mav.addObject("title", serchData);
+		mav.addObject("auther", serchData);
+		mav.addObject("price", serchData);
+		mav.addObject("type", serchData);
+		Page<Books> results = service.search(serchData, serchData, serchData, pageable);
 		List<Books> result = results.getContent();
 		mav.addObject("pages", results);
 		mav.addObject("result", result);
 		mav.addObject("resultSize", result.size());
-		if (result== null || result.size() == 0) {
-			mav.addObject("errorMsg","検索結果がありませんでした。");	
+		if (result == null || result.size() == 0) {
+			mav.addObject("errorMsg", "検索結果がありませんでした。");
 		} else {
-			mav.addObject("errorMsg","");
+			mav.addObject("errorMsg", "");
 		}
 		return mav;
 	}

@@ -12,18 +12,18 @@ import lombok.Setter;
 @Table(name = "clients")
 @Data
 public class Clients {
-	
+
 	@Id
 	@Column(name = "client_id")
 	@Getter
 	@Setter
 	private String loginid;
-	
+
 	@Column(name = "name")
 	@Getter
 	@Setter
 	private String name;
-	
+
 	@Column(name = "password")
 	@Getter
 	@Setter

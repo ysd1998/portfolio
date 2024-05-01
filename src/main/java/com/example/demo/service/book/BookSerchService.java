@@ -16,31 +16,32 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class BookSerchService {
-	
+
 	@Autowired
 	private final BookInfoRepository repository;
-	
-	public Page<Books> search(String id,String Name,String publisher,Pageable pageable) {
+
+	public Page<Books> search(String id, String Name, String publisher, Pageable pageable) {
 		Page<Books> result;
-		if ("".equals(id) && "".equals(Name) && "".equals(publisher) ) {
+		if ("".equals(id) && "".equals(Name) && "".equals(publisher)) {
 			result = repository.findAll(pageable);
 		} else {
-			result = repository.findByTitleLikeOrAutherLikeOrPublisherLike("%"+id+"%","%" +Name+"%","%" +publisher+"%",pageable);
+			result = repository.findByTitleLikeOrAutherLikeOrPublisherLike("%" + id + "%", "%" + Name + "%",
+					"%" + publisher + "%", pageable);
 		}
 		return result;
 	}
-	
+
 	public Books serchId(String id) throws NoSuchElementException {
 		Books book = new Books();
-		Optional<Books> books =repository.findById(id);
+		Optional<Books> books = repository.findById(id);
 		if (books.isPresent()) {
 			book = books.get();
 		}
 		return book;
 	}
-	
-	public Optional<Books> check(String id){
-		Optional<Books> book =repository.findById(id);
+
+	public Optional<Books> check(String id) {
+		Optional<Books> book = repository.findById(id);
 		return book;
 	}
 

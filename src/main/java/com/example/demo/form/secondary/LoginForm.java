@@ -8,17 +8,15 @@ import lombok.Setter;
 @Setter
 @Getter
 public class LoginForm {
-	
+
 	private String loginid;
-	
+
 	private String name;
-	
+
 	private String password;
-	
+
 	private String authority;
-	
+
 	private String did;
-	
-	
 
 }

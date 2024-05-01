@@ -16,42 +16,42 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @RequiredArgsConstructor
 public class ManagerLoginController {
-	
+
 	private final EmpLoginService service;
-	
+
 	private final PasswordEncoder passwordEncoder;
-	
+
 	private final HttpSession session;
-	
+
 	//ログイン画面（社員側）
 	@GetMapping("manager/login")
-	public String view(Model model,LoginForm form) {
+	public String view(Model model, LoginForm form) {
 		return "manager/login";
 	}
-	
-	@GetMapping(value="manager/login",params="error")
-	public String error(Model model,LoginForm form) {
-		var errorInfo =(Exception)session.getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
+
+	@GetMapping(value = "manager/login", params = "error")
+	public String error(Model model, LoginForm form) {
+		var errorInfo = (Exception) session.getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
 		String errormesage = "ログインIDとパスワードが間違ってます。";
-		if (! "".equals(errorInfo)) {
+		if (!"".equals(errorInfo)) {
 			model.addAttribute("errorMsg", errormesage);
 		}
 		return "manager/login";
 	}
-	
+
 	//ログイン後の処理
 	@PostMapping("manager/login")
-	public String login(Model model,LoginForm form) {
+	public String login(Model model, LoginForm form) {
 		var userInfo = service.searchUserById(form.getLoginid());
 		var isCorrectUserAuth = userInfo.isPresent()
-				&& passwordEncoder.matches(form.getPassword(),userInfo.get().getPassword());
+				&& passwordEncoder.matches(form.getPassword(), userInfo.get().getPassword());
 		if (isCorrectUserAuth) {
 			return "redirect:/manager/menu";
 		} else {
 			model.addAttribute("errorMsg", "ログインIDとパスワードが間違ってます。");
 			return "manager/login";
 		}
-		
+
 	}
 
 }

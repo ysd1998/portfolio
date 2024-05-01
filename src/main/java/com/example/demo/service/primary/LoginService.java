@@ -12,9 +12,10 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class LoginService {
-	
+
 	private final UserInfoRepository repository;
-	public Optional<Clients> searchUserById(String loginId){
+
+	public Optional<Clients> searchUserById(String loginId) {
 		return repository.findById(loginId);
 	}
 

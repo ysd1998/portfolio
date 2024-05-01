@@ -14,41 +14,38 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 
 @Configuration
-@EnableJpaRepositories(
-    basePackages = "com.example.demo.repository.primary",
-    entityManagerFactoryRef = "primaryEntityManager",
-    transactionManagerRef = "primaryTransactionManager"
-)
+@EnableJpaRepositories(basePackages = "com.example.demo.repository.primary", entityManagerFactoryRef = "primaryEntityManager", transactionManagerRef = "primaryTransactionManager")
 public class UserDataSourceConfig {
 	//データソース
-	  @Bean
-	  @ConfigurationProperties(prefix = "spring.datasource.primary")
-	  public DataSourceProperties primaryProperties() {
-	    return new DataSourceProperties();
-	  }
+	@Bean
+	@ConfigurationProperties(prefix = "spring.datasource.primary")
+	public DataSourceProperties primaryProperties() {
+		return new DataSourceProperties();
+	}
 
-	  @Bean
-	  @Autowired
-	  public DataSource primaryDataSource(@Qualifier("primaryProperties")
-	      DataSourceProperties properties) {
-	    return properties.initializeDataSourceBuilder().build();
-	  }
+	@Bean
+	@Autowired
+	public DataSource primaryDataSource(@Qualifier("primaryProperties") DataSourceProperties properties) {
+		return properties.initializeDataSourceBuilder().build();
+	}
 
-	  @Bean
-	  @Autowired
-	  public LocalContainerEntityManagerFactoryBean primaryEntityManager(EntityManagerFactoryBuilder builder,@Qualifier("primaryDataSource") DataSource dataSource){
-	    return builder.dataSource(dataSource)
-	        .packages("com.example.demo.entity.primary")
-	        .persistenceUnit("primary")
-	        .build();
-	  }
+	@Bean
+	@Autowired
+	public LocalContainerEntityManagerFactoryBean primaryEntityManager(EntityManagerFactoryBuilder builder,
+			@Qualifier("primaryDataSource") DataSource dataSource) {
+		return builder.dataSource(dataSource)
+				.packages("com.example.demo.entity.primary")
+				.persistenceUnit("primary")
+				.build();
+	}
 
-	  @Bean
-	  @Autowired
-	  public JpaTransactionManager primaryTransactionManager(@Qualifier("primaryEntityManager") LocalContainerEntityManagerFactoryBean primaryEntityManager) {
-	    JpaTransactionManager transactionManager = new JpaTransactionManager();
-	    transactionManager.setEntityManagerFactory(primaryEntityManager.getObject());
-	    return transactionManager;
-	  }
-	  
+	@Bean
+	@Autowired
+	public JpaTransactionManager primaryTransactionManager(
+			@Qualifier("primaryEntityManager") LocalContainerEntityManagerFactoryBean primaryEntityManager) {
+		JpaTransactionManager transactionManager = new JpaTransactionManager();
+		transactionManager.setEntityManagerFactory(primaryEntityManager.getObject());
+		return transactionManager;
+	}
+
 }

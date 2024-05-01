@@ -33,7 +33,10 @@ public class LoginController {
 	@GetMapping(value = "login", params = "error")
 	public String error(Model model, LoginForm form) {
 		var errorInfo = (Exception) session.getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
-		model.addAttribute("errorMsg", errorInfo.getMessage());
+		String errormesage = "ログインIDとパスワードが間違ってます。";
+		if (!"".equals(errorInfo)) {
+			model.addAttribute("errorMsg", errormesage);
+		}
 		return "login";
 	}
 

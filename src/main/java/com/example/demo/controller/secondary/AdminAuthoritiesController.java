@@ -27,7 +27,7 @@ public class AdminAuthoritiesController {
 	@Autowired
 	public DepSerchService depservice;
 	
-	@GetMapping("/manager/authority/{loginid}")
+	@GetMapping("manager/authority/{loginid}")
 	public String view(@PathVariable String loginid,@ModelAttribute("empData")LoginForm empData,
 			@ModelAttribute("authData")LoginForm authData,HttpServletRequest request,Model model) {
 		if (loginid != null) {
@@ -43,10 +43,10 @@ public class AdminAuthoritiesController {
 		} else {
 			model.addAttribute("mesage", "web販売担当権限を削除しますか？");
 		}
-		return "/manager/authority";
+		return "manager/authority";
 	}
 	
-	@PostMapping("/manager/authority")
+	@PostMapping("manager/authority")
 	public String confirmOK(@ModelAttribute("authData")LoginForm authData,
 			Model model, HttpServletRequest request) {
 		Employees emp = service.searchId(authData.getLoginid());

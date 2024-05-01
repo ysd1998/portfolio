@@ -21,10 +21,10 @@ import lombok.RequiredArgsConstructor;
 @ComponentScan
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/manager/admin")
+@RequestMapping("manager/admin")
 public class AdminEmpController {
 	
-	private static final String VIEW = "/manager/admin";
+	private static final String VIEW = "manager/admin";
 	
 	@Autowired
 	public EmpSerchService service;

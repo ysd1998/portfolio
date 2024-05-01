@@ -41,15 +41,20 @@ public class ManagerConfirmController {
 	public TypeSerchService typeservice;
 	
 	//確認画面
-	@GetMapping("/manager/confirm")
+	@GetMapping("manager/confirm")
 	public String confirm(
 	        Model model, HttpServletRequest request)  throws Exception {
 
 	    HttpSession session = request.getSession();
 	    BookInfo bookData = (BookInfo) session.getAttribute("bookData");
-	    String base64 = new String(Base64.encodeBase64(bookData.getPhoto(),true),"ASCII");
-	    if (bookData.getPhoto()==null || "".equals(base64)) {
-			File fileImg = new File("C:/Users/guestuser/Desktop/pleiades-2022-12-ultimate-win-64bit-jre_20230212/workspace/portfolio/src/main/resources/templates/picture/20200501_noimage.png");
+	    String base64;
+	    if (bookData.getPhoto() != null) {
+	    	base64 = new String(Base64.encodeBase64(bookData.getPhoto(),true),"ASCII");
+	    } else {
+	    	base64 = "";
+	    }
+	    if (bookData.getPhoto()==null || "".equals(base64) || base64 ==null) {
+			File fileImg = new File("src/main/resources/templates/picture/20200501_noimage.png");
 			byte[] byteImg = Files.readAllBytes(fileImg.toPath());
 			base64 = new String(Base64.encodeBase64(byteImg,true),"ASCII");
 			StringBuffer data  = new StringBuffer();
@@ -74,11 +79,11 @@ public class ManagerConfirmController {
 	    }
 	    model.addAttribute("bookData", bookData);
 	    model.addAttribute("typeData", type);
-	    return "/manager/confirm";
+	    return "manager/confirm";
 	}
 	
 	//作業処理
-	@PostMapping("/manager/confirm")
+	@PostMapping("manager/confirm")
 	public String confirmOK(@Valid @ModelAttribute("bookData")BookInfo bookData,
 			@AuthenticationPrincipal User user,
 			Model model, HttpServletRequest request) throws Exception {

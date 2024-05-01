@@ -112,7 +112,7 @@
 	<div class="d-flex justify-content-evenly">
 	<input class=" btn btn-primary" type="submit" th:href="@{/manager/confirm}" value="更新"/>
 	</form>
-	<form th:action="@{/manager/delete/{id}}" th:object="${deleteData}" method="GET">
+	<form th:action="@{/manager/delete/{id}}" th:object="${deleteData}" method="POST">
 	<input type="hidden" th:field="*{bookid}"/>
 	<input type="hidden" th:field="*{auther}"/>
 	<input type="hidden" th:field="*{title}"/>

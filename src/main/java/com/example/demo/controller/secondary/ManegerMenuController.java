@@ -23,10 +23,10 @@ import lombok.RequiredArgsConstructor;
 @ComponentScan
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/manager/menu")
+@RequestMapping("manager/menu")
 public class ManegerMenuController {
 	
-	private static final String VIEW = "/manager/menu";
+	private static final String VIEW = "manager/menu";
 	
 	@Autowired
 	public BookSerchService service;

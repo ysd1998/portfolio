@@ -15,24 +15,24 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class TypeSerchService {
-	
+
 	@Autowired
 	private final TypeInfoRepository typerepo;
-	
+
 	public List<Types> serchData(String id) {
 		List<Types> type = typerepo.findByTypeidLike(id);
 		return type;
 	}
-	
+
 	public Types serchNames(String id) {
 		Types type = new Types();
 		Optional<Types> types = typerepo.findByNameLike(id);
 		if (types.isPresent()) {
 			type = types.get();
-		} 
+		}
 		return type;
 	}
-	
+
 	public Types serchId(String id) throws NoSuchElementException {
 		return typerepo.findById(id).get();
 	}

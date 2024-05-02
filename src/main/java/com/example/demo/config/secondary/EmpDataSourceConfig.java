@@ -15,45 +15,42 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 
 @Configuration
-@EnableJpaRepositories(
-    basePackages = "com.example.demo.repository.secondary",
-    entityManagerFactoryRef = "secondaryEntityManager",
-    transactionManagerRef = "secondaryTransactionManager"
-)
+@EnableJpaRepositories(basePackages = "com.example.demo.repository.secondary", entityManagerFactoryRef = "secondaryEntityManager", transactionManagerRef = "secondaryTransactionManager")
 public class EmpDataSourceConfig {
 
-  @Bean
-  @Primary
-  @ConfigurationProperties(prefix = "spring.datasource.secondary")
-  public DataSourceProperties secondaryProperties() {
-    return new DataSourceProperties();
-  }
+	@Bean
+	@Primary
+	@ConfigurationProperties(prefix = "spring.datasource.secondary")
+	public DataSourceProperties secondaryProperties() {
+		return new DataSourceProperties();
+	}
 
-  @Bean
-  @Primary
-  @Autowired
-  public DataSource secondaryDataSource(@Qualifier("secondaryProperties")
-      DataSourceProperties properties) {
-    return properties.initializeDataSourceBuilder().build();
-  }
+	@Bean
+	@Primary
+	@Autowired
+	public DataSource secondaryDataSource(@Qualifier("secondaryProperties") DataSourceProperties properties) {
+		return properties.initializeDataSourceBuilder().build();
+	}
 
-  @Bean
-  @Primary
-  @Autowired
-  public LocalContainerEntityManagerFactoryBean secondaryEntityManager(EntityManagerFactoryBuilder builder,@Qualifier("secondaryDataSource") DataSource dataSource){
-    return builder.dataSource(dataSource)
-        .packages("com.example.demo.entity.secondary")
-        .persistenceUnit("secondary")
-        .build();
-  }
+	@Bean
+	@Primary
+	@Autowired
+	public LocalContainerEntityManagerFactoryBean secondaryEntityManager(EntityManagerFactoryBuilder builder,
+			@Qualifier("secondaryDataSource") DataSource dataSource) {
+		return builder.dataSource(dataSource)
+				.packages("com.example.demo.entity.secondary")
+				.persistenceUnit("secondary")
+				.build();
+	}
 
-  @Bean
-  @Primary
-  @Autowired
-  public JpaTransactionManager secondaryTransactionManager(@Qualifier("secondaryEntityManager") LocalContainerEntityManagerFactoryBean secondaryEntityManager) {
-    JpaTransactionManager transactionManager = new JpaTransactionManager();
-    transactionManager.setEntityManagerFactory(secondaryEntityManager.getObject());
-    return transactionManager;
-  }
+	@Bean
+	@Primary
+	@Autowired
+	public JpaTransactionManager secondaryTransactionManager(
+			@Qualifier("secondaryEntityManager") LocalContainerEntityManagerFactoryBean secondaryEntityManager) {
+		JpaTransactionManager transactionManager = new JpaTransactionManager();
+		transactionManager.setEntityManagerFactory(secondaryEntityManager.getObject());
+		return transactionManager;
+	}
 
 }

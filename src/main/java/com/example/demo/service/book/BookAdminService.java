@@ -14,11 +14,10 @@ import lombok.RequiredArgsConstructor;
 public class BookAdminService {
 	@Autowired
 	private final BookInfoRepository repository;
-	
-//	@Autowired
-//	private JdbcTemplate jdbc;
 
-	
+	//	@Autowired
+	//	private JdbcTemplate jdbc;
+
 	public String insert(BookInfo book) {
 		Books books = new Books();
 		books.setBookid(book.getBookid());
@@ -39,21 +38,21 @@ public class BookAdminService {
 		books.setDeleteflag(book.getDeleteflag());
 		books.setPhoto(book.getPhoto());
 		repository.save(books);
-//		jdbc.update("INSERT INTO `bookdb`.`books`"
-//				+ " (`bookid`, `title`, `auther`, `price`, `typeid`, `publisher`, `year`, `ex` ,`other`, `deleteflag`, `insertid`, `insertday`)"
-//				+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
-//				book.getBookid(),
-//				book.getTitle(),
-//				book.getAuther(),
-//				book.getPrice(),
-//				book.getTypeid(),
-//				book.getPublisher(),
-//				book.getYear(),
-//				book.getEx(),
-//				book.getOther(),
-//				book.getDeleteflag(),
-//				book.getInsertid(),
-//				book.getInsertday());
+		//		jdbc.update("INSERT INTO `bookdb`.`books`"
+		//				+ " (`bookid`, `title`, `auther`, `price`, `typeid`, `publisher`, `year`, `ex` ,`other`, `deleteflag`, `insertid`, `insertday`)"
+		//				+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
+		//				book.getBookid(),
+		//				book.getTitle(),
+		//				book.getAuther(),
+		//				book.getPrice(),
+		//				book.getTypeid(),
+		//				book.getPublisher(),
+		//				book.getYear(),
+		//				book.getEx(),
+		//				book.getOther(),
+		//				book.getDeleteflag(),
+		//				book.getInsertid(),
+		//				book.getInsertday());
 		return "sucsess";
 	}
 

@@ -15,26 +15,26 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class DepSerchService {
-	
+
 	@Autowired
 	private final DepInfoRepository repository;
-	
+
 	public List<Departments> serchData(String id) {
 		List<Departments> type = repository.findByDidLike(id);
 		return type;
 	}
-	
-//	public List<Types> serchName(String id) {
-//		List<Types> type;
-//		if ("".equals(id) ) {
-//			type = null;
-//		} else {
-//			type = repository.findByNameLike("%"+id+"%");
-//		}
-//		
-//		return type;
-//	}
-	
+
+	//	public List<Types> serchName(String id) {
+	//		List<Types> type;
+	//		if ("".equals(id) ) {
+	//			type = null;
+	//		} else {
+	//			type = repository.findByNameLike("%"+id+"%");
+	//		}
+	//		
+	//		return type;
+	//	}
+
 	public Departments serchNames(String id) {
 		Departments type = new Departments();
 		Optional<Departments> types = repository.findByNameLike(id);
@@ -45,7 +45,7 @@ public class DepSerchService {
 		}
 		return type;
 	}
-	
+
 	public Departments serchId(String id) throws NoSuchElementException {
 		return repository.findById(id).get();
 	}

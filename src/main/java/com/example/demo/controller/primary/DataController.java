@@ -1,6 +1,5 @@
 package com.example.demo.controller.primary;
 
-
 import java.io.File;
 import java.nio.file.Files;
 
@@ -22,37 +21,37 @@ import com.example.demo.service.book.TypeSerchService;
 public class DataController {
 	@Autowired
 	public BookSerchService service;
-	
+
 	@Autowired
 	public TypeSerchService typeservice;
-	
+
 	//詳細画面に本の情報を出力
 	@GetMapping("{id}")
-	public String index(Model model,@PathVariable String id)  throws Exception  {
+	public String index(Model model, @PathVariable String id) throws Exception {
 		Books book = service.serchId(id);
-		if (book.getPhoto()==null) {
+		if (book.getPhoto() == null) {
 			File fileImg = new File("src/main/resources/templates/picture/20200501_noimage.png");
 			byte[] byteImg = Files.readAllBytes(fileImg.toPath());
-			StringBuffer data  = new StringBuffer();
-			String base64 = new String(Base64.encodeBase64(byteImg,true),"ASCII");
+			StringBuffer data = new StringBuffer();
+			String base64 = new String(Base64.encodeBase64(byteImg, true), "ASCII");
 			data.append("data:image/png;base64,");
 			data.append(base64);
-			model.addAttribute("base64AccountIcon",data.toString());
+			model.addAttribute("base64AccountIcon", data.toString());
 		} else {
-			
-			StringBuffer data  = new StringBuffer();
-			
-			String base64 = new String(Base64.encodeBase64(book.getPhoto(),true),"ASCII");
-			
+
+			StringBuffer data = new StringBuffer();
+
+			String base64 = new String(Base64.encodeBase64(book.getPhoto(), true), "ASCII");
+
 			data.append("data:image/png;base64,");
 			data.append(base64);
-			
-			model.addAttribute("base64AccountIcon",data.toString());
+
+			model.addAttribute("base64AccountIcon", data.toString());
 		}
 		Types type = typeservice.serchId(book.getTypeid());
 		model.addAttribute("bookData", book);
 		model.addAttribute("typeData", type);
-		return "/bookdata";
+		return "bookdata";
 	}
 
 }

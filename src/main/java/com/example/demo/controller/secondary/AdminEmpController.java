@@ -23,46 +23,45 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RequestMapping("manager/admin")
 public class AdminEmpController {
-	
+
 	private static final String VIEW = "manager/admin";
-	
+
 	@Autowired
 	public EmpSerchService service;
-	
+
 	@RequestMapping(method = RequestMethod.GET)
-	public String index(Model model,Pageable pageable) {
+	public String index(Model model, Pageable pageable) {
 		Page<Employees> results = service.searchEmp("web販売担当", "web販売担当", "web販売担当", pageable);
 		List<Employees> result = results.getContent();
 		model.addAttribute("pages", results);
-		model.addAttribute("result",result);
+		model.addAttribute("result", result);
 		model.addAttribute("resultSize", result.size());
 		return VIEW;
 	}
-	
+
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView serch(ModelAndView mav,Pageable pageable, @RequestParam("serchData")String serchData) {
+	public ModelAndView serch(ModelAndView mav, Pageable pageable, @RequestParam("serchData") String serchData) {
 		mav.setViewName(VIEW);
 		mav.addObject("loginid", serchData);
 		mav.addObject("name", serchData);
-		mav.addObject("authority",serchData);
+		mav.addObject("authority", serchData);
 		Page<Employees> results;
 		if ("".equals(serchData)) {
-			results = service.searchEmp("web販売担当", "web販売担当", "web販売担当" ,pageable);
+			results = service.searchEmp("web販売担当", "web販売担当", "web販売担当", pageable);
 		} else {
-			results = service.searchEmp(serchData, serchData, serchData,pageable);
+			results = service.searchEmp(serchData, serchData, serchData, pageable);
 		}
-		
+
 		List<Employees> result = results.getContent();
 		mav.addObject("pages", results);
 		mav.addObject("result", result);
 		mav.addObject("resultSize", result.size());
-		if (result== null || result.size() == 0) {
-			mav.addObject("errorMsg","検索結果がありませんでした。");	
+		if (result == null || result.size() == 0) {
+			mav.addObject("errorMsg", "検索結果がありませんでした。");
 		} else {
-			mav.addObject("errorMsg","");
+			mav.addObject("errorMsg", "");
 		}
 		return mav;
 	}
-	
 
 }

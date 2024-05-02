@@ -14,41 +14,38 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 
 @Configuration
-@EnableJpaRepositories(
-    basePackages = "com.example.demo.repository.book",
-    entityManagerFactoryRef = "bookEntityManager",
-    transactionManagerRef = "bookTransactionManager"
-)
+@EnableJpaRepositories(basePackages = "com.example.demo.repository.book", entityManagerFactoryRef = "bookEntityManager", transactionManagerRef = "bookTransactionManager")
 public class BookDataSourceConfig {
 
-  @Bean
-  @ConfigurationProperties(prefix = "spring.datasource.book")
-  public DataSourceProperties bookProperties() {
-    return new DataSourceProperties();
-  }
+	@Bean
+	@ConfigurationProperties(prefix = "spring.datasource.book")
+	public DataSourceProperties bookProperties() {
+		return new DataSourceProperties();
+	}
 
-  @Bean
-  @Autowired
-  public DataSource bookDataSource(@Qualifier("bookProperties")
-      DataSourceProperties properties) {
-    return properties.initializeDataSourceBuilder().build();
-  }
+	@Bean
+	@Autowired
+	public DataSource bookDataSource(@Qualifier("bookProperties") DataSourceProperties properties) {
+		return properties.initializeDataSourceBuilder().build();
+	}
 
-  @Bean
-  @Autowired
-  public LocalContainerEntityManagerFactoryBean bookEntityManager(EntityManagerFactoryBuilder builder,@Qualifier("bookDataSource") DataSource dataSource){
-    return builder.dataSource(dataSource)
-        .packages("com.example.demo.entity.book")
-        .persistenceUnit("book")
-        .build();
-  }
+	@Bean
+	@Autowired
+	public LocalContainerEntityManagerFactoryBean bookEntityManager(EntityManagerFactoryBuilder builder,
+			@Qualifier("bookDataSource") DataSource dataSource) {
+		return builder.dataSource(dataSource)
+				.packages("com.example.demo.entity.book")
+				.persistenceUnit("book")
+				.build();
+	}
 
-  @Bean
-  @Autowired
-  public JpaTransactionManager bookTransactionManager(@Qualifier("bookEntityManager") LocalContainerEntityManagerFactoryBean bookEntityManager) {
-    JpaTransactionManager transactionManager = new JpaTransactionManager();
-    transactionManager.setEntityManagerFactory(bookEntityManager.getObject());
-    return transactionManager;
-  }
-  
+	@Bean
+	@Autowired
+	public JpaTransactionManager bookTransactionManager(
+			@Qualifier("bookEntityManager") LocalContainerEntityManagerFactoryBean bookEntityManager) {
+		JpaTransactionManager transactionManager = new JpaTransactionManager();
+		transactionManager.setEntityManagerFactory(bookEntityManager.getObject());
+		return transactionManager;
+	}
+
 }

@@ -18,17 +18,17 @@ import com.example.demo.entity.secondary.Departments;
 //		  transactionManagerRef = "secondaryTransactionManager"
 //		)
 @Repository
-public interface DepInfoRepository extends JpaRepository<Departments,String>{
-//	Optional<Employees> findByLoginidLikeOrNameLikeOrPasswordLike(String loginid,String name,String password);
-	
+public interface DepInfoRepository extends JpaRepository<Departments, String> {
+	//	Optional<Employees> findByLoginidLikeOrNameLikeOrPasswordLike(String loginid,String name,String password);
+
 	Page<Departments> findAll(Pageable page);
-	
+
 	@Query("select u from Departments u where u.did like :loginid or u.name like :name")
-	List<Departments> findByDidLikeOrNameLike(@Param("loginid")String loginid,@Param("name")String password);
-	
+	List<Departments> findByDidLikeOrNameLike(@Param("loginid") String loginid, @Param("name") String password);
+
 	@Query("select u from Departments u where u.did like :loginid")
 	List<Departments> findByDidLike(@Param("loginid") String id);
-	
+
 	@Query("select u from Departments u where u.name like :name")
-	Optional<Departments> findByNameLike(@Param("name")String id);
+	Optional<Departments> findByNameLike(@Param("name") String id);
 }

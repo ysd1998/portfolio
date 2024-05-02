@@ -1,133 +1,144 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
 <head>
-<meta charset="UTF-8">
-<title>商品詳細</title>
-<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}">
-<script rel="text/javascript" th:src="@{/webjars/jquery/3.7.1/jquery.min.js}"></script>
-<!-- ※必ず先にJQueryを読み込む -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<!--<script>-->
-<!--  $('tr[data-href]').click(function (e) {-->
-<!--      if (!$(e.target).is('a')) {-->
-<!--        window.location = $(e.target).data('href');-->
-<!--      };-->
-<!--  });-->
-<!--</script>-->
+	<meta charset="UTF-8">
+	<title>商品詳細</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}">
+	<script rel="text/javascript" th:src="@{/webjars/jquery/3.7.1/jquery.min.js}"></script>
+	<!-- ※必ず先にJQueryを読み込む -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
+	<!--<script>-->
+	<!--  $('tr[data-href]').click(function (e) {-->
+	<!--      if (!$(e.target).is('a')) {-->
+	<!--        window.location = $(e.target).data('href');-->
+	<!--      };-->
+	<!--  });-->
+	<!--</script>-->
 	<script>
-		$(function() {
-		    $(".menu__item").hover(
-		       function() {
-		            $(".menuSub:not(:animated)", this).slideDown();
-		        },
-		        function() {
-		            $(".menuSub", this).slideUp();
-		        }
-		    );
+		$(function () {
+			$(".menu__item").hover(
+				function () {
+					$(".menuSub:not(:animated)", this).slideDown();
+				},
+				function () {
+					$(".menuSub", this).slideUp();
+				}
+			);
 		});
 	</script>
 </head>
 <div>
-<div th:insert="~{manager/common/menu :: menu}"></div>
+	<div th:insert="~{manager/common/menu :: menu}"></div>
 	<form th:action="@{/manager/{id}}" th:object="${bookData}" method="POST" enctype="multipart/form-data">
-	<div class="d-flex align-items-center justify-content-center mt-sm-2 mt-auto mb-sm-2 mb-auto">
-	<div>
-	<div class="row">
-	<p th:text="${message}"></p>
-    <img th:src="${base64AccountIcon}" alt="アイコン画像"  th:width="500px" th:height="600px">
-	</div>
-	<div class="row">
-	<input type="file" name="file" id="file">
-	</div>
-	</div>
-	</div>
-	<div class="d-flex align-items-center justify-content-center mt-sm-2 mt-auto mb-sm-2 mb-auto">
-	<div  style="width:50%;">
-      <div class="row">
-        <div class="col-2 border bg-light">タイトル</div>
-        <div class="col border">
-          <input class="form-control mt-sm-2 mt-auto mb-sm-2 mb-auto" type="text" th:field="*{title}"/>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-2 border bg-light">作者</div>
-        <div class="col border">
-          <input class="form-control mt-sm-2 mt-auto mb-sm-2 mb-auto" type="text" th:field="*{auther}"/>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-2 border bg-light">価格</div>
-        <div class="col border">
-          <input class="form-control mt-sm-2 mt-auto mb-sm-2 mb-auto" type="text" th:field="*{price}"/>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-2 border bg-light">出版社</div>
-        <div class="col border">
-          <input class="form-control mt-sm-2 mt-auto mb-sm-2 mb-auto" type="text"  th:field="*{publisher}"/>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-2 border bg-light">発行日</div>
-        <div class="col border">
-          <input class="form-control mt-sm-2 mt-auto mb-sm-2 mb-auto" type="text" th:field="*{year}"/>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-2 border bg-light">カテゴリ</div>
-        <div class="col border">
-			<select class="form-select  mt-sm-2 mt-auto mb-sm-2 mb-auto" aria-label="Default select example" th:field="*{typeid}" value="*{typeid}">
-				<option value="0">--- 選択してください ---</option>
-				<option  th:each="list : ${Types}" th:value="${list.typeid}" th:selected="${list.typeid == typeid}" th:inline="text">[[${list.name}]]</option>
-			</select>
-<!--          <input class="form-control" type="text"  th:field="*{typeid}"/>-->
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-2 border bg-light ">商品番号</div>
-        <div class="col border">
-          <input class="form-control mt-sm-2 mt-auto mb-sm-2 mb-auto" type="text" th:field="*{bookid}" readonly/>
-        </div>
-      </div>
-      <div class="row" style="height: 40%;" >
-        <div class="col-2 border bg-light">説明</div>
-        <div class="col border">
-		  <textarea class="form-control  mt-sm-2 mt-auto mb-sm-2 mb-auto" id="exampleFormControlTextarea1" rows="4"  th:field="*{ex}"></textarea>
-        </div>
-      </div>
-      <div class="row" style="height: 40%;" >
-        <div class="col-2 border bg-light">その他</div>
-        <div class="col border">
-		  <textarea class="form-control mt-sm-2 mt-auto mb-sm-2 mb-auto" id="exampleFormControlTextarea1" rows="4"  th:field="*{other}"></textarea>
-        </div>
-      </div>
-    </div>
-<!-- mx-md-n5-->
-	</div>
-	</div>
-	<div class="d-flex align-items-center justify-content-center mt-sm-2 mt-auto mb-sm-2 mb-auto">
+		<div class="d-flex align-items-center justify-content-center mt-sm-2 mt-auto mb-sm-2 mb-auto">
+			<div>
+				<div class="row">
+					<p th:text="${message}"></p>
+					<img th:src="${base64AccountIcon}" alt="アイコン画像" th:width="500px" th:height="600px">
+				</div>
+				<div class="row">
+					<input type="file" name="file" id="file">
+				</div>
+			</div>
+		</div>
+		<div class="d-flex align-items-center justify-content-center mt-sm-2 mt-auto mb-sm-2 mb-auto">
+			<div style="width:50%;">
+				<div class="row">
+					<div class="col-2 border bg-light">タイトル</div>
+					<div class="col border">
+						<input class="form-control mt-sm-2 mt-auto mb-sm-2 mb-auto" type="text" th:field="*{title}" />
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-2 border bg-light">作者</div>
+					<div class="col border">
+						<input class="form-control mt-sm-2 mt-auto mb-sm-2 mb-auto" type="text" th:field="*{auther}" />
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-2 border bg-light">価格</div>
+					<div class="col border">
+						<input class="form-control mt-sm-2 mt-auto mb-sm-2 mb-auto" type="text" th:field="*{price}" />
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-2 border bg-light">出版社</div>
+					<div class="col border">
+						<input class="form-control mt-sm-2 mt-auto mb-sm-2 mb-auto" type="text"
+							th:field="*{publisher}" />
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-2 border bg-light">発行日</div>
+					<div class="col border">
+						<input class="form-control mt-sm-2 mt-auto mb-sm-2 mb-auto" type="text" th:field="*{year}" />
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-2 border bg-light">カテゴリ</div>
+					<div class="col border">
+						<select class="form-select  mt-sm-2 mt-auto mb-sm-2 mb-auto" aria-label="Default select example"
+							th:field="*{typeid}" value="*{typeid}">
+							<option value="0">--- 選択してください ---</option>
+							<option th:each="list : ${Types}" th:value="${list.typeid}"
+								th:selected="${list.typeid == typeid}" th:inline="text">[[${list.name}]]</option>
+						</select>
+						<!--          <input class="form-control" type="text"  th:field="*{typeid}"/>-->
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-2 border bg-light ">商品番号</div>
+					<div class="col border">
+						<input class="form-control mt-sm-2 mt-auto mb-sm-2 mb-auto" type="text" th:field="*{bookid}"
+							readonly />
+					</div>
+				</div>
+				<div class="row" style="height: 40%;">
+					<div class="col-2 border bg-light">説明</div>
+					<div class="col border">
+						<textarea class="form-control  mt-sm-2 mt-auto mb-sm-2 mb-auto" id="exampleFormControlTextarea1"
+							rows="4" th:field="*{ex}"></textarea>
+					</div>
+				</div>
+				<div class="row" style="height: 40%;">
+					<div class="col-2 border bg-light">その他</div>
+					<div class="col border">
+						<textarea class="form-control mt-sm-2 mt-auto mb-sm-2 mb-auto" id="exampleFormControlTextarea1"
+							rows="4" th:field="*{other}"></textarea>
+					</div>
+				</div>
+			</div>
+			<!-- mx-md-n5-->
+		</div>
+</div>
+<div class="d-flex align-items-center justify-content-center mt-sm-2 mt-auto mb-sm-2 mb-auto">
 	<span th:text="${errorMsg}"></span>
-	</div>
-	<div class="d-flex justify-content-evenly">
-	<input class=" btn btn-primary" type="submit" th:href="@{/manager/confirm}" value="更新"/>
+</div>
+<div class="d-flex justify-content-evenly">
+	<input class=" btn btn-primary" type="submit" th:href="@{/manager/confirm}" value="更新" />
 	</form>
-	<form th:action="@{/manager/delete/{id}}" th:object="${deleteData}" method="GET">
-	<input type="hidden" th:field="*{bookid}"/>
-	<input type="hidden" th:field="*{auther}"/>
-	<input type="hidden" th:field="*{title}"/>
-	<input type="hidden" th:field="*{typeid}"/>
-	<input type="hidden" th:field="*{year}"/>
-	<input type="hidden" th:field="*{price}"/>
-	<input type="hidden" th:field="*{ex}"/>
-	<input type="hidden" th:field="*{other}"/>
-	<input type="hidden" th:field="*{publisher}"/>
-	<input class=" btn btn-primary" type="submit" th:href="@{/manager/confirm}" value="削除"/>
+	<form th:action="@{/manager/delete/{id}}" th:object="${deleteData}" method="POST">
+		<input type="hidden" th:field="*{bookid}" />
+		<input type="hidden" th:field="*{auther}" />
+		<input type="hidden" th:field="*{title}" />
+		<input type="hidden" th:field="*{typeid}" />
+		<input type="hidden" th:field="*{year}" />
+		<input type="hidden" th:field="*{price}" />
+		<input type="hidden" th:field="*{ex}" />
+		<input type="hidden" th:field="*{other}" />
+		<input type="hidden" th:field="*{publisher}" />
+		<input class=" btn btn-primary" type="submit" th:href="@{/manager/confirm}" value="削除" />
 	</form>
 	<form th:action="@{/manager/menu}" method="get">
-	<input class=" btn btn-primary" type="submit" th:href="@{/manager/menu}" value="戻る"/>
+		<input class=" btn btn-primary" type="submit" th:href="@{/manager/menu}" value="戻る" />
 	</form>
-	</div>
-	</div>
+</div>
+</div>
 </body>
+
 </html>

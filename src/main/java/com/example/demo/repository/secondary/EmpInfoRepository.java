@@ -17,15 +17,16 @@ import com.example.demo.entity.secondary.Employees;
 //		  transactionManagerRef = "secondaryTransactionManager"
 //		)
 @Repository
-public interface EmpInfoRepository extends JpaRepository<Employees,String>{
-//	Optional<Employees> findByLoginidLikeOrNameLikeOrPasswordLike(String loginid,String name,String password);
-	
+public interface EmpInfoRepository extends JpaRepository<Employees, String> {
+	//	Optional<Employees> findByLoginidLikeOrNameLikeOrPasswordLike(String loginid,String name,String password);
+
 	Page<Employees> findAll(Pageable page);
-	
+
 	@Query("select u from Employees u where u.loginid like :loginid or u.auther like :auther or u.password like :password")
-	List<Employees> findByLoginidLikeOrPasswordLike(String loginid,String password);
-	
+	List<Employees> findByLoginidLikeOrPasswordLike(String loginid, String password);
+
 	@Query("select u from Employees u where u.loginid like :loginid or u.name like :name or u.authority like :authority")
-	Page<Employees> findByLoginidLikeOrNameLikeOrAuthorityLike(@Param("loginid")String loginid,@Param("name")String name,@Param("authority")String authority, Pageable page);
+	Page<Employees> findByLoginidLikeOrNameLikeOrAuthorityLike(@Param("loginid") String loginid,
+			@Param("name") String name, @Param("authority") String authority, Pageable page);
 
 }

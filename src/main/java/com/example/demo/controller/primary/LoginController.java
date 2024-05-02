@@ -16,41 +16,41 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @RequiredArgsConstructor
 public class LoginController {
-	
+
 	private final LoginService service;
-	
+
 	private final PasswordEncoder passwordEncoder;
-	
+
 	private final HttpSession session;
-	
+
 	//ログイン画面（ユーザー側）
 	@GetMapping("login")
-	public String view(Model model,LoginForm form) {
+	public String view(Model model, LoginForm form) {
 		model.addAttribute("errorMsg", "");
 		return "login";
 	}
-	
-	@GetMapping(value="login",params="error")
-	public String error(Model model,LoginForm form) {
-		var errorInfo =(Exception)session.getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
+
+	@GetMapping(value = "login", params = "error")
+	public String error(Model model, LoginForm form) {
+		var errorInfo = (Exception) session.getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
 		model.addAttribute("errorMsg", errorInfo.getMessage());
 		return "login";
 	}
-	
+
 	//ログイン後の処理
 	@PostMapping("login")
-	public String login(Model model,LoginForm form) {
+	public String login(Model model, LoginForm form) {
 		var userInfo = service.searchUserById(form.getLoginid());
-		var errorInfo =(Exception)session.getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
+		var errorInfo = (Exception) session.getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
 		model.addAttribute("errorMsg", errorInfo.getMessage());
 		var isCorrectUserAuth = userInfo.isPresent()
-				&& passwordEncoder.matches(form.getPassword(),userInfo.get().getPassword());
+				&& passwordEncoder.matches(form.getPassword(), userInfo.get().getPassword());
 		if (isCorrectUserAuth) {
 			return "redirect:menu";
 		} else {
 			return "login";
 		}
-		
+
 	}
 
 }

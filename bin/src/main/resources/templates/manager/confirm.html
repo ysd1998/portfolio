@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+<meta charset="UTF-8">
+<title>商品詳細</title>
+<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}">
+<script rel="text/javascript" th:src="@{/webjars/jquery/3.7.1/jquery.min.js}"></script>
+<!-- ※必ず先にJQueryを読み込む -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<!--<script>-->
+<!--  $('tr[data-href]').click(function (e) {-->
+<!--      if (!$(e.target).is('a')) {-->
+<!--        window.location = $(e.target).data('href');-->
+<!--      };-->
+<!--  });-->
+<!--</script>-->
+	<script>
+		$(function() {
+		    $(".menu__item").hover(
+		       function() {
+		            $(".menuSub:not(:animated)", this).slideDown();
+		        },
+		        function() {
+		            $(".menuSub", this).slideUp();
+		        }
+		    );
+		});
+	</script>
+</head>
+<body>
+<div th:insert="~{manager/common/menu :: menu}"></div>
+	<div class="d-flex justify-content-center">
+	<img th:src="${base64AccountIcon}" alt="アイコン画像"  th:width="500px" th:height="600px">
+	</div>
+	<div class="d-flex align-items-center justify-content-center mt-sm-2 mt-auto mb-sm-2 mb-auto">
+	<div th:object="${bookData}" style="width:50%;">
+      <div class="row">
+        <div class="col-2 border bg-light">タイトル</div>
+        <div class="col border">
+          <p th:text="*{title}"></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-2 border bg-light">作者</div>
+        <div class="col border">
+          <p th:text="*{auther}"></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-2 border bg-light">価格</div>
+        <div class="col border">
+          <p th:text="*{price}"></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-2 border bg-light">出版社</div>
+        <div class="col border">
+          <p th:text="*{publisher}"></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-2 border bg-light">発行日</div>
+        <div class="col border">
+          <p th:text="*{year}"></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-2 border bg-light">カテゴリ</div>
+        <div class="col border">
+<!--          <p th:text="${typeData.name}" th:value="*{type_id}"></p>-->
+          <input type="hidden" th:value="*{typeid}"/>
+          <p th:text="${typeData.name}"></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-2 border bg-light">商品番号</div>
+        <div class="col border">
+          <p th:text="*{bookid}"></p>
+        </div>
+      </div>
+      <div class="row" style="height: 40%;">
+        <div class="col-2 border bg-light">説明</div>
+        <div class="col border">
+          <p th:text="*{ex}"></p>
+        </div>
+      </div>
+      <div class="row" style="height: 40%;">
+        <div class="col-2 border bg-light">そのた</div>
+        <div class="col border">
+          <p th:text="*{other}"></p>
+        </div>
+      </div>
+    </div>
+<!-- mx-md-n5-->
+</div>
+	<div class="d-flex justify-content-center"><span th:text="${mesage}"></span></div>
+	<div class="d-flex justify-content-evenly">
+	<form th:action="@{/manager/confirm}" th:object="${bookData}" method="post">
+	<input type="hidden" th:field="*{bookid}"/>
+	<input type="hidden" th:field="*{auther}"/>
+	<input type="hidden" th:field="*{title}"/>
+	<input type="hidden" th:field="*{typeid}"/>
+	<input type="hidden" th:field="*{year}"/>
+	<input type="hidden" th:field="*{price}"/>
+	<input type="hidden" th:field="*{ex}"/>
+	<input type="hidden" th:field="*{other}"/>
+	<input type="hidden" th:field="*{publisher}"/>
+	<input type="hidden" th:field="*{work}"/>
+	<input type="hidden" th:field="*{photo}"/>
+	<input class=" btn btn-primary" type="submit" th:href="@{/manager/menu}" th:value="*{work}"/>
+	</form>
+	<form th:action="@{/manager/menu}" method="get">
+	<input class=" btn btn-primary" type="submit" th:href="@{/manage/menu}" value="戻る"/>
+	</div>
+	</form>
+</body>
+</html>

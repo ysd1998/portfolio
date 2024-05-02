@@ -46,13 +46,13 @@ public class ManagerAdminController {
 	@Autowired
 	public TypeSerchService typeservice;
 	
-	@GetMapping("/manager/{id}")
+	@GetMapping("manager/{id}")
 	public String view(@PathVariable String id,@ModelAttribute("bookData")BookInfo bookData,
 			@ModelAttribute("deleteData")BookInfo DeleteData,HttpServletRequest request,Model model)  throws Exception {
 		Books book = serch.serchId(id);
 		log.info(book.toString());
 		if (book.getPhoto()==null) {
-			File fileImg = new File("C:/Users/guestuser/Desktop/pleiades-2022-12-ultimate-win-64bit-jre_20230212/workspace/portfolio/src/main/resources/templates/picture/20200501_noimage.png");
+			File fileImg = new File("src/main/resources/templates/picture/20200501_noimage.png");
 			byte[] byteImg = Files.readAllBytes(fileImg.toPath());
 			StringBuffer data  = new StringBuffer();
 			String base64 = new String(Base64.encodeBase64(byteImg,true),"ASCII");
@@ -75,10 +75,10 @@ public class ManagerAdminController {
 		model.addAttribute("deleteData", book);
 		List<Types> result = typeservice.serchData("%");
 		model.addAttribute("Types", result);
-		return "/manager/bookadmin";
+		return "manager/bookadmin";
 	}
 	
-	@PostMapping("/manager/{id}")
+	@PostMapping("manager/{id}")
 	public String updateId(@Valid @ModelAttribute("bookData")BookInfo bookData,
 						@AuthenticationPrincipal User user,
 						@RequestParam("file") MultipartFile file,
@@ -105,14 +105,14 @@ public class ManagerAdminController {
 			List<Types> result = typeservice.serchData("%");
 			model.addAttribute("Types", result);
 			model.addAttribute("errorMsg","必須項目が空欄です。");
-			return "/manager/bookinit";
+			return "manager/bookinit";
 		} else if (isCorrectUserAuth.length() > 10 || isTitle.length() > 10 || bookData.getPublisher().length() > 10 ||
 				bookData.getAuther().length() > 10 || bookData.getEx().length() > 1000 || bookData.getOther().length() > 1000||
 				bookData.getPrice().length() > 10) {
 			List<Types> result = typeservice.serchData("%");
 			model.addAttribute("Types", result);
 			model.addAttribute("errorMsg","文字数オーバーです。");
-			return "/manager/bookinit";
+			return "manager/bookinit";
 		} else {
 			return "redirect:/manager/confirm";
 			
@@ -131,15 +131,15 @@ public class ManagerAdminController {
 //	      data.append("data:image/png;base64,");
 //		  data.append(image);
 //		  m.addAttribute("base64AccountIcon",data.toString());
-//		  return "/manager/{id}";
+//		  return "manager/{id}";
 //	    } catch (Exception e) {
 //	      message = "Could not upload the file: " + file.getOriginalFilename() + "!";
 //	      m.addAttribute("message", message);
-//	      return "/manager/{id}";
+//	      return "manager/{id}";
 //	    }
 //	  }
 	
-	@GetMapping("/manager/delete/{id}")
+	@GetMapping("manager/delete/{id}")
 	public String deleteId(@Valid @ModelAttribute("deleteData")BookInfo DeleteData,
 						@AuthenticationPrincipal User user,
 						BindingResult bindingResult,
@@ -160,9 +160,9 @@ public class ManagerAdminController {
 		if (isCorrectUserAuth.equals("") || isTitle.equals("") ) {
 			List<Types> result = typeservice.serchData("%");
 			model.addAttribute("Types", result);
-			return "/manager/{id}";
+			return "manager/{id}";
 		} else {
-			return "redirect:/manager/confirm";
+			return "redirect:manager/confirm";
 			
 		}
 		

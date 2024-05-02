@@ -1,3 +1,8 @@
+server:
+  tomcat:
+    max-http-form-post-size: 10MB
+    max-swallow-size: 10MB
+      
 spring:
   datasource:
     primary:
@@ -17,8 +22,8 @@ spring:
       username: devuser01
   servlet:
        multipart:
-        max-file-size: 300KB
-        max-request-size: 300KB
+        max-file-size: 10MB
+        max-request-size: 10MB
   jpa:
     hibernate:
       ddl-auto: none;

@@ -24,21 +24,21 @@ public class LoginController {
 	private final HttpSession session;
 	
 	//ログイン画面（ユーザー側）
-	@GetMapping("/login")
+	@GetMapping("login")
 	public String view(Model model,LoginForm form) {
 		model.addAttribute("errorMsg", "");
-		return "/login";
+		return "login";
 	}
 	
-	@GetMapping(value="/login",params="error")
+	@GetMapping(value="login",params="error")
 	public String error(Model model,LoginForm form) {
 		var errorInfo =(Exception)session.getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
 		model.addAttribute("errorMsg", errorInfo.getMessage());
-		return "/login";
+		return "login";
 	}
 	
 	//ログイン後の処理
-	@PostMapping("/login")
+	@PostMapping("login")
 	public String login(Model model,LoginForm form) {
 		var userInfo = service.searchUserById(form.getLoginid());
 		var errorInfo =(Exception)session.getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
@@ -46,7 +46,7 @@ public class LoginController {
 		var isCorrectUserAuth = userInfo.isPresent()
 				&& passwordEncoder.matches(form.getPassword(),userInfo.get().getPassword());
 		if (isCorrectUserAuth) {
-			return "redirect:/menu";
+			return "redirect:menu";
 		} else {
 			return "login";
 		}

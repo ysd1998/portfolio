@@ -31,7 +31,7 @@ public class DataController {
 	public String index(Model model,@PathVariable String id)  throws Exception  {
 		Books book = service.serchId(id);
 		if (book.getPhoto()==null) {
-			File fileImg = new File("C:/Users/guestuser/Desktop/pleiades-2022-12-ultimate-win-64bit-jre_20230212/workspace/portfolio/src/main/resources/templates/picture/20200501_noimage.png");
+			File fileImg = new File("src/main/resources/templates/picture/20200501_noimage.png");
 			byte[] byteImg = Files.readAllBytes(fileImg.toPath());
 			StringBuffer data  = new StringBuffer();
 			String base64 = new String(Base64.encodeBase64(byteImg,true),"ASCII");

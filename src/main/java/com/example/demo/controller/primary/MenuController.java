@@ -21,10 +21,10 @@ import com.example.demo.service.book.TypeSerchService;
 @ComponentScan
 @Controller
 //@RequiredArgsConstructor
-@RequestMapping("/menu")
+@RequestMapping("menu")
 public class MenuController {
 	
-	private static final String VIEW = "/menu";
+	private static final String VIEW = "menu";
 	@Autowired
 	public BookSerchService service;
 	

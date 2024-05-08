@@ -1,7 +1,6 @@
 package com.example.demo.controller.primary;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -25,6 +24,7 @@ import com.example.demo.service.book.TypeSerchService;
 public class MenuController {
 
 	private static final String VIEW = "menu";
+
 	@Autowired
 	public BookSerchService service;
 
@@ -33,7 +33,7 @@ public class MenuController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String index(Model model, Pageable pageable) {
-		Page<Books> results = service.search("", "", "", pageable);
+		Page<Books> results = service.search("", "", "", "", pageable);
 		List<Books> result = results.getContent();
 		model.addAttribute("pages", results);
 		model.addAttribute("result", result);
@@ -42,14 +42,13 @@ public class MenuController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView serch(ModelAndView mav, Pageable pageable, @RequestParam("serchData") String serchData)
-			throws NoSuchElementException {
+	public ModelAndView serch(ModelAndView mav, Pageable pageable, @RequestParam("serchData") String serchData) {
 		mav.setViewName(VIEW);
 		mav.addObject("title", serchData);
 		mav.addObject("auther", serchData);
 		mav.addObject("price", serchData);
 		mav.addObject("type", serchData);
-		Page<Books> results = service.search(serchData, serchData, serchData, pageable);
+		Page<Books> results = service.searchUser(serchData, serchData, serchData, pageable);
 		List<Books> result = results.getContent();
 		mav.addObject("pages", results);
 		mav.addObject("result", result);

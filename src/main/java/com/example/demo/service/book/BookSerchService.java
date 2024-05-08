@@ -20,12 +20,24 @@ public class BookSerchService {
 	@Autowired
 	private final BookInfoRepository repository;
 
-	public Page<Books> search(String id, String Name, String publisher, Pageable pageable) {
+	public Page<Books> search(String id, String title, String Name, String publisher, Pageable pageable) {
 		Page<Books> result;
-		if ("".equals(id) && "".equals(Name) && "".equals(publisher)) {
+		if ("".equals(id) && "".equals(title) && "".equals(Name) && "".equals(publisher)) {
 			result = repository.findAll(pageable);
 		} else {
-			result = repository.findByTitleLikeOrAutherLikeOrPublisherLike("%" + id + "%", "%" + Name + "%",
+			result = repository.findByBookidLikeOrTitleLikeOrAutherLikeOrPublisherLike("%" + id + "%",
+					"%" + title + "%", "%" + Name + "%",
+					"%" + publisher + "%", pageable);
+		}
+		return result;
+	}
+
+	public Page<Books> searchUser(String title, String Name, String publisher, Pageable pageable) {
+		Page<Books> result;
+		if ("".equals(title) && "".equals(Name) && "".equals(publisher)) {
+			result = repository.findAll(pageable);
+		} else {
+			result = repository.findByTitleLikeOrAutherLikeOrPublisherLike("%" + title + "%", "%" + Name + "%",
 					"%" + publisher + "%", pageable);
 		}
 		return result;

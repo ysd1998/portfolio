@@ -53,7 +53,11 @@
 　管理者が担当権限を付与・削除することができる。  
 
 ## E-R図
-![E-R図-商品](https://github.com/ysd1998/portfolio/assets/42951508/fdf98abc-8c6c-4bc2-bce4-bd95a4978c58)
+![E-R図-商品](https://github.com/ysd1998/portfolio/assets/42951508/fdf98abc-8c6c-4bc2-bce4-bd95a4978c58)  
+
+## 追加した機能
+
+・  書影データを追加    
 
 ## 今後追加したい機能等
 

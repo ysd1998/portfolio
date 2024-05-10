@@ -25,7 +25,7 @@
   - Apache Tomcat
 
 - 総合開発環境
-  - eclipse 2022
+  - Eclipse 2022
 
 
 ## 概要

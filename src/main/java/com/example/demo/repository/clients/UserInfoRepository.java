@@ -1,11 +1,11 @@
-package com.example.demo.repository.primary;
+package com.example.demo.repository.clients;
 
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.entity.primary.Clients;
+import com.example.demo.entity.clients.Clients;
 
 //@EnableJpaRepositories(
 //		  basePackages = "com.example.demo.repository.primary",

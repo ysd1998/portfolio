@@ -1,4 +1,4 @@
-package com.example.demo.service.secondary;
+package com.example.demo.service.employees;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -7,8 +7,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.entity.secondary.Departments;
-import com.example.demo.repository.secondary.DepInfoRepository;
+import com.example.demo.entity.employees.Departments;
+import com.example.demo.repository.employees.DepInfoRepository;
 
 import lombok.RequiredArgsConstructor;
 

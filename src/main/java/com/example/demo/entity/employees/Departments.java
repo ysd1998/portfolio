@@ -1,4 +1,4 @@
-package com.example.demo.entity.primary;
+package com.example.demo.entity.employees;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,24 +9,19 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "clients")
+@Table(name = "departments")
 @Data
-public class Clients {
+public class Departments {
 
 	@Id
-	@Column(name = "client_id")
+	@Column(name = "department_id")
 	@Getter
 	@Setter
-	private String loginid;
+	private String did;
 
 	@Column(name = "name")
 	@Getter
 	@Setter
 	private String name;
-
-	@Column(name = "password")
-	@Getter
-	@Setter
-	private String password;
 
 }

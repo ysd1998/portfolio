@@ -4,12 +4,12 @@ server:
     max-swallow-size: 20MB
 spring:
   datasource:
-    primary:
+    clients:
       driver-class-name: com.mysql.cj.jdbc.Driver
       password: mysql
       url: jdbc:mysql://localhost/client_db
       username: devuser01
-    secondary:
+    employees:
       driver-class-name: com.mysql.cj.jdbc.Driver
       password: mysql
       url: jdbc:mysql://localhost/employee_db

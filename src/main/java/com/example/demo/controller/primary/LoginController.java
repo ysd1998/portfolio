@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.demo.form.primary.LoginForm;
-import com.example.demo.service.primary.LoginService;
+import com.example.demo.service.clients.LoginService;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;

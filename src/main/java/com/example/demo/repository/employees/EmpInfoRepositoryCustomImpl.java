@@ -1,11 +1,11 @@
-package com.example.demo.repository.secondary;
+package com.example.demo.repository.employees;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.example.demo.entity.secondary.Employees;
+import com.example.demo.entity.employees.Employees;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -18,7 +18,7 @@ public class EmpInfoRepositoryCustomImpl implements EmpInfoRepositoryCustom {
 	//	
 	//	EntityManager manager = emf.createEntityManager();
 	@Autowired
-	@PersistenceContext(unitName = "secondary")
+	@PersistenceContext(unitName = "employees")
 	EntityManager manager;
 
 	@SuppressWarnings("unchecked")

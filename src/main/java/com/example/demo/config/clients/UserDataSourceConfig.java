@@ -1,4 +1,4 @@
-package com.example.demo.config.primary;
+package com.example.demo.config.clients;
 
 import javax.sql.DataSource;
 
@@ -14,37 +14,37 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 
 @Configuration
-@EnableJpaRepositories(basePackages = "com.example.demo.repository.primary", entityManagerFactoryRef = "primaryEntityManager", transactionManagerRef = "primaryTransactionManager")
+@EnableJpaRepositories(basePackages = "com.example.demo.repository.clients", entityManagerFactoryRef = "clientsEntityManager", transactionManagerRef = "clientsTransactionManager")
 public class UserDataSourceConfig {
 	//データソース
 	@Bean
-	@ConfigurationProperties(prefix = "spring.datasource.primary")
-	public DataSourceProperties primaryProperties() {
+	@ConfigurationProperties(prefix = "spring.datasource.clients")
+	public DataSourceProperties clientsProperties() {
 		return new DataSourceProperties();
 	}
 
 	@Bean
 	@Autowired
-	public DataSource primaryDataSource(@Qualifier("primaryProperties") DataSourceProperties properties) {
+	public DataSource clientsDataSource(@Qualifier("clientsProperties") DataSourceProperties properties) {
 		return properties.initializeDataSourceBuilder().build();
 	}
 
 	@Bean
 	@Autowired
-	public LocalContainerEntityManagerFactoryBean primaryEntityManager(EntityManagerFactoryBuilder builder,
-			@Qualifier("primaryDataSource") DataSource dataSource) {
+	public LocalContainerEntityManagerFactoryBean clientsEntityManager(EntityManagerFactoryBuilder builder,
+			@Qualifier("clientsDataSource") DataSource dataSource) {
 		return builder.dataSource(dataSource)
-				.packages("com.example.demo.entity.primary")
-				.persistenceUnit("primary")
+				.packages("com.example.demo.entity.clients")
+				.persistenceUnit("clients")
 				.build();
 	}
 
 	@Bean
 	@Autowired
-	public JpaTransactionManager primaryTransactionManager(
-			@Qualifier("primaryEntityManager") LocalContainerEntityManagerFactoryBean primaryEntityManager) {
+	public JpaTransactionManager clientsTransactionManager(
+			@Qualifier("clientsEntityManager") LocalContainerEntityManagerFactoryBean clientsEntityManager) {
 		JpaTransactionManager transactionManager = new JpaTransactionManager();
-		transactionManager.setEntityManagerFactory(primaryEntityManager.getObject());
+		transactionManager.setEntityManagerFactory(clientsEntityManager.getObject());
 		return transactionManager;
 	}
 

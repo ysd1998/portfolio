@@ -1,4 +1,4 @@
-package com.example.demo.service.primary;
+package com.example.demo.service.clients;
 
 //
 //@Service

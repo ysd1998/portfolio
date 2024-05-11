@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.example.demo.entity.secondary.Departments;
-import com.example.demo.entity.secondary.Employees;
+import com.example.demo.entity.employees.Departments;
+import com.example.demo.entity.employees.Employees;
 import com.example.demo.form.secondary.LoginForm;
-import com.example.demo.service.secondary.DepSerchService;
-import com.example.demo.service.secondary.EmpSerchService;
+import com.example.demo.service.employees.DepSerchService;
+import com.example.demo.service.employees.EmpSerchService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;

@@ -1,13 +1,13 @@
-package com.example.demo.service.primary;
+package com.example.demo.service.clients;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.entity.primary.Clients;
-import com.example.demo.repository.primary.UserInfoRepository;
-import com.example.demo.repository.primary.UserInfoRepositoryCustom;
+import com.example.demo.entity.clients.Clients;
+import com.example.demo.repository.clients.UserInfoRepository;
+import com.example.demo.repository.clients.UserInfoRepositoryCustom;
 
 import lombok.RequiredArgsConstructor;
 

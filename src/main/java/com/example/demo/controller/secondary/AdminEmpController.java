@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.demo.entity.secondary.Employees;
-import com.example.demo.service.secondary.EmpSerchService;
+import com.example.demo.entity.employees.Employees;
+import com.example.demo.service.employees.EmpSerchService;
 
 import lombok.RequiredArgsConstructor;
 

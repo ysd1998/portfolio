@@ -1,11 +1,11 @@
-package com.example.demo.repository.primary;
+package com.example.demo.repository.clients;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.example.demo.entity.primary.Clients;
+import com.example.demo.entity.clients.Clients;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;

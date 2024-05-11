@@ -31,10 +31,9 @@ public class UserSecurityBeanDefine {
 	 */
 	@Bean
 	SecurityFilterChain secondfilterChain(HttpSecurity http) throws Exception {
-		http
-				.authorizeHttpRequests(
-						authorize -> authorize.requestMatchers(UrlConfig.NO_AUTHENTICATION).permitAll()
-								.anyRequest().authenticated())
+		http.authorizeHttpRequests(
+				authorize -> authorize.requestMatchers(UrlConfig.NO_AUTHENTICATION).permitAll()
+						.anyRequest().authenticated())
 				.formLogin(
 						login -> login.loginPage(UrlConfig.login)
 								.usernameParameter(USERNAME_PARAMETER)

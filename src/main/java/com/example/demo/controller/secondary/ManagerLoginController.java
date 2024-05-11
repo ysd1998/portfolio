@@ -34,7 +34,7 @@ public class ManagerLoginController {
 	public String error(Model model, LoginForm form) {
 		var errorInfo = (Exception) session.getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
 
-		String errormesage = "ログインIDとパスワードが間違ってます。";
+		String errormesage = "ログインIDかパスワードが間違ってます。";
 		if (!"".equals(errorInfo)) {
 			model.addAttribute("errorMsg", errormesage);
 		}

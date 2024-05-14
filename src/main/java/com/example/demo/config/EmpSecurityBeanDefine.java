@@ -38,7 +38,7 @@ public class EmpSecurityBeanDefine {
 		http.securityMatcher("/manager/**")
 				.authorizeHttpRequests(
 						authorize -> authorize.requestMatchers(UrlConfig.MN_NO_AUTHENTICATION).permitAll()
-								.requestMatchers(UrlConfig.MN_NO_AUTHENTICATION).permitAll()
+								.requestMatchers("/manager/**").hasAnyAuthority("web販売担当", "管理者")
 								.requestMatchers("/manager/admin").hasAuthority("管理者")
 								.anyRequest().authenticated())
 				.logout((logout) -> logout

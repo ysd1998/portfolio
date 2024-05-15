@@ -10,7 +10,7 @@ public class UrlConfig {
 	public static final String webjars = "/webjars/**";
 	public static final String commenu = "/common/menu";
 
-	public static final String[] NO_AUTHENTICATION = { login, webjars, commenu };
+	public static final String[] NO_AUTHENTICATION = { login, webjars, commenu , menu ,bookdata};
 
 	public static final String managerlogin = "/manager/login";
 

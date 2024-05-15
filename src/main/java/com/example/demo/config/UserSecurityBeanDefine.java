@@ -10,6 +10,8 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import com.example.demo.form.primary.UrlConfig;
 
+import lombok.RequiredArgsConstructor;
+
 /**
  * 
  * @author ys-sj
@@ -18,6 +20,7 @@ import com.example.demo.form.primary.UrlConfig;
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
+@RequiredArgsConstructor
 @Order(2)
 public class UserSecurityBeanDefine {
 
@@ -34,6 +37,7 @@ public class UserSecurityBeanDefine {
 		http.securityMatcher("/**")
 				.authorizeHttpRequests(
 						authorize -> authorize.requestMatchers(UrlConfig.NO_AUTHENTICATION).permitAll()
+								.requestMatchers("/manager/**").hasAnyAuthority("web販売担当", "管理者")
 								.anyRequest().authenticated())
 				.formLogin(
 						login -> login.loginPage(UrlConfig.login)

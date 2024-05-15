@@ -51,8 +51,8 @@ public class AdminAuthoritiesController {
 			Model model, HttpServletRequest request) {
 		Employees emp = service.searchId(authData.getLoginid());
 		if ("web販売担当".equals(authData.getAuthority())) {
-	    	authData.setAuthority("");
-	    } else if ("".equals(authData.getAuthority())) {
+	    	authData.setAuthority("権限なし");
+	    } else if ("権限なし".equals(authData.getAuthority())) {
 	    	authData.setAuthority("web販売担当");
 	    }
 		authData.setPassword(emp.getPassword());

@@ -6,7 +6,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.example.demo.repository.clients.UserInfoRepository;
 import com.example.demo.repository.employees.EmpInfoRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -16,18 +18,35 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class EmpDetailServiceImpl implements UserDetailsService {
 
-	private final EmpInfoRepository repository;
+	private final EmpInfoRepository emp;
+	
+	private final UserInfoRepository user;
 
 	@Primary
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		var userInfo = repository.findById(username)
-				.orElseThrow(() -> new UsernameNotFoundException(username));
+		String uri = ServletUriComponentsBuilder.fromCurrentRequestUri().toUriString();
+		System.out.println(uri);
+		if (uri.contains("/manager")) {
+			var userInfo = emp.findById(username)
+					.orElseThrow(() -> new UsernameNotFoundException(username));
 
-		return User.withUsername(userInfo.getLoginid())
-				.password(userInfo.getPassword())
-				.authorities(userInfo.getAuthority())
-				.build();
+			return User.withUsername(userInfo.getLoginid())
+					.password(userInfo.getPassword())
+					.authorities(userInfo.getAuthority())
+					.build();
+			
+		} else {
+			var userInfo = user.findById(username)
+					.orElseThrow(() -> new UsernameNotFoundException(username));
+
+			return User.withUsername(userInfo.getLoginid())
+					.password(userInfo.getPassword())
+					.authorities("User")
+					.build();
+			
+		}
+		
 	}
 
 }

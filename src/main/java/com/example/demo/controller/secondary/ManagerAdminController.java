@@ -46,6 +46,8 @@ public class ManagerAdminController {
 	@Autowired
 	public TypeSerchService typeservice;
 
+	static final private String DATE_FORMAT = "yyyy-MM-dd";
+
 	@GetMapping("manager/{id}")
 	public String view(@PathVariable String id, @ModelAttribute("bookData") BookInfo bookData,
 			@ModelAttribute("deleteData") BookInfo DeleteData, HttpServletRequest request, Model model)

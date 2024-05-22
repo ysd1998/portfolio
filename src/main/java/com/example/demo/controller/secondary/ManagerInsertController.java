@@ -41,6 +41,8 @@ public class ManagerInsertController {
 	@Autowired
 	public TypeSerchService typeservice;
 
+	static final private String DATE_FORMAT = "yyyy-MM-dd";
+
 	@GetMapping("manager/bookinit")
 	public String view(@ModelAttribute("bookData") BookInfo bookData, HttpServletRequest request, Model model) {
 		Date date = new Date();

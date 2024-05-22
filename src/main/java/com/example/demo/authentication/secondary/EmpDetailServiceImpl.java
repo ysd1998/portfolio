@@ -19,15 +19,14 @@ import lombok.RequiredArgsConstructor;
 public class EmpDetailServiceImpl implements UserDetailsService {
 
 	private final EmpInfoRepository emp;
-	
+
 	private final UserInfoRepository user;
 
 	@Primary
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		String uri = ServletUriComponentsBuilder.fromCurrentRequestUri().toUriString();
-		System.out.println(uri);
-		if (uri.contains("/manager")) {
+		if (uri.contains("/manager/")) {
 			var userInfo = emp.findById(username)
 					.orElseThrow(() -> new UsernameNotFoundException(username));
 
@@ -35,7 +34,7 @@ public class EmpDetailServiceImpl implements UserDetailsService {
 					.password(userInfo.getPassword())
 					.authorities(userInfo.getAuthority())
 					.build();
-			
+
 		} else {
 			var userInfo = user.findById(username)
 					.orElseThrow(() -> new UsernameNotFoundException(username));
@@ -44,9 +43,9 @@ public class EmpDetailServiceImpl implements UserDetailsService {
 					.password(userInfo.getPassword())
 					.authorities("User")
 					.build();
-			
+
 		}
-		
+
 	}
 
 }

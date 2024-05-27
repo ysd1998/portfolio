@@ -90,7 +90,8 @@ public class ManagerInsertController {
 		bookData.setDeleteflag("0");
 		session.setAttribute("bookData", bookData);
 		if (isCorrectUserAuth.equals("") || isTitle.equals("") || "".equals(bookData.getPublisher()) ||
-				"".equals(bookData.getYear()) || "0".equals(bookData.getTypeid()) || "".equals(bookData.getPrice())) {
+				"".equals(bookData.getYear()) || "0".equals(bookData.getTypeid()) || "".equals(bookData.getPrice())
+				|| "".equals(bookData.getEx())) {
 			List<Types> result = typeservice.serchData("%");
 			model.addAttribute("Types", result);
 			model.addAttribute("errorMsg", "必須項目が空欄です。");

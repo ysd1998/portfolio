@@ -20,16 +20,16 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @RequiredArgsConstructor
 public class AdminAuthoritiesController {
-	
+
 	@Autowired
 	public EmpSerchService service;
-	
+
 	@Autowired
 	public DepSerchService depservice;
-	
+
 	@GetMapping("manager/authority/{loginid}")
-	public String view(@PathVariable String loginid,@ModelAttribute("empData")LoginForm empData,
-			@ModelAttribute("authData")LoginForm authData,HttpServletRequest request,Model model) {
+	public String view(@PathVariable String loginid, @ModelAttribute("empData") LoginForm empData,
+			@ModelAttribute("authData") LoginForm authData, HttpServletRequest request, Model model) {
 		if (loginid != null) {
 			System.out.println("error");
 		}
@@ -40,24 +40,26 @@ public class AdminAuthoritiesController {
 		model.addAttribute("depData", result);
 		if ("".equals(emp.getAuthority())) {
 			model.addAttribute("mesage", "web販売担当権限を付与しますか？");
+		} else if ("管理者".equals(emp.getAuthority())) {
+			model.addAttribute("mesage", "");
 		} else {
 			model.addAttribute("mesage", "web販売担当権限を削除しますか？");
 		}
 		return "manager/authority";
 	}
-	
+
 	@PostMapping("manager/authority")
-	public String confirmOK(@ModelAttribute("authData")LoginForm authData,
+	public String confirmOK(@ModelAttribute("authData") LoginForm authData,
 			Model model, HttpServletRequest request) {
 		Employees emp = service.searchId(authData.getLoginid());
 		if ("web販売担当".equals(authData.getAuthority())) {
-	    	authData.setAuthority("権限なし");
-	    } else if ("権限なし".equals(authData.getAuthority())) {
-	    	authData.setAuthority("web販売担当");
-	    }
+			authData.setAuthority("権限なし");
+		} else if ("権限なし".equals(authData.getAuthority())) {
+			authData.setAuthority("web販売担当");
+		}
 		authData.setPassword(emp.getPassword());
-	    service.insert(authData);
-	    return "redirect:/manager/admin";
+		service.insert(authData);
+		return "redirect:/manager/admin";
 	}
 
 }

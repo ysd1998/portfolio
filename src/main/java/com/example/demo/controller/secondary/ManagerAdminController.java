@@ -135,7 +135,7 @@ public class ManagerAdminController {
 			return "manager/bookadmin";
 		} else if (isCorrectUserAuth.length() > 10 || isTitle.length() > 10 || bookData.getPublisher().length() > 10 ||
 				bookData.getAuther().length() > 10 || bookData.getEx().length() > 1000
-				|| bookData.getOther().length() > 1000 ||
+				|| bookData.getOther().length() > 1000 || bookData.getYear().length() != 10 ||
 				bookData.getPrice().length() > 10) {
 			if (book.getPhoto() == null) {
 				File fileImg = new File("src/main/resources/templates/picture/20200501_noimage.png");

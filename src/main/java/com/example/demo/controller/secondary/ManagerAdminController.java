@@ -133,7 +133,7 @@ public class ManagerAdminController {
 			model.addAttribute("Types", result);
 			model.addAttribute("errorMsg", "必須項目が空欄です。");
 			return "manager/bookadmin";
-		} else if (isCorrectUserAuth.length() > 10 || isTitle.length() > 10 || bookData.getPublisher().length() > 10 ||
+		} else if (isCorrectUserAuth.length() > 10 || isTitle.length() > 10 || bookData.getPublisher().length() > 8 ||
 				bookData.getAuther().length() > 10 || bookData.getEx().length() > 1000
 				|| bookData.getOther().length() > 1000 || bookData.getYear().length() != 10 ||
 				bookData.getPrice().length() > 10) {

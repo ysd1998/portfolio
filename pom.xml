@@ -152,11 +152,6 @@
 <!--            <artifactId>derby</artifactId>-->
 <!--            <version>10.13.1.1</version>-->
 <!--        </dependency>-->
-		<dependency>
-			<groupId>com.example</groupId>
-			<artifactId>portfolio-1</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
 	</dependencies>
 	
 

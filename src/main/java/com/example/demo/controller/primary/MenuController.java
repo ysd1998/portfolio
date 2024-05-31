@@ -17,6 +17,8 @@ import com.example.demo.entity.book.Books;
 import com.example.demo.service.book.BookSerchService;
 import com.example.demo.service.book.TypeSerchService;
 
+import io.micrometer.common.util.StringUtils;
+
 @ComponentScan
 @Controller
 //@RequiredArgsConstructor
@@ -30,11 +32,18 @@ public class MenuController {
 
 	@Autowired
 	public TypeSerchService typeservice;
+	
+	private static String serchDataseve;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String index(Model model, Pageable pageable) {
 		//		Page<Books> results = bookmapper.getBookList(pageable);
-		Page<Books> results = service.search("", "", "", "", pageable);
+		Page<Books> results;
+		if (!StringUtils.isEmpty(serchDataseve)) {
+			results = service.searchUser(serchDataseve, serchDataseve, serchDataseve, pageable);
+		} else {
+			results = service.search("", "", "", "", pageable);
+		}
 		List<Books> result = results.getContent();
 		model.addAttribute("pages", results);
 		model.addAttribute("result", result);
@@ -45,10 +54,8 @@ public class MenuController {
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView serch(ModelAndView mav, Pageable pageable, @RequestParam("serchData") String serchData) {
 		mav.setViewName(VIEW);
-		mav.addObject("title", serchData);
-		mav.addObject("auther", serchData);
-		mav.addObject("price", serchData);
-		mav.addObject("type", serchData);
+		serchDataseve = "";
+		serchDataseve = serchData;
 		Page<Books> results = service.searchUser(serchData, serchData, serchData, pageable);
 		List<Books> result = results.getContent();
 		mav.addObject("pages", results);

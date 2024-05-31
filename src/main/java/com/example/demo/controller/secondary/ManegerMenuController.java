@@ -1,6 +1,7 @@
 package com.example.demo.controller.secondary;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -37,7 +38,8 @@ public class ManegerMenuController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String index(Model model, Pageable pageable) {
 		Page<Books> results = service.search("", "", "", "", pageable);
-		List<Books> result = results.getContent();
+		List<Books> result = results.getContent().stream()
+				.distinct().collect(Collectors.toList());
 		model.addAttribute("pages", results);
 		model.addAttribute("result", result);
 		model.addAttribute("resultSize", result.size());
@@ -57,6 +59,7 @@ public class ManegerMenuController {
 		} else {
 			typeid = type.getTypeid();
 		}
+		mav.addObject("serchData", serchData);
 		Page<Books> results = service.search(serchData, serchData, serchData, serchData, pageable);
 		List<Books> result = results.getContent();
 		mav.addObject("pages", results);

@@ -29,6 +29,7 @@ CREATE TABLE `employees` (
   `authority` varchar(8) DEFAULT NULL,
   `password` varchar(256) NOT NULL,
   PRIMARY KEY (`employee_id`),
+  UNIQUE KEY `employee_id_UNIQUE` (`employee_id`),
   KEY `department_id_idx` (`department_id`),
   CONSTRAINT `department_id` FOREIGN KEY (`department_id`) REFERENCES `departments` (`department_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -53,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-01 13:57:26
+-- Dump completed on 2024-05-30 15:11:41

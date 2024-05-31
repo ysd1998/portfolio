@@ -72,7 +72,7 @@
 			<input type="hidden" th:field="*{name}" />
 			<input type="hidden" th:field="*{did}" />
 			<input type="hidden" th:field="*{authority}" />
-			<input class=" btn btn-primary" type="submit" th:href="@{/manager/menu}" th:value="権限変更" />
+			<input th:if="${authData.authority != '管理者'}" class=" btn btn-primary" type="submit" th:href="@{/manager/menu}" th:value="権限変更" />
 		</form>
 		<form th:action="@{/manager/admin}" method="get">
 			<input class=" btn btn-primary" type="submit" th:href="@{/manage/menu}" value="戻る" />

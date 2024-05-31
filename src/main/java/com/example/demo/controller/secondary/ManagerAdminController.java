@@ -46,6 +46,8 @@ public class ManagerAdminController {
 	@Autowired
 	public TypeSerchService typeservice;
 
+	static final private String DATE_FORMAT = "yyyy-MM-dd";
+
 	@GetMapping("manager/{id}")
 	public String view(@PathVariable String id, @ModelAttribute("bookData") BookInfo bookData,
 			@ModelAttribute("deleteData") BookInfo DeleteData, HttpServletRequest request, Model model)
@@ -94,27 +96,72 @@ public class ManagerAdminController {
 		String isTitle = bookData.getTitle();
 		bookData.setWork("更新");
 		Date date = new Date();
+		//		String access = "manager/" + isCorrectUserAuth;
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		String strDate = dateFormat.format(date);
 		bookData.setUpdateday(strDate);
 		bookData.setUpdateid(user.getUsername());
 		bookData.setDeleteflag("0");
+		Books book = serch.serchId(bookData.getBookid());
 		HttpSession session = request.getSession();
 		session.setAttribute("bookData", bookData);
 		if (isCorrectUserAuth.equals("") || isTitle.equals("") || "".equals(bookData.getPublisher()) ||
-				"".equals(bookData.getYear()) || "0".equals(bookData.getTypeid()) || "".equals(bookData.getPrice())) {
+				"".equals(bookData.getYear()) || "0".equals(bookData.getTypeid()) || "".equals(bookData.getPrice())
+				|| "".equals(bookData.getEx())) {
+			if (book.getPhoto() == null) {
+				File fileImg = new File("src/main/resources/templates/picture/20200501_noimage.png");
+				byte[] byteImg = Files.readAllBytes(fileImg.toPath());
+				StringBuffer data = new StringBuffer();
+				String base64 = new String(Base64.encodeBase64(byteImg, true), "ASCII");
+				data.append("data:image/png;base64,");
+				data.append(base64);
+				model.addAttribute("base64AccountIcon", data.toString());
+			} else {
+
+				StringBuffer data = new StringBuffer();
+
+				String base64 = new String(Base64.encodeBase64(book.getPhoto(), true), "ASCII");
+
+				data.append("data:image/png;base64,");
+				data.append(base64);
+
+				model.addAttribute("base64AccountIcon", data.toString());
+			}
+			model.addAttribute("bookData", book);
+			model.addAttribute("deleteData", book);
 			List<Types> result = typeservice.serchData("%");
 			model.addAttribute("Types", result);
 			model.addAttribute("errorMsg", "必須項目が空欄です。");
-			return "manager/bookinit";
-		} else if (isCorrectUserAuth.length() > 10 || isTitle.length() > 10 || bookData.getPublisher().length() > 10 ||
+			return "manager/bookadmin";
+		} else if (isCorrectUserAuth.length() > 10 || isTitle.length() > 10 || bookData.getPublisher().length() > 8 ||
 				bookData.getAuther().length() > 10 || bookData.getEx().length() > 1000
-				|| bookData.getOther().length() > 1000 ||
+				|| bookData.getOther().length() > 1000 || bookData.getYear().length() != 10 ||
 				bookData.getPrice().length() > 10) {
+			if (book.getPhoto() == null) {
+				File fileImg = new File("src/main/resources/templates/picture/20200501_noimage.png");
+				byte[] byteImg = Files.readAllBytes(fileImg.toPath());
+				StringBuffer data = new StringBuffer();
+				String base64 = new String(Base64.encodeBase64(byteImg, true), "ASCII");
+				data.append("data:image/png;base64,");
+				data.append(base64);
+				model.addAttribute("base64AccountIcon", data.toString());
+			} else {
+
+				StringBuffer data = new StringBuffer();
+
+				String base64 = new String(Base64.encodeBase64(book.getPhoto(), true), "ASCII");
+
+				data.append("data:image/png;base64,");
+				data.append(base64);
+
+				model.addAttribute("base64AccountIcon", data.toString());
+			}
+			model.addAttribute("bookData", book);
+			model.addAttribute("deleteData", book);
 			List<Types> result = typeservice.serchData("%");
 			model.addAttribute("Types", result);
 			model.addAttribute("errorMsg", "文字数オーバーです。");
-			return "manager/{id}";
+			return "manager/bookadmin";
 		} else {
 			return "redirect:/manager/confirm";
 

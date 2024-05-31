@@ -83,16 +83,28 @@
 					<p th:text="*{bookid}"></p>
 				</div>
 			</div>
-			<div class="row" style="height: 40%;">
+			<div class="row"  style="height: 40%;">
 				<div class="col-2 border bg-light">説明</div>
-				<div class="col border">
-					<p th:text="*{ex}"></p>
+				<div class="col border" style="overflow-wrap: break-word;">
+					<p>
+						<th:block th:if="*{ex != null}">
+							<th:block th:each="line: *{ex.split('\r\n|\r|\n', -1)}">
+								<th:block th:text="${line}" /><br />
+							</th:block>
+						</th:block>
+					</p>
 				</div>
 			</div>
-			<div class="row" style="height: 40%;">
-				<div class="col-2 border bg-light">そのた</div>
-				<div class="col border">
-					<p th:text="*{other}"></p>
+			<div class="row"  style="height: 40%;">
+				<div class="col-2 border bg-light">その他</div>
+				<div class="col border" style="overflow-wrap: break-word;">
+					<p>
+						<th:block th:if="*{other != null}">
+							<th:block th:each="line: *{other.split('\r\n|\r|\n', -1)}">
+								<th:block th:text="${line}" /><br />
+							</th:block>
+						</th:block>
+					</p>
 				</div>
 			</div>
 		</div>

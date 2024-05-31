@@ -37,6 +37,7 @@ public class UserSecurityBeanDefine {
 		http.securityMatcher("/**")
 				.authorizeHttpRequests(
 						authorize -> authorize.requestMatchers(UrlConfig.NO_AUTHENTICATION).permitAll()
+								.requestMatchers(UrlConfig.USER_AUTHENTICATION).hasAuthority("User")
 								.requestMatchers("/manager/**").hasAnyAuthority("web販売担当", "管理者")
 								.anyRequest().authenticated())
 				.formLogin(

@@ -49,6 +49,7 @@ public class AdminEmpController {
 		if ("".equals(serchData)) {
 			results = service.searchEmp("web販売担当", "web販売担当", "web販売担当", pageable);
 		} else {
+			mav.addObject("serchData", serchData);
 			results = service.searchEmp(serchData, serchData, serchData, pageable);
 		}
 

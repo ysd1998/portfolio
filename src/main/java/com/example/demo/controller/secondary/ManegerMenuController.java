@@ -59,6 +59,7 @@ public class ManegerMenuController {
 		} else {
 			typeid = type.getTypeid();
 		}
+		mav.addObject("serchData", serchData);
 		Page<Books> results = service.search(serchData, serchData, serchData, serchData, pageable);
 		List<Books> result = results.getContent();
 		mav.addObject("pages", results);

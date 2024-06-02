@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.demo.entity.employees.Employees;
 import com.example.demo.service.employees.EmpSerchService;
 
+import io.micrometer.common.util.StringUtils;
 import lombok.RequiredArgsConstructor;
 
 @ComponentScan
@@ -28,10 +29,17 @@ public class AdminEmpController {
 
 	@Autowired
 	public EmpSerchService service;
+	
+	private static String serchDataseve;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String index(Model model, Pageable pageable) {
-		Page<Employees> results = service.searchEmp("web販売担当", "web販売担当", "web販売担当", pageable);
+		Page<Employees> results;
+		if (!StringUtils.isEmpty(serchDataseve)) {
+			results = service.searchEmp(serchDataseve, serchDataseve, serchDataseve, pageable);
+		} else {
+			results = service.searchEmp("web販売担当", "web販売担当", "web販売担当", pageable);
+		}
 		List<Employees> result = results.getContent();
 		model.addAttribute("pages", results);
 		model.addAttribute("result", result);
@@ -42,9 +50,8 @@ public class AdminEmpController {
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView serch(ModelAndView mav, Pageable pageable, @RequestParam("serchData") String serchData) {
 		mav.setViewName(VIEW);
-		mav.addObject("loginid", serchData);
-		mav.addObject("name", serchData);
-		mav.addObject("authority", serchData);
+		serchDataseve = "";
+		serchDataseve = serchData;
 		Page<Employees> results;
 		if ("".equals(serchData)) {
 			results = service.searchEmp("web販売担当", "web販売担当", "web販売担当", pageable);

@@ -38,7 +38,7 @@ public class AdminAuthoritiesController {
 		model.addAttribute("authData", emp);
 		Departments result = depservice.serchId(emp.getDid());
 		model.addAttribute("depData", result);
-		if ("".equals(emp.getAuthority())) {
+		if ("権限なし".equals(emp.getAuthority())) {
 			model.addAttribute("mesage", "web販売担当権限を付与しますか？");
 		} else if ("管理者".equals(emp.getAuthority())) {
 			model.addAttribute("mesage", "");

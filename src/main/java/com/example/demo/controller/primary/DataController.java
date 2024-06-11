@@ -29,6 +29,7 @@ public class DataController {
 	@GetMapping("{id}")
 	public String index(Model model, @PathVariable String id) throws Exception {
 		Books book = service.serchId(id);
+		//		var book = service.check(id);
 		if (book.getPhoto() == null) {
 			File fileImg = new File("src/main/resources/templates/picture/20200501_noimage.png");
 			byte[] byteImg = Files.readAllBytes(fileImg.toPath());
@@ -49,6 +50,7 @@ public class DataController {
 			model.addAttribute("base64AccountIcon", data.toString());
 		}
 		Types type = typeservice.serchId(book.getTypeid());
+		//		var type = typeservice.check(book.get().getTypeid());
 		model.addAttribute("bookData", book);
 		model.addAttribute("typeData", type);
 		return "bookdata";

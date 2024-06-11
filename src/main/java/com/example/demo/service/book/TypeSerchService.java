@@ -37,4 +37,9 @@ public class TypeSerchService {
 		return typerepo.findById(id).get();
 	}
 
+	public Optional<Types> check(String id) throws NoSuchElementException {
+		Optional<Types> types = typerepo.findById(id);
+		return types;
+	}
+
 }

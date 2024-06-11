@@ -19,9 +19,9 @@ import com.example.demo.service.book.TypeSerchService;
 
 import io.micrometer.common.util.StringUtils;
 
+//@RequiredArgsConstructor
 @ComponentScan
 @Controller
-//@RequiredArgsConstructor
 @RequestMapping("menu")
 public class MenuController {
 
@@ -32,11 +32,11 @@ public class MenuController {
 
 	@Autowired
 	public TypeSerchService typeservice;
-	
+
 	private static String serchDataseve;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String index(Model model, Pageable pageable) {
+	public String index(Model model, Pageable pageable) throws Exception {
 		//		Page<Books> results = bookmapper.getBookList(pageable);
 		Page<Books> results;
 		if (!StringUtils.isEmpty(serchDataseve)) {
@@ -45,6 +45,25 @@ public class MenuController {
 			results = service.search("", "", "", "", pageable);
 		}
 		List<Books> result = results.getContent();
+		//		if (result.getPhoto() == null) {
+		//			File fileImg = new File("src/main/resources/templates/picture/20200501_noimage.png");
+		//			byte[] byteImg = Files.readAllBytes(fileImg.toPath());
+		//			StringBuffer data = new StringBuffer();
+		//			String base64 = new String(Base64.encodeBase64(byteImg, true), "ASCII");
+		//			data.append("data:image/png;base64,");
+		//			data.append(base64);
+		//			model.addAttribute("base64AccountIcon", data.toString());
+		//		} else {
+		//
+		//			StringBuffer data = new StringBuffer();
+		//
+		//			String base64 = new String(Base64.encodeBase64(result.getPhoto(), true), "ASCII");
+		//
+		//			data.append("data:image/png;base64,");
+		//			data.append(base64);
+		//
+		//			model.addAttribute("base64AccountIcon", data.toString());
+		//		}
 		model.addAttribute("pages", results);
 		model.addAttribute("result", result);
 		model.addAttribute("resultSize", result.size());

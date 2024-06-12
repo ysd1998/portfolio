@@ -92,7 +92,7 @@
 			<a class="link-offset-2 link-underline link-underline-opacity-0" th:each="data : ${result}"
 				th:href="@{/{id}(id=*{data.bookid})}">
 				<div class="row border-bottom">
-<!--					<div class="col-4 mt-sm-2 mt-auto  mb-sm-2 mb-auto"><img src="sample.jpg" th:src="${'data:image/png;base64,' + image}"/></div>-->
+<!--					<div class="col-4 mt-sm-2 mt-auto  mb-sm-2 mb-auto"><img th:src="${base64AccountIcon}" alt="アイコン画像" th:width="50px" th:height="60spx"></div>-->
 					<div class="col mt-sm-2 mt-auto  mb-sm-2 mb-auto"><span th:text="${data.title}"></span></div>
 					<div class="col mt-sm-2 mt-auto  mb-sm-2 mb-auto"><span th:text="${data.auther}"></span></div>
 					<div class="col mt-sm-2 mt-auto  mb-sm-2 mb-auto"><span th:text="${data.price}"></span></div>

@@ -1,5 +1,9 @@
 package com.example.demo.entity.book;
 
+import java.io.File;
+import java.nio.file.Files;
+
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.hibernate.annotations.SQLRestriction;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.CreatedDate;
@@ -122,6 +126,30 @@ public class Books {
 
 	@Transient
 	private MultipartFile photoFile;
+
+	@Getter
+	@Setter
+	private String base64;
+
+	public String base64photo() throws Exception {
+		if (photo == null) {
+			File fileImg = new File("src/main/resources/templates/picture/20200501_noimage.png");
+			byte[] byteImg = Files.readAllBytes(fileImg.toPath());
+			StringBuffer data = new StringBuffer();
+			base64 = new String(Base64.encodeBase64(byteImg, true), "ASCII");
+			data.append("data:image/png;base64,");
+			data.append(base64);
+		} else {
+
+			StringBuffer data = new StringBuffer();
+
+			base64 = new String(Base64.encodeBase64(photo, true), "ASCII");
+
+			data.append("data:image/png;base64,");
+			data.append(base64);
+		}
+		return base64;
+	}
 
 	//	@Override
 	//	  @Deprecated

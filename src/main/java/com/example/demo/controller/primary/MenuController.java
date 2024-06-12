@@ -44,26 +44,26 @@ public class MenuController {
 		} else {
 			results = service.search("", "", "", "", pageable);
 		}
+		//				if (results.getPhoto() == null) {
+		//					File fileImg = new File("src/main/resources/templates/picture/20200501_noimage.png");
+		//					byte[] byteImg = Files.readAllBytes(fileImg.toPath());
+		//					StringBuffer data = new StringBuffer();
+		//					String base64 = new String(Base64.encodeBase64(byteImg, true), "ASCII");
+		//					data.append("data:image/png;base64,");
+		//					data.append(base64);
+		//					model.addAttribute("base64AccountIcon", data.toString());
+		//				} else {
+		//		
+		//					StringBuffer data = new StringBuffer();
+		//		
+		//					String base64 = new String(Base64.encodeBase64(result.getPhoto(), true), "ASCII");
+		//		
+		//					data.append("data:image/png;base64,");
+		//					data.append(base64);
+		//		
+		//					model.addAttribute("base64AccountIcon", data.toString());
+		//				}
 		List<Books> result = results.getContent();
-		//		if (result.getPhoto() == null) {
-		//			File fileImg = new File("src/main/resources/templates/picture/20200501_noimage.png");
-		//			byte[] byteImg = Files.readAllBytes(fileImg.toPath());
-		//			StringBuffer data = new StringBuffer();
-		//			String base64 = new String(Base64.encodeBase64(byteImg, true), "ASCII");
-		//			data.append("data:image/png;base64,");
-		//			data.append(base64);
-		//			model.addAttribute("base64AccountIcon", data.toString());
-		//		} else {
-		//
-		//			StringBuffer data = new StringBuffer();
-		//
-		//			String base64 = new String(Base64.encodeBase64(result.getPhoto(), true), "ASCII");
-		//
-		//			data.append("data:image/png;base64,");
-		//			data.append(base64);
-		//
-		//			model.addAttribute("base64AccountIcon", data.toString());
-		//		}
 		model.addAttribute("pages", results);
 		model.addAttribute("result", result);
 		model.addAttribute("resultSize", result.size());

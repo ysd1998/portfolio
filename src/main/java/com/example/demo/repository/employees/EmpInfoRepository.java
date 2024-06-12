@@ -1,6 +1,7 @@
 package com.example.demo.repository.employees;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,6 +22,8 @@ public interface EmpInfoRepository extends JpaRepository<Employees, String> {
 	//	Optional<Employees> findByLoginidLikeOrNameLikeOrPasswordLike(String loginid,String name,String password);
 
 	Page<Employees> findAll(Pageable page);
+
+	Optional<Employees> findById(String loginid);
 
 	@Query("select u from Employees u where u.loginid like :loginid or u.auther like :auther or u.password like :password")
 	List<Employees> findByLoginidLikeOrPasswordLike(String loginid, String password);

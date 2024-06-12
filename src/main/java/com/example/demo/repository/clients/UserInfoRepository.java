@@ -17,4 +17,5 @@ public interface UserInfoRepository extends JpaRepository<Clients, String> {
 
 	Optional<Clients> findByLoginidLikeOrNameLikeOrPasswordLike(String loginid, String name, String password);
 
+	Optional<Clients> findById(String loginid);
 }

@@ -54,26 +54,6 @@ public class ManagerAdminController {
 			throws Exception {
 		Books book = serch.serchId(id);
 		log.info(book.toString());
-		if (book.getPhoto() == null) {
-			File fileImg = new File("src/main/resources/templates/picture/20200501_noimage.png");
-			byte[] byteImg = Files.readAllBytes(fileImg.toPath());
-			StringBuffer data = new StringBuffer();
-			String base64 = new String(Base64.encodeBase64(byteImg, true), "ASCII");
-			data.append("data:image/png;base64,");
-			data.append(base64);
-			model.addAttribute("base64AccountIcon", data.toString());
-		} else {
-
-			StringBuffer data = new StringBuffer();
-
-			String base64 = new String(Base64.encodeBase64(book.getPhoto(), true), "ASCII");
-
-			data.append("data:image/png;base64,");
-			data.append(base64);
-
-			model.addAttribute("base64AccountIcon", data.toString());
-		}
-
 		model.addAttribute("bookData", book);
 		model.addAttribute("deleteData", book);
 		List<Types> result = typeservice.serchData("%");
@@ -135,7 +115,7 @@ public class ManagerAdminController {
 			return "manager/bookadmin";
 		} else if (isCorrectUserAuth.length() > 10 || isTitle.length() > 10 || bookData.getPublisher().length() > 8 ||
 				bookData.getAuther().length() > 10 || bookData.getEx().length() > 1000
-				|| bookData.getOther().length() > 1000 || bookData.getYear().length() != 10 ||
+				|| bookData.getOther().length() > 1000 ||
 				bookData.getPrice().length() > 10) {
 			if (book.getPhoto() == null) {
 				File fileImg = new File("src/main/resources/templates/picture/20200501_noimage.png");

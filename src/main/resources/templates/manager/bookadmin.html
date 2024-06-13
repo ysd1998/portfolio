@@ -36,13 +36,13 @@
 	<div th:insert="~{manager/common/menu :: menu}"></div>
 	<form th:action="@{/manager/{id}}" th:object="${bookData}" method="POST" enctype="multipart/form-data">
 		<div class="d-flex align-items-center justify-content-center mt-sm-2 mt-auto mb-sm-2 mb-auto">
-			<div>
+			<div class="w-25">
 				<div class="row">
 					<p th:text="${message}"></p>
-					<img th:src="${base64AccountIcon}" alt="アイコン画像" th:width="500px" th:height="600px">
+					<img th:src="${bookData.base64photo()}" alt="アイコン画像">
 				</div>
 				<div class="row">
-					<input type="file" name="file" id="file">
+					<input type="file" name="file" id="file" accept="image/png">
 				</div>
 			</div>
 		</div>
@@ -76,7 +76,7 @@
 				<div class="row">
 					<div class="col-2 border bg-light">発行日＊</div>
 					<div class="col border">
-						<input class="form-control mt-sm-2 mt-auto mb-sm-2 mb-auto" type="text" th:field="*{year}" />
+						<input class="form-control mt-sm-2 mt-auto mb-sm-2 mb-auto" type="date" th:field="*{year}" />
 					</div>
 				</div>
 				<div class="row">

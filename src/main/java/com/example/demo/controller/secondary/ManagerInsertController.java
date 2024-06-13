@@ -100,8 +100,7 @@ public class ManagerInsertController {
 			return "manager/bookinit";
 		} else if (isCorrectUserAuth.length() > 10 || isTitle.length() > 10 || bookData.getPublisher().length() > 8 ||
 				bookData.getAuther().length() > 10 || bookData.getEx().length() > 1000
-				|| bookData.getOther().length() > 1000 || bookData.getYear().length() != 8 ||
-				bookData.getPrice().length() > 10) {
+				|| bookData.getOther().length() > 1000 || bookData.getPrice().length() > 10) {
 			List<Types> result = typeservice.serchData("%");
 			model.addAttribute("Types", result);
 			model.addAttribute("errorMsg", "文字数オーバーです。");

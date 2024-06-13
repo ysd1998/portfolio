@@ -2,6 +2,8 @@ package com.example.demo.entity.book;
 
 import java.io.File;
 import java.nio.file.Files;
+import java.text.ParseException;
+import java.util.Date;
 
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.hibernate.annotations.SQLRestriction;
@@ -149,6 +151,12 @@ public class Books {
 		}
 		result = data.toString();
 		return result;
+	}
+
+	public Date parseDate() throws ParseException {
+		//		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = java.sql.Date.valueOf(year);
+		return date;
 	}
 
 	//	@Override

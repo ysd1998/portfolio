@@ -127,28 +127,28 @@ public class Books {
 	@Transient
 	private MultipartFile photoFile;
 
-	@Getter
-	@Setter
-	private String base64;
-
+	//	@Getter
+	//	@Setter
+	//	private String base64;
+	//
 	public String base64photo() throws Exception {
-		if (photo == null) {
+		String base64;
+		String result;
+		StringBuffer data = new StringBuffer();
+		if (this.photo == null) {
 			File fileImg = new File("src/main/resources/templates/picture/20200501_noimage.png");
 			byte[] byteImg = Files.readAllBytes(fileImg.toPath());
-			StringBuffer data = new StringBuffer();
 			base64 = new String(Base64.encodeBase64(byteImg, true), "ASCII");
 			data.append("data:image/png;base64,");
 			data.append(base64);
 		} else {
-
-			StringBuffer data = new StringBuffer();
-
-			base64 = new String(Base64.encodeBase64(photo, true), "ASCII");
+			base64 = new String(Base64.encodeBase64(this.photo, true), "ASCII");
 
 			data.append("data:image/png;base64,");
 			data.append(base64);
 		}
-		return base64;
+		result = data.toString();
+		return result;
 	}
 
 	//	@Override

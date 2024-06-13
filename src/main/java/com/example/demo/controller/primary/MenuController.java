@@ -1,7 +1,10 @@
 package com.example.demo.controller.primary;
 
+import java.io.File;
+import java.nio.file.Files;
 import java.util.List;
 
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.domain.Page;
@@ -44,26 +47,48 @@ public class MenuController {
 		} else {
 			results = service.search("", "", "", "", pageable);
 		}
-		//				if (results.getPhoto() == null) {
-		//					File fileImg = new File("src/main/resources/templates/picture/20200501_noimage.png");
-		//					byte[] byteImg = Files.readAllBytes(fileImg.toPath());
-		//					StringBuffer data = new StringBuffer();
-		//					String base64 = new String(Base64.encodeBase64(byteImg, true), "ASCII");
-		//					data.append("data:image/png;base64,");
-		//					data.append(base64);
-		//					model.addAttribute("base64AccountIcon", data.toString());
-		//				} else {
-		//		
-		//					StringBuffer data = new StringBuffer();
-		//		
-		//					String base64 = new String(Base64.encodeBase64(result.getPhoto(), true), "ASCII");
-		//		
-		//					data.append("data:image/png;base64,");
-		//					data.append(base64);
-		//		
-		//					model.addAttribute("base64AccountIcon", data.toString());
-		//				}
+		//	if (results.getPhoto() == null) {
+		//		File fileImg = new File("src/main/resources/templates/picture/20200501_noimage.png");
+		//		byte[] byteImg = Files.readAllBytes(fileImg.toPath());
+		//		StringBuffer data = new StringBuffer();
+		//		String base64 = new String(Base64.encodeBase64(byteImg, true), "ASCII");
+		//		data.append("data:image/png;base64,");
+		//		data.append(base64);
+		//		model.addAttribute("base64AccountIcon", data.toString());
+		//	} else {
+		//				
+		//		StringBuffer data = new StringBuffer();
+		//				
+		//		String base64 = new String(Base64.encodeBase64(result.getPhoto(), true), "ASCII");
+		//				
+		//		data.append("data:image/png;base64,");
+		//		data.append(base64);
+		//				
+		//		model.addAttribute("base64AccountIcon", data.toString());
+		//	}
 		List<Books> result = results.getContent();
+		File fileImg = new File("src/main/resources/templates/picture/20200501_noimage.png");
+		byte[] byteImg = Files.readAllBytes(fileImg.toPath());
+		StringBuffer data = new StringBuffer();
+		String base64;
+		Books mark;
+		int size = result.size();
+		for (int i = 0; i < size; i++) {
+			mark = result.get(i);
+			if (mark.getPhoto() == null) {
+				data = new StringBuffer();
+				base64 = new String(Base64.encodeBase64(byteImg, true), "ASCII");
+				data.append("data:image/png;base64,");
+				data.append(base64);
+				//				mark.setBase64(data.toString());
+			} else {
+				data = new StringBuffer();
+				base64 = new String(Base64.encodeBase64(mark.getPhoto(), true), "ASCII");
+				data.append("data:image/png;base64,");
+				data.append(base64);
+				//				mark.setBase64(data.toString());
+			}
+		}
 		model.addAttribute("pages", results);
 		model.addAttribute("result", result);
 		model.addAttribute("resultSize", result.size());

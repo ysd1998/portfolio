@@ -149,25 +149,6 @@ public class ManagerAdminController {
 
 	}
 
-	//	@PostMapping("/upload")
-	//	  public String uploadFile(@RequestParam("file") MultipartFile file, @PathVariable String id, Model m) {
-	//	    String message = "";
-	//	    try {
-	//	      Books book = serch.serchId(id);
-	//	      // ポイント4: Base64.getEncoder().encodeToString(bytes)でbyteをStringにして、Viewに渡す
-	//	      String image =  new String(Base64.encodeBase64(book.getPhoto(),true),"ASCII");
-	//	      StringBuffer data  = new StringBuffer();
-	//	      data.append("data:image/png;base64,");
-	//		  data.append(image);
-	//		  m.addAttribute("base64AccountIcon",data.toString());
-	//		  return "manager/{id}";
-	//	    } catch (Exception e) {
-	//	      message = "Could not upload the file: " + file.getOriginalFilename() + "!";
-	//	      m.addAttribute("message", message);
-	//	      return "manager/{id}";
-	//	    }
-	//	  }
-
 	@PostMapping("manager/delete/{id}")
 	public String deleteId(@Valid @ModelAttribute("deleteData") BookInfo DeleteData,
 			@AuthenticationPrincipal User user,

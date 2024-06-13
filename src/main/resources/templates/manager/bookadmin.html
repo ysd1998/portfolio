@@ -41,13 +41,16 @@
 					<p th:text="${message}"></p>
 					<img th:src="${bookData.base64photo()}" alt="アイコン画像">
 				</div>
-				<div class="row">
-					<input type="file" name="file" id="file" accept="image/png">
-				</div>
 			</div>
 		</div>
 		<div class="d-flex align-items-center justify-content-center mt-sm-2 mt-auto mb-sm-2 mb-auto">
 			<div style="width:50%;">
+				<div class="row">
+					<div class="col-2 border bg-light">書影変更</div>
+					<div class="col border">
+						<input type="file" name="file" id="file" accept="image/png">
+					</div>
+				</div>
 				<div class="row">
 					<div class="col-2 border bg-light">タイトル＊</div>
 					<div class="col border">

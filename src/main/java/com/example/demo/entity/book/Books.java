@@ -159,6 +159,16 @@ public class Books {
 		return date;
 	}
 
+	public String comma() {
+		int priceint = Integer.parseInt(this.price);
+		String comma;
+		StringBuffer data = new StringBuffer();
+		comma = String.format("%,d", priceint);
+		data.append("\\");
+		data.append(comma);
+		return data.toString();
+	}
+
 	//	@Override
 	//	  @Deprecated
 	//	  public int getId() {

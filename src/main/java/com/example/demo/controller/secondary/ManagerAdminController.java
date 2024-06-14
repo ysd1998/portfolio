@@ -1,12 +1,9 @@
 package com.example.demo.controller.secondary;
 
-import java.io.File;
-import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
@@ -85,28 +82,10 @@ public class ManagerAdminController {
 		Books book = serch.serchId(bookData.getBookid());
 		HttpSession session = request.getSession();
 		session.setAttribute("bookData", bookData);
+		boolean isNumeric = bookData.getPrice().matches("[+-]?\\d*(\\.\\d+)?");
 		if (isCorrectUserAuth.equals("") || isTitle.equals("") || "".equals(bookData.getPublisher()) ||
 				"".equals(bookData.getYear()) || "0".equals(bookData.getTypeid()) || "".equals(bookData.getPrice())
 				|| "".equals(bookData.getEx())) {
-			if (book.getPhoto() == null) {
-				File fileImg = new File("src/main/resources/templates/picture/20200501_noimage.png");
-				byte[] byteImg = Files.readAllBytes(fileImg.toPath());
-				StringBuffer data = new StringBuffer();
-				String base64 = new String(Base64.encodeBase64(byteImg, true), "ASCII");
-				data.append("data:image/png;base64,");
-				data.append(base64);
-				model.addAttribute("base64AccountIcon", data.toString());
-			} else {
-
-				StringBuffer data = new StringBuffer();
-
-				String base64 = new String(Base64.encodeBase64(book.getPhoto(), true), "ASCII");
-
-				data.append("data:image/png;base64,");
-				data.append(base64);
-
-				model.addAttribute("base64AccountIcon", data.toString());
-			}
 			model.addAttribute("bookData", book);
 			model.addAttribute("deleteData", book);
 			List<Types> result = typeservice.serchData("%");
@@ -117,30 +96,18 @@ public class ManagerAdminController {
 				bookData.getAuther().length() > 10 || bookData.getEx().length() > 1000
 				|| bookData.getOther().length() > 1000 ||
 				bookData.getPrice().length() > 10) {
-			if (book.getPhoto() == null) {
-				File fileImg = new File("src/main/resources/templates/picture/20200501_noimage.png");
-				byte[] byteImg = Files.readAllBytes(fileImg.toPath());
-				StringBuffer data = new StringBuffer();
-				String base64 = new String(Base64.encodeBase64(byteImg, true), "ASCII");
-				data.append("data:image/png;base64,");
-				data.append(base64);
-				model.addAttribute("base64AccountIcon", data.toString());
-			} else {
-
-				StringBuffer data = new StringBuffer();
-
-				String base64 = new String(Base64.encodeBase64(book.getPhoto(), true), "ASCII");
-
-				data.append("data:image/png;base64,");
-				data.append(base64);
-
-				model.addAttribute("base64AccountIcon", data.toString());
-			}
 			model.addAttribute("bookData", book);
 			model.addAttribute("deleteData", book);
 			List<Types> result = typeservice.serchData("%");
 			model.addAttribute("Types", result);
 			model.addAttribute("errorMsg", "文字数オーバーです。");
+			return "manager/bookadmin";
+		} else if (!isNumeric) {
+			model.addAttribute("bookData", book);
+			model.addAttribute("deleteData", book);
+			List<Types> result = typeservice.serchData("%");
+			model.addAttribute("Types", result);
+			model.addAttribute("errorMsg", "価格項目に数字ではない文字・全角文字が挿入されています。削除してください。");
 			return "manager/bookadmin";
 		} else {
 			return "redirect:/manager/confirm";

@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -25,7 +26,7 @@ import lombok.RequiredArgsConstructor;
 public class EmpSecurityBeanDefine {
 
 	/** パスワードエンコーダー */
-	private final PasswordEncoder passwordEncoder;
+	private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 	/** ユーザー情報取得Service */
 	private final UserDetailsService userDetailsService;
@@ -44,7 +45,7 @@ public class EmpSecurityBeanDefine {
 				.logout((logout) -> logout
 						.logoutUrl("/manager/logout"))
 				.formLogin(login -> login.loginPage("/manager/login").usernameParameter("loginid")
-						.defaultSuccessUrl("/manager/menu"));
+						.defaultSuccessUrl("/manager/index"));
 		//		.logout((logout) -> logout.logoutSuccessUrl("/manager/login"))
 		return http.build();
 	}

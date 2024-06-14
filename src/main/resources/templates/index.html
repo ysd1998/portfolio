@@ -21,7 +21,7 @@
 	<script>
 		function loadPage(currentPage) {
 			$.ajax({
-				url: "/menu",
+				url: "/index",
 				type: "GET",
 				data: {currentPage: currentPage},
 				success: function (data) {
@@ -57,10 +57,11 @@
 <!--				<div class="col mt-sm-2 mt-auto mb-sm-2 mb-auto">価格</div>-->
 			</div>
 			<div class="row border-bottom" th:each="data : ${result}">
-				<div class="col-4 mt-sm-2 mt-auto  mb-sm-2 mb-auto"><a class="link-offset-2 link-underline link-underline-opacity-0" th:href="@{/{id}(id=*{data.bookid})}"><img
+				<div class="col-4 mt-sm-2 mt-auto  mb-sm-2 mb-auto"><a class="link-offset-2 link-underline link-underline-opacity-0" th:href="@{/data/{id}(id=*{data.bookid})}"><img
 							th:src="${data.base64photo()}" alt="アイコン画像" th:width="150px" th:height="180px"></a></div>
 				<div class="col mt-sm-2 mt-auto  mb-sm-2 mb-auto">
-					<a class="link-offset-2 link-underline link-underline-opacity-0" th:href="@{/{id}(id=*{data.bookid})}"><h5 th:text="${data.title}"></h5></a><br><br>
+					<a class="link-offset-2 link-underline link-underline-opacity-0" th:href="@{/data/{id}(id=*{data.bookid})}"><h5 th:text="${data.title}"></h5></a>
+					<br>
 					作者:<span th:text="${data.auther}"></span><br>
 					価格:<span th:text="${data.comma()}"></span><br>
 				</div>

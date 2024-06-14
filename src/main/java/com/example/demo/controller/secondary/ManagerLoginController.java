@@ -1,5 +1,6 @@
 package com.example.demo.controller.secondary;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.stereotype.Controller;
@@ -19,7 +20,7 @@ public class ManagerLoginController {
 
 	private final EmpLoginService service;
 
-	private final PasswordEncoder passwordEncoder;
+	private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 	private final HttpSession session;
 
@@ -48,7 +49,7 @@ public class ManagerLoginController {
 		var isCorrectUserAuth = userInfo.isPresent()
 				&& passwordEncoder.matches(form.getPassword(), userInfo.get().getPassword());
 		if (isCorrectUserAuth) {
-			return "redirect:manager/menu";
+			return "redirect:manager/index";
 		} else {
 			model.addAttribute("errorMsg", "ログインIDとパスワードが間違ってます。");
 			return "manager/login";

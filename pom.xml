@@ -6,7 +6,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.2.3</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
 	<artifactId>demo</artifactId>
@@ -29,7 +29,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -52,11 +51,11 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-tomcat</artifactId>
-        <scope>provided</scope>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.webjars.npm/flatpickr -->
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.webjars.npm/flatpickr -->
 		<dependency>
 			<groupId>org.webjars.npm</groupId>
 			<artifactId>flatpickr</artifactId>
@@ -72,11 +71,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jdbc</artifactId>
 			<exclusions>
-            <exclusion>
-         		<groupId>com.zaxxer</groupId>
-         		<artifactId>HikariCP</artifactId>
-     		 </exclusion>
-            </exclusions>
+				<exclusion>
+					<groupId>com.zaxxer</groupId>
+					<artifactId>HikariCP</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<!--JDBC-->
 		<dependency>
@@ -125,47 +124,52 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-		    <groupId>commons-io</groupId>
-		    <artifactId>commons-io</artifactId>
-		    <version>2.6</version>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.6</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.thymeleaf.extras</groupId>
-		    <artifactId>thymeleaf-extras-springsecurity6</artifactId>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity6</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.mybatis.spring.boot</groupId>
 			<artifactId>mybatis-spring-boot-starter</artifactId>
 			<version>3.0.3</version>
 		</dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.hibernate</groupId>-->
-<!--            <artifactId>hibernate-core</artifactId>-->
-<!--            <version>5.2.5.Final</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.hibernate</groupId>-->
-<!--            <artifactId>hibernate-validator</artifactId>-->
-<!--            <version>5.3.3.Final</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.hibernate</groupId>-->
-<!--            <artifactId>hibernate-java8</artifactId>-->
-<!--            <version>5.2.5.Final</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.apache.derby</groupId>-->
-<!--            <artifactId>derby</artifactId>-->
-<!--            <version>10.13.1.1</version>-->
-<!--        </dependency>-->
-<!--		<dependency>-->
-<!--			<groupId>com.example</groupId>-->
-<!--			<artifactId>portfolio-1</artifactId>-->
-<!--			<version>0.0.1-SNAPSHOT</version>-->
-<!--		</dependency>-->
+		<dependencies>
+			<dependency>
+				<groupId>com.github.dozermapper</groupId>
+				<artifactId>dozer-spring-boot-starter</artifactId>
+				<version>6.5.0</version>
+			</dependency>
+		</dependencies>
+		<!--        <dependency>-->
+		<!--            <groupId>org.hibernate</groupId>-->
+		<!--            <artifactId>hibernate-core</artifactId>-->
+		<!--            <version>5.2.5.Final</version>-->
+		<!--        </dependency>-->
+		<!--        <dependency>-->
+		<!--            <groupId>org.hibernate</groupId>-->
+		<!--            <artifactId>hibernate-validator</artifactId>-->
+		<!--            <version>5.3.3.Final</version>-->
+		<!--        </dependency>-->
+		<!--        <dependency>-->
+		<!--            <groupId>org.hibernate</groupId>-->
+		<!--            <artifactId>hibernate-java8</artifactId>-->
+		<!--            <version>5.2.5.Final</version>-->
+		<!--        </dependency>-->
+		<!--        <dependency>-->
+		<!--            <groupId>org.apache.derby</groupId>-->
+		<!--            <artifactId>derby</artifactId>-->
+		<!--            <version>10.13.1.1</version>-->
+		<!--        </dependency>-->
+		<!--		<dependency>-->
+		<!--			<groupId>com.example</groupId>-->
+		<!--			<artifactId>portfolio-1</artifactId>-->
+		<!--			<version>0.0.1-SNAPSHOT</version>-->
+		<!--		</dependency>-->
 	</dependencies>
-	
-
 	<build>
 		<plugins>
 			<plugin>
@@ -182,5 +186,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>

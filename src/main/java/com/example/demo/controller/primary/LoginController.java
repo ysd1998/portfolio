@@ -1,5 +1,6 @@
 package com.example.demo.controller.primary;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.stereotype.Controller;
@@ -19,7 +20,7 @@ public class LoginController {
 
 	private final LoginService service;
 
-	private final PasswordEncoder passwordEncoder;
+	private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 	private final HttpSession session;
 

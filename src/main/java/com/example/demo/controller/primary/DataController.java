@@ -22,7 +22,7 @@ public class DataController {
 	public TypeSerchService typeservice;
 
 	//詳細画面に本の情報を出力
-	@GetMapping("{id}")
+	@GetMapping("data/{id}")
 	public String index(Model model, @PathVariable String id) throws Exception {
 		Books book = service.serchId(id);
 		//		var book = service.check(id);

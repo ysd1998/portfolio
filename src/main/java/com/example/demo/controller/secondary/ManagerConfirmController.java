@@ -120,7 +120,7 @@ public class ManagerConfirmController {
 			bookData.setDeleteflag("1");
 		}
 		service.insert(bookData);
-		return "redirect:/manager/menu";
+		return "redirect:/manager/index";
 	}
 
 }

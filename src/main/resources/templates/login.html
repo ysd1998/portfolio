@@ -20,7 +20,7 @@
 			</div>
 		</header>
 		<div class="container align-items-center text-center">
-			<form th:action="@{/login}" method="post" th:object="${loginForm}">
+			<form sec:authorize="!hasAnyAuthority('管理者','web販売担当')" th:action="@{/login}" method="post" th:object="${loginForm}">
 				<div class="form-group">
 					<div class="d-flex flex-wrap align-items-center justify-content-center mt-sm-2 mt-auto mb-sm-2 mb-auto">
 						<div class="row g-1">
@@ -45,6 +45,7 @@
 					<input class="btn btn-primary" type="submit" value="ログイン">
 				</div>
 			</form>
+			<span sec:authorize="hasAnyAuthority('管理者','web販売担当')" th:text="現在従業員ユーザーがログインしています。"></span>
 		</div>
 	</main>
 </body>

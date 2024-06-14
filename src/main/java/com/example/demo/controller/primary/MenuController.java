@@ -22,10 +22,10 @@ import io.micrometer.common.util.StringUtils;
 //@RequiredArgsConstructor
 @ComponentScan
 @Controller
-@RequestMapping("menu")
+@RequestMapping("index")
 public class MenuController {
 
-	private static final String VIEW = "menu";
+	private static final String VIEW = "index";
 
 	@Autowired
 	public BookSerchService service;

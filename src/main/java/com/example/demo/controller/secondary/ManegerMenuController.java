@@ -24,22 +24,23 @@ import lombok.RequiredArgsConstructor;
 @ComponentScan
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("manager/menu")
+@RequestMapping("manager/index")
 public class ManegerMenuController {
 
-	private static final String VIEW = "manager/menu";
+	private static final String VIEW = "manager/index";
 
 	@Autowired
 	public BookSerchService service;
 
 	@Autowired
 	public TypeSerchService typeserch;
-	
+
 	private static String serchDataseve;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String index(Model model, Pageable pageable,@RequestParam(name = "serchData", required = false) String serchData) {
-//		String serchData = "";
+	public String index(Model model, Pageable pageable,
+			@RequestParam(name = "serchData", required = false) String serchData) {
+		//		String serchData = "";
 		Page<Books> results;
 		if (!StringUtils.isEmpty(serchDataseve)) {
 			results = service.search(serchDataseve, serchDataseve, serchDataseve, serchDataseve, pageable);
@@ -56,7 +57,7 @@ public class ManegerMenuController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String serch(Model model,Pageable pageable, @RequestParam("serchData") String serchData) {
+	public String serch(Model model, Pageable pageable, @RequestParam("serchData") String serchData) {
 		Types type = typeserch.serchNames(serchData);
 		serchDataseve = "";
 		serchDataseve = serchData;

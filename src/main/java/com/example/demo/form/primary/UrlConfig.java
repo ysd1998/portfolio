@@ -3,9 +3,9 @@ package com.example.demo.form.primary;
 public class UrlConfig {
 	public static final String login = "/login";
 
-	public static final String menu = "/menu";
+	public static final String menu = "/index";
 
-	public static final String bookdata = "/bookdata";
+	public static final String bookdata = "/data/**";
 
 	public static final String webjars = "/webjars/**";
 	public static final String commenu = "/common/menu";
@@ -16,7 +16,7 @@ public class UrlConfig {
 
 	public static final String managerlogin = "/manager/login";
 
-	public static final String managermenu = "/manager/menu";
+	public static final String managermenu = "/manager/index";
 
 	public static final String managerbookdata = "/manager/bookdata";
 

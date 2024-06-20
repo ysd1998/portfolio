@@ -47,11 +47,9 @@ public class ManagerConfirmController {
 
 		HttpSession session = request.getSession();
 		BookInfo bookData = (BookInfo) session.getAttribute("bookData");
-		String base64;
+		String base64 = "";
 		if (bookData.getPhoto() != null) {
 			base64 = new String(Base64.encodeBase64(bookData.getPhoto(), true), "ASCII");
-		} else {
-			base64 = "";
 		}
 		if (bookData.getPhoto() == null || "".equals(base64) || base64 == null) {
 			File fileImg = new File("src/main/resources/templates/picture/20200501_noimage.png");

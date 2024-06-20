@@ -75,8 +75,12 @@ public class ManagerInsertController {
 			HttpServletRequest request,
 			Model model) throws Exception {
 		model.addAttribute("bookData", bookData);
-		if (file != null) {
+		String extension = "";
+		String name = "";
+		if (!file.isEmpty()) {
 			bookData.setPhoto(file.getBytes());
+			name = file.getOriginalFilename();
+			extension = name.substring(name.lastIndexOf("."));
 		}
 		String isCorrectUserAuth = bookData.getBookid();
 		String isTitle = bookData.getTitle();
@@ -90,12 +94,6 @@ public class ManagerInsertController {
 		bookData.setInsertid(user.getUsername());
 		bookData.setDeleteflag("0");
 		session.setAttribute("bookData", bookData);
-		String extension = "";
-		String name = "";
-		if (!file.isEmpty()) {
-			name = file.getOriginalFilename();
-			extension = name.substring(name.lastIndexOf("."));
-		}
 		boolean isNumeric = bookData.getPrice().matches("[+-]?\\d*(\\.\\d+)?");
 		if (isCorrectUserAuth.equals("") || isTitle.equals("") || "".equals(bookData.getPublisher()) ||
 				"".equals(bookData.getYear()) || "0".equals(bookData.getTypeid()) || "".equals(bookData.getPrice())
@@ -117,7 +115,7 @@ public class ManagerInsertController {
 			model.addAttribute("Types", result);
 			model.addAttribute("errorMsg", "価格項目に数字ではない文字・全角文字が挿入されています。削除してください。");
 			return "manager/bookinit";
-		} else if (!extension.equals("png") && !"".equals(extension)) {
+		} else if (!extension.equals(".png") && !"".equals(extension)) {
 			List<Types> result = typeservice.serchData("%");
 			model.addAttribute("Types", result);
 			model.addAttribute("errorMsg", "フォルダの拡張子がPNGではありません。");

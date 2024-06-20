@@ -90,6 +90,12 @@ public class ManagerInsertController {
 		bookData.setInsertid(user.getUsername());
 		bookData.setDeleteflag("0");
 		session.setAttribute("bookData", bookData);
+		String extension = "";
+		String name = "";
+		if (!file.isEmpty()) {
+			name = file.getOriginalFilename();
+			extension = name.substring(name.lastIndexOf("."));
+		}
 		boolean isNumeric = bookData.getPrice().matches("[+-]?\\d*(\\.\\d+)?");
 		if (isCorrectUserAuth.equals("") || isTitle.equals("") || "".equals(bookData.getPublisher()) ||
 				"".equals(bookData.getYear()) || "0".equals(bookData.getTypeid()) || "".equals(bookData.getPrice())
@@ -110,6 +116,11 @@ public class ManagerInsertController {
 			List<Types> result = typeservice.serchData("%");
 			model.addAttribute("Types", result);
 			model.addAttribute("errorMsg", "価格項目に数字ではない文字・全角文字が挿入されています。削除してください。");
+			return "manager/bookinit";
+		} else if (!extension.equals("png") && !"".equals(extension)) {
+			List<Types> result = typeservice.serchData("%");
+			model.addAttribute("Types", result);
+			model.addAttribute("errorMsg", "フォルダの拡張子がPNGではありません。");
 			return "manager/bookinit";
 		} else {
 			return "redirect:/manager/confirm";

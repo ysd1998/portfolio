@@ -62,6 +62,29 @@
 ## E-R図
 ![E-R図-商品](https://github.com/ysd1998/portfolio/assets/42951508/19c0a1ef-8cce-43c1-9755-3d2a25e13d54)
 
+## 実際のシステム画像
+### ユーザー側ログイン画面
+![スクリーンショット 2024-06-20 120715](https://github.com/ysd1998/portfolio/assets/42951508/9a10e4fe-3d6e-4b2a-9864-9860d6e1efd0)
+### ユーザー側商品検索画面
+![localhost_8080_index](https://github.com/ysd1998/portfolio/assets/42951508/66a0d62e-6b40-4f64-a6f4-f7ed7fa98210)
+### ユーザー側商品詳細画面
+![localhost_8080_data_BK24022801 (1)](https://github.com/ysd1998/portfolio/assets/42951508/ddd5dd1e-75ea-4ee8-a45d-65d7c98c5cd5)
+### 社員側ログイン画面
+![スクリーンショット 2024-06-21 110123](https://github.com/ysd1998/portfolio/assets/42951508/4ac59500-2b34-413c-8853-6f07ae17e82f)
+### 社員側商品管理画面
+![スクリーンショット 2024-06-20 120803](https://github.com/ysd1998/portfolio/assets/42951508/fa5c9b47-8ae8-48e2-8001-0d0be24656fa)
+### 社員側商品追加画面
+![localhost_8080_manager_bookinit](https://github.com/ysd1998/portfolio/assets/42951508/109103e1-8c98-4c51-9462-f8fb2002f3c0)
+### 社員側商品詳細管理画面
+![localhost_8080_manager_BK24042501](https://github.com/ysd1998/portfolio/assets/42951508/44df64b4-1ee3-4257-af3d-6832a932c8de)
+### 社員側確認画面
+![localhost_8080_manager_confirm](https://github.com/ysd1998/portfolio/assets/42951508/532458f9-0230-4c3e-9e3d-a9e0efd7d9c0)
+### 管理者側社員管理画面
+![スクリーンショット 2024-06-21 105951](https://github.com/ysd1998/portfolio/assets/42951508/e5edf992-dc87-4504-9840-fe30d1c5bd42)
+### 管理者側社員権限付与画面
+![スクリーンショット 2024-06-21 110042](https://github.com/ysd1998/portfolio/assets/42951508/9a532a1b-121f-4632-9f6f-5a62a3413156)
+
+
 ## 追加した機能
 
 ・　書影データを追加    

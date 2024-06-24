@@ -45,9 +45,9 @@
 					<input class="btn btn-primary" type="submit" value="ログイン">
 				</div>
 			</form>
-			<span sec:authorize="hasAnyAuthority('管理者','web販売担当')" th:text="現在従業員ユーザーがログインしています。"></span>
+			<span sec:authorize="hasAnyAuthority('管理者','web販売担当')" th:text="現在従業員ユーザーがログインしています。他のブラウザからログインしてください。"></span>
 		</div>
 	</main>
-</body>
+</body>ｓ
 
 </html>

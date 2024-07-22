@@ -53,8 +53,9 @@ public class AdminEmpController {
 		serchDataseve = "";
 		serchDataseve = serchData;
 		Page<Employees> results;
+		Pageable pagereset = pageable.withPage(0);
 		if ("".equals(serchData)) {
-			results = service.searchEmp("web販売担当", "web販売担当", "web販売担当", pageable);
+			results = service.searchEmp("web販売担当", "web販売担当", "web販売担当", pagereset);
 		} else {
 			mav.addObject("serchData", serchData);
 			results = service.searchEmp(serchData, serchData, serchData, pageable);

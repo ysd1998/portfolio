@@ -56,7 +56,8 @@ public class MenuController {
 		mav.setViewName(VIEW);
 		serchDataseve = "";
 		serchDataseve = serchData;
-		Page<Books> results = service.searchUser(serchData, serchData, serchData, pageable);
+		Pageable pagereset = pageable.withPage(0);
+		Page<Books> results = service.searchUser(serchData, serchData, serchData, pagereset);
 		List<Books> result = results.getContent();
 		mav.addObject("pages", results);
 		mav.addObject("result", result);

@@ -68,7 +68,8 @@ public class ManegerMenuController {
 			typeid = type.getTypeid();
 		}
 		model.addAttribute("serchData", serchData);
-		Page<Books> results = service.search(serchData, serchData, serchData, serchData, pageable);
+		Pageable pagereset = pageable.withPage(0);
+		Page<Books> results = service.search(serchData, serchData, serchData, serchData, pagereset);
 		List<Books> result = results.getContent();
 		model.addAttribute("pages", results);
 		model.addAttribute("result", result);

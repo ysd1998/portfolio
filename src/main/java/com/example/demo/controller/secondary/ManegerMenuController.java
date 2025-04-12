@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.book.Books;
-import com.example.demo.entity.book.Types;
 import com.example.demo.service.book.BookSerchService;
 import com.example.demo.service.book.TypeSerchService;
 
@@ -58,15 +57,10 @@ public class ManegerMenuController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String serch(Model model, Pageable pageable, @RequestParam("serchData") String serchData) {
-		Types type = typeserch.serchNames(serchData);
+//		Types type = typeserch.serchNames(serchData);
 		serchDataseve = "";
 		serchDataseve = serchData;
-		String typeid;
-		if (type == null || "".equals(type)) {
-			typeid = serchData;
-		} else {
-			typeid = type.getTypeid();
-		}
+//		String typeid = (type == null || type.toString().isEmpty()) ? serchData : type.getTypeid();
 		model.addAttribute("serchData", serchData);
 		Pageable pagereset = pageable.withPage(0);
 		Page<Books> results = service.search(serchData, serchData, serchData, serchData, pagereset);
